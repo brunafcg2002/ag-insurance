@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Identidade visual — A. Gonçalves - Seguros</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      body {
+        background: var(--surface);
+      }
+      h1 {
+        font-size: clamp(30px, 5vw, 52px);
+        margin-bottom: 18px;
+      }
+      .variants {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: 24px;
+        margin-top: 36px;
+      }
+      figure {
+        margin: 0;
+      }
+      .sample {
+        display: grid;
+        place-items: center;
+        min-height: 290px;
+        padding: 44px;
+        border: 1px solid var(--border);
+        background: white;
+      }
+      .sample.light {
+        background: var(--surface);
+      }
+      .sample.blue {
+        background: var(--primary);
+      }
+      .sample img {
+        width: 150px;
+        height: 156px;
+        object-fit: contain;
+      }
+      figcaption {
+        padding: 16px 0;
+        font-size: 16px;
+      }
+      figcaption a {
+        color: var(--primary);
+        text-decoration: underline;
+      }
+      .back {
+        display: inline-block;
+        color: var(--primary);
+        margin-bottom: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <a class="back" href="../index.html">← Voltar ao site</a>
+      <h1>A. Gonçalves - Seguros</h1>
+      <p>O símbolo original e as suas variantes em azul e branco.</p>
+      <div class="variants">
+        <figure>
+          <div class="sample">
+            <img
+              src="../assets/brand/logo-original.jpg"
+              alt="Símbolo original"
+            />
+          </div>
+          <figcaption>
+            <a href="../assets/brand/logo-original.jpg" download
+              >Original · JPG</a
+            >
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="sample">
+            <img
+              src="../assets/brand/logo-blue-on-white.svg"
+              alt="Símbolo azul em fundo branco"
+            />
+          </div>
+          <figcaption>
+            <a href="../assets/brand/logo-blue-on-white.svg" download
+              >Azul sobre branco · SVG</a
+            >
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="sample light">
+            <img
+              src="../assets/brand/logo-blue-on-light.svg"
+              alt="Símbolo azul em fundo azul claro"
+            />
+          </div>
+          <figcaption>
+            <a href="../assets/brand/logo-blue-on-light.svg" download
+              >Azul sobre fundo claro · SVG</a
+            >
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="sample blue">
+            <img
+              src="../assets/brand/logo-white-on-blue.svg"
+              alt="Símbolo branco em fundo azul"
+            />
+          </div>
+          <figcaption>
+            <a href="../assets/brand/logo-white-on-blue.svg" download
+              >Branco sobre azul · SVG</a
+            >
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="sample">
+            <img
+              src="../assets/brand/logo-blue.svg"
+              alt="Símbolo azul com fundo transparente"
+            />
+          </div>
+          <figcaption>
+            <a href="../assets/brand/logo-blue.svg" download
+              >Azul transparente · SVG</a
+            >
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="sample blue">
+            <img
+              src="../assets/brand/logo-white.svg"
+              alt="Símbolo branco com fundo transparente"
+            />
+          </div>
+          <figcaption>
+            <a href="../assets/brand/logo-white.svg" download
+              >Branco transparente · SVG</a
+            >
+          </figcaption>
+        </figure>
+      </div>
+    </main>
+  </body>
+</html>
