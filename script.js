@@ -119,13 +119,44 @@ document.addEventListener("keydown", (event) => {
 
 const carousel = document.querySelector(".carousel");
 const slides = [...document.querySelectorAll(".carousel-slide")];
+const pagination = document.querySelector(".carousel-pagination");
 let currentSlide = 0;
 const visibleSlides = () => (innerWidth < 768 ? 1 : innerWidth < 992 ? 2 : 3);
 function updateCarousel(announce = false) {
-  currentSlide = Math.max(
+  const count = visibleSlides();
+  const pageCount = Math.ceil(slides.length / count);
+  const page = Math.max(
     0,
-    Math.min(currentSlide, slides.length - visibleSlides()),
+    Math.min(Math.floor(currentSlide / count), pageCount - 1),
   );
+  currentSlide = page * count;
+
+  if (pagination.children.length !== pageCount) {
+    pagination.replaceChildren(
+      ...Array.from({ length: pageCount }, (_, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "carousel-dot";
+        button.dataset.page = index;
+        button.setAttribute("aria-controls", "insurance-carousel");
+        const categories = slides
+          .slice(index * count, (index + 1) * count)
+          .map((slide) =>
+            slide.querySelector(".slide-category").textContent.trim(),
+          );
+        button.setAttribute(
+          "aria-label",
+          `Ir para página ${index + 1} de ${pageCount}: ${categories.join(", ")}`,
+        );
+        return button;
+      }),
+    );
+  }
+  [...pagination.children].forEach((button, index) => {
+    const active = index === page;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-current", String(active));
+  });
   const gap = parseFloat(
     getComputedStyle(document.querySelector(".carousel-track")).gap,
   );
@@ -136,23 +167,30 @@ function updateCarousel(announce = false) {
     slide.inert = !visible;
     slide.setAttribute("aria-hidden", String(!visible));
   });
-  document.querySelector(".previous").disabled = currentSlide === 0;
-  document.querySelector(".next").disabled =
-    currentSlide >= slides.length - visibleSlides();
   if (announce)
     document.querySelector(".carousel-status").textContent =
-      `${slides[currentSlide].querySelector(".slide-category").textContent}. Seguros ${currentSlide + 1} a ${currentSlide + visibleSlides()} de ${slides.length}.`;
+      `Página ${page + 1} de ${pageCount}. Seguros ${currentSlide + 1} a ${Math.min(currentSlide + count, slides.length)} de ${slides.length}.`;
 }
 function moveCarousel(direction) {
-  currentSlide += direction;
+  currentSlide += direction * visibleSlides();
   updateCarousel(true);
 }
-document
-  .querySelector(".previous")
-  .addEventListener("click", () => moveCarousel(-1));
-document
-  .querySelector(".next")
-  .addEventListener("click", () => moveCarousel(1));
+pagination.addEventListener("click", (event) => {
+  const button = event.target.closest(".carousel-dot");
+  if (!button) return;
+  currentSlide = Number(button.dataset.page) * visibleSlides();
+  updateCarousel(true);
+});
+pagination.addEventListener("keydown", (event) => {
+  if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+  event.preventDefault();
+  if (event.key === "Home") currentSlide = 0;
+  if (event.key === "End") currentSlide = slides.length - 1;
+  if (event.key === "ArrowLeft") currentSlide -= visibleSlides();
+  if (event.key === "ArrowRight") currentSlide += visibleSlides();
+  updateCarousel(true);
+  pagination.querySelector('[aria-current="true"]').focus();
+});
 carousel.addEventListener("keydown", (event) => {
   if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
     event.preventDefault();

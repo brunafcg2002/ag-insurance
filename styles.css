@@ -336,7 +336,7 @@ section[id],
   overflow: hidden;
 }
 .carousel-container {
-  padding-top: 0;
+  padding-block: 0;
 }
 .carousel {
   overflow: hidden;
@@ -394,38 +394,45 @@ section[id],
 }
 .carousel-controls {
   display: flex;
-  gap: 16px;
-  margin-top: 56px;
-}
-.arrow-button {
-  display: flex;
   justify-content: center;
+  margin-top: 24px;
+}
+.carousel-pagination {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+}
+.carousel-dot {
+  display: flex;
   align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
-  padding: 10px;
-  border-radius: 8px;
-  background: var(--surface);
-  color: var(--primary);
+  padding: 0;
+  border-radius: 22px;
+}
+.carousel-dot::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 10px;
+  background: var(--primary);
+  opacity: 0.25;
+  transform: scale(0.9);
   transition:
-    box-shadow 0.25s,
-    transform 0.25s,
-    opacity 0.25s;
+    width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease,
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.arrow-button svg {
-  width: 24px;
-  height: 24px;
+.carousel-dot:hover::before,
+.carousel-dot:focus-visible::before {
+  opacity: 0.65;
+  transform: scale(1);
 }
-.arrow-button.previous svg {
-  transform: rotate(180deg);
-}
-.arrow-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px #0000001a;
-}
-.arrow-button:disabled {
-  opacity: 0.35;
-  cursor: default;
+.carousel-dot.is-active::before {
+  width: 28px;
+  opacity: 1;
+  transform: scale(1);
 }
 
 .section-heading {
@@ -1075,6 +1082,25 @@ dialog::backdrop {
     background: white;
     overflow-y: auto;
     height: 100dvh;
+    animation: mobile-menu-open 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .menu-open .navbar nav > * {
+    animation: mobile-menu-item 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .menu-open .navbar nav > :nth-child(2) {
+    animation-delay: 20ms;
+  }
+  .menu-open .navbar nav > :nth-child(3) {
+    animation-delay: 40ms;
+  }
+  .menu-open .navbar nav > :nth-child(4) {
+    animation-delay: 60ms;
+  }
+  .menu-open .navbar nav > :nth-child(5) {
+    animation-delay: 80ms;
+  }
+  .menu-open .navbar nav > :nth-child(6) {
+    animation-delay: 100ms;
   }
   .menu-open .brand {
     position: relative;
@@ -1168,6 +1194,22 @@ dialog::backdrop {
     grid-template-columns: 1.6fr 1fr;
   }
 }
+@keyframes mobile-menu-open {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0);
+  }
+}
+@keyframes mobile-menu-item {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 @media (max-width: 767px) {
   :root {
     --gutter: 18px;
@@ -1221,7 +1263,7 @@ dialog::backdrop {
     height: 270px;
   }
   .carousel-controls {
-    margin-top: 30px;
+    margin-top: 16px;
   }
   .section-heading {
     grid-template-columns: 1fr;

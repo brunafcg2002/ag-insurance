@@ -85,9 +85,10 @@
         <div class="container carousel-container">
           <div
             class="carousel"
+            id="insurance-carousel"
             tabindex="0"
             aria-roledescription="carrossel"
-            aria-label="Explore os seguros; utilize as setas para navegar"
+            aria-label="Explore os seguros; deslize ou utilize os pontos de paginação"
           >
             <div class="carousel-track">
               <article
@@ -234,23 +235,12 @@
             </div>
           </div>
           <div class="carousel-controls">
-            <button class="arrow-button previous" aria-label="Seguro anterior">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M4 12h15M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-              </svg></button
-            ><button class="arrow-button next" aria-label="Seguro seguinte">
-              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  d="M4 12h15M13 5l7 7-7 7"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                />
-              </svg></button
-            ><span class="carousel-status sr-only" aria-live="polite"></span>
+            <div
+              class="carousel-pagination"
+              role="group"
+              aria-label="Páginas dos seguros"
+            ></div>
+            <span class="carousel-status sr-only" aria-live="polite"></span>
           </div>
         </div>
       </section>
