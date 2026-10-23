@@ -1,6 +1,6 @@
 # A. Gonçalves - Seguros
 
-A responsive insurance homepage with PT Sans, a blue and neutral palette, photographic hero, overlapping carousel, service grid, inset image captions, and patterned contact section.
+A responsive insurance homepage with PT Sans, a blue and neutral palette, photographic hero, overlapping campaign carousel, service grid, and inset image captions.
 
 The company name and icon come from [the existing company website](http://agoncalves.com.pt/index.html). Visitor-facing copy is in **European Portuguese**. It implements the homepage only; navigation stays within the page and cards open detail dialogs.
 
@@ -14,11 +14,11 @@ For a local HTTP preview, run any static server. If Python 3 is installed:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Then open http://127.0.0.1:8000. Deploy by uploading `index.html`, `styles.css`, `script.js`, and `assets/` together to any static host. Relative asset paths also support hosting in a subdirectory.
+Then open http://localhost:8000. If the layout differs from opening the file directly, reset browser zoom to 100% (`Cmd+0` on macOS) and reload. Browsers can save different zoom levels for `localhost`, `127.0.0.1`, and local files. Deploy by uploading `index.html`, `styles.css`, `script.js`, and `assets/` together to any static host. Relative asset paths also support hosting in a subdirectory.
 
 ## Editing
 
-- `index.html`: homepage markup, insurance cards, and advice cards. Page content is available without JavaScript.
+- `index.html`: homepage markup, insurance cards, and FAQ cards. Page content is available without JavaScript.
 - `styles.css`: design tokens, typography, component styles, responsive layouts, and reduced-motion support.
 - `script.js`: navigation, carousel, dialogs, and their supporting content.
 - `assets/`: local photographs, fonts, favicon, and vendored Leaflet 1.9.4 with its license. Map tiles are fetched externally only when the location section approaches the viewport.
@@ -27,7 +27,7 @@ Then open http://127.0.0.1:8000. Deploy by uploading `index.html`, `styles.css`,
 - [Asset sources](docs/assets.md): source URLs and font licensing.
 - [Brand variants](docs/brand-assets.html): original icon and blue/white SVG variants.
 
-The contact dialog prepares a message and can copy it to the clipboard. It does **not** send or persist form data. An actual submission endpoint has not been configured. Copy and insurance categories are draft content for company review; no staff profiles, testimonials, business statistics, or insurer partnerships have been invented.
+The contact dialog prepares a message and can copy it to the clipboard. It does **not** send or persist form data. An actual submission endpoint has not been configured. Copy and insurance categories are draft content for company review; the experience claim, family history, insurer partnerships, and service information follow the client-supplied October 2026 PDF.
 
 ## Verification
 
@@ -40,3 +40,21 @@ Migration checks covered direct file opening, subdirectory hosting, content with
 The location section uses locally vendored Leaflet, OpenStreetMap street tiles, and Esri World Imagery satellite tiles. It needs internet access, with no npm install or build step. Visible attribution changes with the active layer. The custom pin uses the company symbol and the approved palette; controls support street/satellite switching, zoom, and recentering. Wheel zoom is disabled so the map does not interrupt page scrolling. The privacy dialog explains external map requests.
 
 The address and contact details were verified against [the company website](http://agoncalves.com.pt/index.html) and [its Allianz listing](https://www.allianz.pt/mediador/agoncalves.html). The owner supplied the exact Google Maps place location: `41.278481, -8.282931`. `officeLocation` in `script.js`, the custom pin, recentering, and the directions link use that location. These are the place coordinates from the listing, rather than the map viewport centre in its URL.
+
+## Client content update — October 2026
+
+The homepage follows the client-supplied `WEBSITE A. GONÇALVES.pdf`: six insurance options (Automóvel, Saúde, Habitação, Vida, Acidentes de Trabalho, Poupança e Investimento), three risk scenarios, and three FAQs with answer dialogs. Insurance and scenario dialogs lead to the existing message-preparation form. The form remains local and does not send messages.
+
+The PDF is the owner-supplied source for the 40+ years claim, family history, four named insurers, and service information. Allianz contact details are corroborated by its [agency listing](https://www.allianz.pt/mediador/agoncalves.html). General statements about mandatory cover were checked against the ASF's [work accident insurance](https://www.asf.com.pt/web/site-pc/seguros/seguro-de-acidentes-de-trabalho) and [home insurance](https://www.asf.com.pt/pt/web/site-pc/seguros/seguro-de-habita%C3%A7%C3%A3o) information. Insurance descriptions remain draft copy for company review.
+
+Selected owner-supplied photographs are optimised local JPEGs; see [asset sources](docs/assets.md) for the original-to-site mapping. Unused original uploads and the source PDF were removed during pre-commit cleanup; only assets referenced by site code or the brand reference page are retained. Navigation labels start with capital letters.
+
+Footer call links distinguish the landline (`255 820 960`) from the owner-supplied mobile (`963 667 526`), with matching icons and `tel:` destinations. Both numbers and the company email also appear in the contact and message-preview dialogs. The map card contains only the address and directions.
+
+## Campaign cards
+
+The opening carousel now presents Zurich campaigns. The previous three company highlights are the numbered points in “Quem somos”. Cards show their expiry date and open a conditions dialog with the official source and a contact action that selects the matching insurance category.
+
+The three offers were checked on 23 October 2026 and expire on 31 December 2026. Review or replace the static campaign copy before expiry; there is no automatic feed or date-based removal. Update `index.html` for card copy and images, and the `campaigns` array in `script.js` for conditions, dates, source links, and contact categories. Keep both consistent. See [campaign research](docs/campaigns.md) for verified terms and source notes.
+
+Insurer tags use self-contained local SVG image files, so they render through both `file://` and an HTTP preview without CSS mask requests.

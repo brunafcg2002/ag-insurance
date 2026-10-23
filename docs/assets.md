@@ -6,12 +6,8 @@ All page images and fonts are served locally. The company website was inspected 
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `assets/images/bruno.jpg`         | Office and team photograph supplied by the owner; used in the homepage hero.                                                                               |
 | `assets/images/quem_somos.jpg`    | Family photograph supplied by the owner; used in the Quem somos section.                                                                                   |
-| `assets/images/CTA-Bg-Top.svg`    | Upper contact-section pattern                                                                                                                              |
-| `assets/images/CTA-Bg-Bottom.svg` | Lower contact-section pattern                                                                                                                              |
-| `assets/images/family.jpg`        | [Unsplash family photograph](https://images.unsplash.com/photo-1511895426328-dc8714191300)                                                                 |
 | `assets/images/home.jpg`          | [Unsplash cabin photograph](https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8)                                                                  |
 | `assets/images/car.jpg`           | [Unsplash automobile photograph](https://images.unsplash.com/photo-1503376780353-7e6692767b70)                                                             |
-| `assets/images/health.jpg`        | [Unsplash healthcare photograph](https://images.unsplash.com/photo-1576091160399-112ba8d25d1d)                                                             |
 | `assets/images/business.jpg`      | [Unsplash office photograph](https://images.unsplash.com/photo-1497366811353-6870744d04b2)                                                                 |
 | `assets/fonts/pt-sans-*.woff2`    | Self-hosted PT Sans Latin subsets. [PT Sans family](https://fonts.google.com/specimen/PT+Sans), SIL Open Font License; included in `assets/fonts/OFL.txt`. |
 
@@ -27,3 +23,41 @@ Background-specific logo files are retained together: `assets/brand/logo-blue-on
 - Pin: CSS geometry using the existing local white company symbol.
 - Office address and contact details: [company website](http://agoncalves.com.pt/index.html), corroborated by the [Allianz agency listing](https://www.allianz.pt/mediador/agoncalves.html).
 - Map coordinates: `41.278481, -8.282931`, confirmed by the owner via the [Google Maps place listing](https://www.google.com/maps/place/Allianz+Seguros+-+Bruno+Gon%C3%A7alves/@41.278485,-8.2855059,17z/data=!3m1!4b1!4m6!3m5!1s0xd2492eb8b8a94c1:0x7be9e2dfab6b34a8!8m2!3d41.278481!4d-8.282931!16s%2Fg%2F11hbv5my8m). The pin, recenter control, and directions link share this destination.
+
+## Client photographs — October 2026 update
+
+The owner supplied the following photographs alongside the website update PDF. Local website copies are resized to a maximum of 1600px and JPEG quality 78; unused original uploads were removed during pre-commit cleanup.
+
+| Local file | Original upload | Placement |
+| --- | --- | --- |
+| `assets/images/quem_somos.jpg` | `quem_somos.jpg` | About section: four family members on the stairs; existing local copy retained. |
+| `assets/images/analise-seguros.jpg` | `P1058668.jpg` | FAQ about reviewing existing insurance: documents being reviewed. |
+| `assets/images/bruno_photo.jpg` | `bruno_photo.jpg` | FAQ about proposals from different insurers: Bruno on the telephone. Resized to 1600px, JPEG quality 82. |
+| `assets/images/atendimento.jpg` | `antonio.jpg` | FAQ about remote service: colleague working at a computer. |
+
+Only images referenced by the homepage or the brand reference page are retained in the project. The source PDF and unused/duplicate uploads were removed during pre-commit cleanup.
+
+## Official Zurich campaign images
+
+The opening cards use imagery taken directly from the corresponding promotion blocks on the official Zurich Portugal product pages, retrieved on 23 October 2026. They replace the generated placeholders, which have been removed from the project. Images are served locally at 1000 × 1000 pixels. Home and health PNGs were converted to JPEG quality 86 for the site; the Auto JPEG is unchanged. No recolouring or AI editing was applied.
+
+| Local file | Official campaign image | Campaign page |
+| --- | --- | --- |
+| `assets/images/zurich-campanha-casa.jpg` | [Family moving home](https://edge.sitecorecloud.io/zurichinsurf8c0-zwpshared-prod-d824/media/project/zurich-headless/portugal/images/02-para-si/02-habitacao/lar-flex/stage-lar-promo.png?iar=0&w=1000) | [Zurich Lar Flex](https://www.zurich.com.pt/pt-pt/particulares/habitacao/lar-flex) |
+| `assets/images/zurich-campanha-auto.jpg` | [Zurich Auto promotion](https://edge.sitecorecloud.io/zurichinsurf8c0-zwpshared-prod-d824/media/project/zurich-headless/portugal/images/02-para-si/01-automovel/zurich-auto/2026/zurich-auto-promo-2026-1.jpg?iar=0&w=1000) | [Zurich Auto](https://www.zurich.com.pt/pt-pt/particulares/automovel/automovel) |
+| `assets/images/zurich-campanha-saude.jpg` | [WHOOP campaign creative](https://edge.sitecorecloud.io/zurichinsurf8c0-zwpshared-prod-d824/media/project/zurich-headless/portugal/images/02-para-si/06-saude/01-zurich-saude/hero-whoop.png?iar=0&w=1000) | [Zurich Saúde](https://www.zurich.com.pt/pt-pt/particulares/saude/zurich-saude) |
+
+Campaign imagery belongs to Zurich and its respective rights holders. Local card crops are controlled by CSS; source attribution is retained here.
+
+## Insurer logos
+
+Downloaded from official insurer sites on 23 October 2026 and served locally in compact tags below the insurance introduction. The tags use self-contained `*-blue.svg` files that embed the downloaded image and apply an SVG alpha filter in primary blue, preserving the original proportions. Separate unused original logo files were removed; their original image data remains embedded in each derivative. These regular image assets also work through `file://`, where external CSS masks are blocked. These marks identify the four insurers named by the owner.
+
+| Local file | Official source |
+| --- | --- |
+| `assets/brand/insurers/allianz-blue.svg` | [Allianz Portugal header logo](https://www.allianz.pt/content/dam/onemarketing/system/allianz-logo.svg) |
+| `assets/brand/insurers/zurich-blue.svg` | [Zurich corporate header logo](https://www.zurich.com/-/media-assets/project/zurich-headless/shared/corporate/zurich-logo-blue.svg?iar=0) |
+| `assets/brand/insurers/lusitania-blue.svg` | [Lusitania header logo](https://www.lusitania.pt/media/hjepeceq/logotipo.png) |
+| `assets/brand/insurers/real-vida-blue.svg` | Inline SVG from the header of [Real Vida Seguros](https://www.realvidaseguros.pt/), embedded in the blue derivative. |
+
+Logos remain trademarks of their respective owners. No external logo requests are made by the homepage.
