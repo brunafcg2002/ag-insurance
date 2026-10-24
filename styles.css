@@ -2688,3 +2688,15 @@ dialog,
 .footer-registration a:hover {
   color: var(--primary);
 }
+
+.footer-copyright {
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+@media (min-width: 768px) {
+  .footer-bottom {
+    align-items: center;
+  }
+}
