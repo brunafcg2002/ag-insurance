@@ -2496,3 +2496,15 @@ dialog,
     padding-bottom: 16px;
   }
 }
+
+.footer-navigation {
+  display: contents;
+}
+@media (max-width: 767px) {
+  .footer-navigation {
+    display: flex;
+    flex-direction: column;
+    order: 2;
+    gap: 0;
+  }
+}
