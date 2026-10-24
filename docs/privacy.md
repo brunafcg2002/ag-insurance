@@ -12,7 +12,21 @@ Updated 24 October 2026. The visitor notice in `script.js` describes the deploye
 
 ## Owner details still to confirm
 
-The notice uses the verified trading name and contact address. The owner's full legal controller identity has been requested but not supplied; it must be confirmed before treating the notice as the company's final legal statement. No NIF, DPO, precise retention period, email provider, or contractual safeguard has been invented. The retention text describes purpose-based criteria; the company must confirm its actual email-handling practices.
+The notice is explicitly marked as a version under review. Each unknown value is shown as the literal `[PlaceHolder]` followed by its purpose. These are visible in the public dialog and are not verified business facts. Replace the fields and remove the review note once the company has confirmed the content.
+
+| Field in the notice | Confirmation needed |
+| --- | --- |
+| Legal controller | Full legal name of the entity behind the trading name. |
+| Registered office | Confirm the legal seat; the known office remains the correspondence address. |
+| Data protection officer | Confirm whether one is designated; enter contact details if so, otherwise replace with an accurate statement or omit this paragraph. This field does not imply a DPO is mandatory. |
+| Business email provider | Provider and privacy policy. |
+| Recipients | Actual authorised staff/service categories and any insurer disclosures. |
+| International transfers | Relevant contracted services, countries/situations, applicable safeguards and how to obtain details. Do not invent a transfer mechanism. |
+| Enquiries without a contract | Actual retention period or concrete criteria and starting point. |
+| Proposals/contracts | Applicable retention periods/criteria and legal duties, aligned with the separate insurance privacy information. |
+| Security and access | Measures actually implemented for business email and enquiry handling. |
+
+The notice keeps verified website behaviour separate from unconfirmed business practices. The legal bases for proposal enquiries and other communications are a proposed framework for company review, not a legal compliance certification. The company should validate the legitimate-interest assessment and the law applicable to its insurance activity. Do not invent a NIF, fixed retention period, processor contract, or security measure.
 
 If a sending service is configured later, update the form notice and privacy policy to identify that service, the data flow, relevant recipients/transfers, and retention before enabling it. The mailto handoff does not enable server-side email submission.
 

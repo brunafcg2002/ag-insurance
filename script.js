@@ -744,26 +744,42 @@ document.addEventListener("click", (event) => {
 <span class="eyebrow">Privacidade</span>
 <h2 id="dialog-title">Política de privacidade</h2>
 <p class="form-note">Atualizada em <time datetime="2026-10-24">24 de outubro de 2026</time></p>
-<p>Respeitamos a sua privacidade. Esta política explica que dados são tratados quando visita este site ou entra em contacto com a A. Gonçalves - Seguros.</p>
-<h3>Quem gere o site</h3>
-<p>A gestão do site e dos contactos apresentados é assegurada pela A. Gonçalves - Seguros. Para questões de privacidade, contacte <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> ou escreva para Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada.</p>
-<h3>O formulário «Vamos conversar»</h3>
-<p>O formulário utiliza o nome, email, tipo de seguro e mensagem que preencher para preparar um email no seu navegador. Ao escolher «Abrir aplicação de email», estes dados são incluídos numa ligação que abre a sua aplicação de email. Confirme o envio nessa aplicação. O site não envia o email por si nem guarda os dados numa base de dados. Se escolher «Copiar mensagem», o texto passa para a área de transferência do seu dispositivo, gerida pelo respetivo sistema.</p>
-<p>Se enviar a mensagem através da sua aplicação de email, os dados serão transmitidos ao serviço de email e à A. Gonçalves - Seguros. Nesta primeira mensagem, envie apenas a informação necessária ao seu pedido, evitando documentos de identificação e informações de saúde.</p>
-<h3>Para que usamos os seus contactos</h3>
-<p>Quando nos contacta, usamos os dados que fornecer para responder, esclarecer dúvidas e preparar as propostas que solicitar. Os pedidos de proposta são tratados para realizar diligências pré-contratuais a seu pedido; os restantes esclarecimentos, com base no interesse legítimo em responder às comunicações recebidas, nos termos do artigo 6.º, n.º 1, alíneas b) e f), do RGPD.</p>
-<p>Este site não disponibiliza subscrições de publicidade nem toma decisões automatizadas sobre a contratação de seguros.</p>
-<h3>Navegação, alojamento e mapas</h3>
-<p>O site está alojado no GitHub Pages. O alojamento regista endereços IP para fins de segurança. Ao carregar o mapa, o navegador liga-se ao OpenStreetMap; a vista de satélite liga-se à Esri. Estes fornecedores recebem o IP e os dados técnicos necessários para entregar as imagens. O mapa não solicita a localização do seu dispositivo.</p>
-<p>O código deste site não instala cookies de análise ou publicidade. As fotografias, os logótipos, os tipos de letra e o código do mapa são servidos com o próprio site.</p>
-<p>Consulte as políticas do <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a>, da <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OpenStreetMap Foundation</a> e da <a href="https://www.esri.com/en-us/privacy/privacy-statements/privacy-statement" target="_blank" rel="noopener noreferrer">Esri</a> para conhecer o tratamento, a conservação e as condições de transferências internacionais aplicáveis aos respetivos serviços. Estes serviços podem tratar dados fora do Espaço Económico Europeu.</p>
-<h3>Conservação e acesso aos dados</h3>
-<p>Os dados preparados pelo formulário não são conservados pelo site. As mensagens que nos enviar por email são conservadas pelo tempo necessário para tratar e concluir o pedido, ou durante os prazos exigidos por obrigações legais e pela defesa de direitos. O acesso deve limitar-se às pessoas que tratam do pedido e aos prestadores necessários ao funcionamento dos serviços.</p>
-<p>Se o contacto der origem a uma proposta ou contrato de seguro, será prestada a informação de privacidade específica aplicável, incluindo a da respetiva seguradora.</p>
-<h3>Os seus direitos</h3>
-<p>Pode pedir acesso, retificação ou apagamento dos seus dados e, quando aplicável, limitação, oposição ou portabilidade, através de <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. Pode também apresentar uma reclamação à <a href="https://www.cnpd.pt/cidadaos/participacoes/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.</p>
-<h3>Ligações externas e alterações</h3>
-<p>«Como chegar» abre o Google Maps. As ligações às campanhas abrem o site da Zurich. Ao seguir essas ligações, aplicam-se as políticas dos respetivos serviços. Esta política será revista se alterarmos os serviços utilizados ou ativarmos o envio de mensagens pelo formulário.</p>
+<p class="form-note">Versão em revisão: os campos identificados com [PlaceHolder] aguardam confirmação pela entidade responsável.</p>
+<p>Esta política explica como são tratados os dados pessoais de quem visita este site ou entra em contacto com a A. Gonçalves - Seguros, nos termos do Regulamento Geral sobre a Proteção de Dados (RGPD) e da legislação nacional aplicável.</p>
+<h3>1. Responsável pelo tratamento</h3>
+<p>A atividade apresentada sob a designação comercial A. Gonçalves - Seguros é exercida por <strong>[PlaceHolder]</strong> — denominação legal completa da entidade responsável pelo tratamento.</p>
+<p>Sede da entidade: <strong>[PlaceHolder]</strong> — morada da sede, a confirmar pela empresa.</p>
+<p>Para questões de privacidade e exercício de direitos, contacte <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. Pode também escrever para Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada, morada de contacto apresentada no site.</p>
+<p>Encarregado de proteção de dados: <strong>[PlaceHolder]</strong> — confirmar se foi designado; se existir, indicar os contactos. A designação não é obrigatória para todas as entidades.</p>
+<h3>2. Dados tratados e funcionamento do formulário</h3>
+<p>O formulário «Vamos conversar» utiliza o nome, email, opção de interesse e mensagem que preencher para preparar um email no seu navegador. Todos os campos são necessários para continuar através do formulário; pode, em alternativa, utilizar os contactos diretos apresentados no site.</p>
+<p>Ao escolher «Abrir aplicação de email», esses dados são incluídos numa ligação <em>mailto:</em> que abre a aplicação de email configurada no seu dispositivo. O envio depende da sua confirmação nessa aplicação. O site não envia o email automaticamente nem guarda o conteúdo do formulário numa base de dados.</p>
+<p>Se escolher «Copiar mensagem», o texto passa para a área de transferência do dispositivo, gerida pelo respetivo sistema. Se enviar o email, a mensagem será tratada pelos serviços de email envolvidos e recebida pela empresa. Envie apenas os dados necessários ao seu pedido; evite incluir documentos de identificação, informações de saúde ou outros dados sensíveis neste primeiro contacto.</p>
+<h3>3. Finalidades e fundamentos legais</h3>
+<p>Os dados enviados para pedir uma proposta ou informações necessárias à contratação de um seguro são utilizados para realizar diligências pré-contratuais a seu pedido, nos termos do artigo 6.º, n.º 1, alínea b), do RGPD.</p>
+<p>Os restantes pedidos de esclarecimento são tratados com base no interesse legítimo em responder às comunicações recebidas e prestar apoio, nos termos do artigo 6.º, n.º 1, alínea f), sujeito à ponderação dos seus direitos e interesses. Quando exista uma obrigação legal de conservação ou comunicação, o tratamento necessário ao seu cumprimento tem fundamento na alínea c) do mesmo artigo.</p>
+<p>Este site não disponibiliza subscrições de publicidade nem toma decisões automatizadas sobre a contratação de seguros. O envio de um pedido de contacto não corresponde à subscrição de comunicações promocionais.</p>
+<h3>4. Alojamento, mapas e cookies</h3>
+<p>O site é alojado no GitHub Pages, que regista endereços IP para fins de segurança. Ao carregar o mapa, o navegador pede imagens ao OpenStreetMap; na vista de satélite, à Esri. Esses serviços recebem o IP e os dados técnicos necessários à ligação. O mapa não solicita a localização do seu dispositivo.</p>
+<p>As fotografias, os logótipos, os tipos de letra e o código Leaflet são servidos com o site. O código do site não instala cookies de análise ou publicidade nem utiliza ferramentas de acompanhamento para esses fins.</p>
+<p>«Como chegar» abre o Google Maps e as ligações às campanhas abrem o site da Zurich. Ao seguir essas ligações, aplicam-se as políticas dos respetivos serviços.</p>
+<h3>5. Destinatários e transferências internacionais</h3>
+<p>O tratamento dos pedidos pode envolver as pessoas autorizadas a responder e os prestadores necessários ao funcionamento do email. Prestador do serviço de email da empresa: <strong>[PlaceHolder]</strong> — identificar o fornecedor e a respetiva política de privacidade.</p>
+<p>Outros destinatários ou categorias de destinatários dos pedidos, se aplicável: <strong>[PlaceHolder]</strong> — confirmar os acessos internos, prestadores e eventuais comunicações a seguradoras. A informação específica sobre o tratamento associado a uma proposta ou contrato deve identificar a respetiva seguradora e os destinatários aplicáveis.</p>
+<p>O GitHub e os fornecedores de mapas podem tratar dados fora do Espaço Económico Europeu. Consulte as políticas do <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a>, da <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OpenStreetMap Foundation</a> e da <a href="https://www.esri.com/en-us/privacy/privacy-statements/privacy-statement" target="_blank" rel="noopener noreferrer">Esri</a>.</p>
+<p>Transferências internacionais e garantias aplicáveis aos serviços contratados pela empresa: <strong>[PlaceHolder]</strong> — confirmar países ou situações de transferência e o mecanismo aplicável, quando necessário, incluindo como obter informação sobre essas garantias.</p>
+<h3>6. Conservação dos dados</h3>
+<p>O site não conserva os dados preenchidos no formulário. Os dados enviados por email podem ser conservados para tratar o pedido, cumprir obrigações legais ou exercer e defender direitos, pelo período adequado a cada finalidade.</p>
+<p>Pedidos de contacto sem contratação: <strong>[PlaceHolder]</strong> — indicar o prazo ou os critérios concretos de conservação e o momento a partir do qual são contados.</p>
+<p>Pedidos que dão origem a propostas ou contratos: <strong>[PlaceHolder]</strong> — indicar os prazos ou critérios aplicáveis, incluindo as obrigações legais relevantes e a informação específica a fornecer ao cliente.</p>
+<h3>7. Proteção e acesso aos dados</h3>
+<p>Medidas de segurança e regras de acesso aplicadas pela empresa aos emails e pedidos recebidos: <strong>[PlaceHolder]</strong> — descrever as medidas efetivamente implementadas, de forma adequada e sem divulgar pormenores que comprometam a segurança.</p>
+<h3>8. Os seus direitos</h3>
+<p>Nos termos e limites previstos no RGPD, pode solicitar acesso, retificação, apagamento, limitação do tratamento ou portabilidade dos seus dados, bem como opor-se a tratamentos baseados no interesse legítimo. Se algum tratamento depender do seu consentimento, pode retirá-lo a qualquer momento, sem afetar a licitude do tratamento anterior.</p>
+<p>Envie o pedido para <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. A resposta deve ser prestada sem demora injustificada e, em regra, no prazo de um mês. Quando a complexidade ou o número de pedidos justificar uma prorrogação, será informado dentro desse prazo, nos termos do RGPD. Para confirmar a sua identidade, apenas deve ser solicitada a informação necessária.</p>
+<p>Pode apresentar uma reclamação à <a href="https://www.cnpd.pt/cidadaos/participacoes/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>, sem prejuízo de outros meios de recurso.</p>
+<h3>9. Alterações a esta política</h3>
+<p>Esta política será atualizada quando se alterarem os tratamentos, os fornecedores ou as funcionalidades do site. A data da versão encontra-se no início do documento. A eventual ativação de envio direto pelo formulário, ferramentas de análise ou publicidade exige uma avaliação prévia e a atualização da informação aplicável.</p>
 </div>`);
 });
 
