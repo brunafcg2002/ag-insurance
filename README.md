@@ -58,3 +58,7 @@ The opening carousel now presents Zurich campaigns. The previous three company h
 The three offers were checked on 23 October 2026 and expire on 31 December 2026. Review or replace the static campaign copy before expiry; there is no automatic feed or date-based removal. Update `index.html` for card copy and images, and the `campaigns` array in `script.js` for conditions, dates, source links, and contact categories. Keep both consistent. See [campaign research](docs/campaigns.md) for verified terms and source notes.
 
 Insurer tags use self-contained local SVG image files, so they render through both `file://` and an HTTP preview without CSS mask requests.
+
+## Asset cache versions
+
+`index.html` loads `styles.css` and `script.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.

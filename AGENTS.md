@@ -7,3 +7,5 @@
 - The contact form only prepares a message; actual sending requires separate configuration.
 - The map uses local Leaflet files and external street/satellite tiles. Preserve provider attribution. The owner-confirmed location is `41.278481, -8.282931`; keep the pin and directions destination consistent.
 - Verify changes with a static local server and check desktop/mobile layouts and affected interactions. Update documentation when setup changes.
+
+- When changing `styles.css` or `script.js`, refresh its `?v=` query parameter in `index.html` with the first 12 characters of the file’s SHA-256 so deployed updates bypass stale asset caches.
