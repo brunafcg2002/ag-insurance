@@ -51,13 +51,13 @@ Campaign imagery belongs to Zurich and its respective rights holders. Local card
 
 ## Insurer logos
 
-Downloaded from official insurer sites on 23 October 2026 and served locally in the moving logo strip below the insurance introduction. The strip uses self-contained `*-blue.svg` files that embed the downloaded image and apply an SVG alpha filter in primary blue, preserving the original proportions. Separate unused original logo files were removed; their original image data remains embedded in each derivative. These regular image assets also work through `file://`, where external CSS masks are blocked. These marks identify the four insurers named by the owner.
+Downloaded from official insurer sites on 23 October 2026 and served locally in the moving logo strip below the insurance introduction. Allianz, Zurich, and Real Vida use direct vector paths recoloured to primary blue, without nested images or SVG raster filters, to improve Safari rendering. Lusitania uses its original 226 × 34 transparent PNG with pixels recoloured directly; its source resolution remains a limitation on high-density screens. These local images also work through `file://`. Logo URLs carry content hashes to refresh deployed caches. These marks identify the four insurers named by the owner.
 
 | Local file | Official source |
 | --- | --- |
 | `assets/brand/insurers/allianz-blue.svg` | [Allianz Portugal header logo](https://www.allianz.pt/content/dam/onemarketing/system/allianz-logo.svg) |
 | `assets/brand/insurers/zurich-blue.svg` | [Zurich corporate header logo](https://www.zurich.com/-/media-assets/project/zurich-headless/shared/corporate/zurich-logo-blue.svg?iar=0) |
-| `assets/brand/insurers/lusitania-blue.svg` | [Lusitania header logo](https://www.lusitania.pt/media/hjepeceq/logotipo.png) |
-| `assets/brand/insurers/real-vida-blue.svg` | Inline SVG from the header of [Real Vida Seguros](https://www.realvidaseguros.pt/), embedded in the blue derivative. |
+| `assets/brand/insurers/lusitania-blue.png` | [Lusitania header logo](https://www.lusitania.pt/media/hjepeceq/logotipo.png) |
+| `assets/brand/insurers/real-vida-blue.svg` | Inline SVG from the header of [Real Vida Seguros](https://www.realvidaseguros.pt/), recoloured in the local vector. |
 
 Logos remain trademarks of their respective owners. No external logo requests are made by the homepage.

@@ -27,7 +27,7 @@ Then open http://localhost:8000. If the layout differs from opening the file dir
 - [Asset sources](docs/assets.md): source URLs and font licensing.
 - [Brand variants](docs/brand-assets.html): original icon and blue/white SVG variants.
 
-The contact dialog prepares a message and can copy it to the clipboard. It does **not** send or persist form data. An actual submission endpoint has not been configured. Copy and insurance categories are draft content for company review; the experience claim, family history, insurer partnerships, and service information follow the client-supplied October 2026 PDF.
+The contact dialog requires a name, valid email, insurance option, and non-blank message. It opens a URL-encoded `mailto:` draft in the visitor’s email application; the visitor confirms sending there. A preview, retry link, and clipboard fallback remain available if no mail handler opens. The site does **not** send or persist form data and needs no backend or API credentials. Copy and insurance categories are draft content for company review; the experience claim, family history, insurer partnerships, and service information follow the client-supplied October 2026 PDF.
 
 ## Verification
 
@@ -43,7 +43,7 @@ The address and contact details were verified against [the company website](http
 
 ## Client content update — October 2026
 
-The homepage follows the client-supplied `WEBSITE A. GONÇALVES.pdf`: six insurance options (Automóvel, Saúde, Habitação, Vida, Acidentes de Trabalho, Poupança e Investimento), three risk scenarios, and three FAQs with answer dialogs. Insurance and scenario dialogs lead to the existing message-preparation form. The form remains local and does not send messages.
+The homepage follows the client-supplied `WEBSITE A. GONÇALVES.pdf`: six insurance options (Automóvel, Saúde, Habitação, Vida, Acidentes de Trabalho, Poupança e Investimento), three risk scenarios, and three FAQs with answer dialogs. Insurance and scenario dialogs lead to the existing message-preparation form. The form prepares a local email draft; sending happens in the visitor’s email application.
 
 The PDF is the owner-supplied source for the 40+ years claim, family history, four named insurers, and service information. Allianz contact details are corroborated by its [agency listing](https://www.allianz.pt/mediador/agoncalves.html). General statements about mandatory cover were checked against the ASF's [work accident insurance](https://www.asf.com.pt/web/site-pc/seguros/seguro-de-acidentes-de-trabalho) and [home insurance](https://www.asf.com.pt/pt/web/site-pc/seguros/seguro-de-habita%C3%A7%C3%A3o) information. Insurance descriptions remain draft copy for company review.
 
@@ -57,8 +57,10 @@ The opening carousel now presents Zurich campaigns. The previous three company h
 
 The three offers were checked on 23 October 2026 and expire on 31 December 2026. Review or replace the static campaign copy before expiry; there is no automatic feed or date-based removal. Update `index.html` for card copy and images, and the `campaigns` array in `script.js` for conditions, dates, source links, and contact categories. Keep both consistent. See [campaign research](docs/campaigns.md) for verified terms and source notes.
 
-Insurer tags use self-contained local SVG image files, so they render through both `file://` and an HTTP preview without CSS mask requests.
+The insurer strip uses local vector SVGs and a transparent PNG, without SVG raster filters or external CSS mask requests. It works through both `file://` and HTTP and keeps moving after touch/click. Reduced-motion preferences show a static row.
 
 ## Asset cache versions
 
 `index.html` loads `styles.css` and `script.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.
+
+The privacy notice covers the current form, direct email contact, hosting, map providers, and visitor rights. See [privacy notes](docs/privacy.md) for verified data flows and the legal identity details still awaiting owner confirmation.

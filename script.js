@@ -544,6 +544,7 @@ function styleContactSelect(select) {
   trigger.className = "insurance-select-trigger";
   trigger.setAttribute("role", "combobox");
   trigger.setAttribute("aria-label", "Estou interessado em");
+  trigger.setAttribute("aria-required", "true");
   trigger.setAttribute("aria-haspopup", "listbox");
   trigger.setAttribute("aria-expanded", "false");
   trigger.setAttribute("aria-controls", "insurance-options");
@@ -655,17 +656,36 @@ function styleContactSelect(select) {
 
 function openContact(solution = "") {
   openDialog(
-    `<span class="eyebrow">Vamos conversar</span><h2 id="dialog-title">O que gostaria<br>de proteger?</h2>${contactDetails}<p>Prepare os pontos que gostaria de conversar connosco.</p><form id="contact-form"><label>O seu nome<input name="name" autocomplete="name" required placeholder="Como se chama?" maxlength="100"></label><label>O seu email<input type="email" name="email" autocomplete="email" required placeholder="nome@exemplo.pt" maxlength="200"></label><label>Estou interessado em<select name="solution"><option value="">Escolha uma opção</option>${solutions.map((s) => `<option value="${s.name}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join("")}<option>Outra questão</option></select></label><label>A sua mensagem<textarea name="message" rows="3" placeholder="Conte-nos um pouco do que precisa." maxlength="2500"></textarea></label><p class="form-note">Pré-visualização: este formulário prepara uma mensagem. Os dados não são enviados nem guardados.</p><button class="button" type="submit">Preparar mensagem ${arrow}</button></form>`,
+    `<span class="eyebrow">Vamos conversar</span><h2 id="dialog-title">O que gostaria<br>de proteger?</h2>${contactDetails}<p>Preencha os campos para preparar o seu email. Todos os campos são obrigatórios.</p><form id="contact-form"><label>O seu nome<input name="name" autocomplete="name" required placeholder="Como se chama?" maxlength="100"></label><label>O seu email<input type="email" name="email" autocomplete="email" required placeholder="nome@exemplo.pt" maxlength="200"></label><label>Estou interessado em<select name="solution" required><option value="">Escolha uma opção</option>${solutions.map((s) => `<option value="${s.name}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join("")}<option>Outra questão</option></select></label><label>A sua mensagem<textarea name="message" required rows="3" placeholder="Conte-nos um pouco do que precisa." maxlength="2500"></textarea></label><p class="form-note">Ao continuar, abrimos a sua aplicação de email com a mensagem preenchida. Confirme o envio nessa aplicação. O site não guarda os dados do formulário.</p><button class="button" type="submit" disabled>Abrir aplicação de email ${arrow}</button></form>`,
   );
   styleContactSelect(document.querySelector('#contact-form select[name="solution"]'));
-  document.querySelector("#contact-form").addEventListener("submit", (e) => {
+  const form = document.querySelector("#contact-form");
+  const fields = [...form.querySelectorAll("input, select, textarea")];
+  const submit = form.querySelector('[type="submit"]');
+  function updateValidity() {
+    fields.forEach((field) => {
+      field.setCustomValidity(field.value.trim() ? "" : "Preencha este campo.");
+    });
+    submit.disabled = !fields.every((field) => field.validity.valid);
+  }
+  form.addEventListener("input", updateValidity);
+  form.addEventListener("change", updateValidity);
+  updateValidity();
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const values = new FormData(e.currentTarget);
+    updateValidity();
+    if (!form.reportValidity()) return;
+    const values = new FormData(form);
+    for (const [key, value] of values) values.set(key, value.trim());
     const message = `Olá, A. Gonçalves - Seguros!\n\nO meu nome é ${values.get("name")}.\nEmail: ${values.get("email")}\nInteresse: ${values.get("solution") || "Informações gerais"}\n\n${values.get("message") || "Gostaria de saber mais sobre as vossas soluções de proteção."}`;
+    const subject = `Pedido de contacto — ${values.get("solution")}`;
+    const mailto = `mailto:seguros@agoncalves.com.pt?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.replace(/\r?\n/g, "\r\n"))}`;
     openDialog(
-      `<span class="eyebrow">A sua mensagem</span><h2 id="dialog-title">O primeiro passo<br>está preparado.</h2>${contactDetails}<p>Esta é a sua mensagem. O envio ficará disponível quando os contactos da empresa forem configurados.</p><pre class="message-preview"></pre><button class="button" id="copy-message">Copiar mensagem ${arrow}</button><p class="copy-status" role="status"></p>`,
+      `<span class="eyebrow">A sua mensagem</span><h2 id="dialog-title">O primeiro passo<br>está preparado.</h2>${contactDetails}<p>Confirme o envio na sua aplicação de email. Se não abrir, use a ligação abaixo ou copie a mensagem e envie-a para seguros@agoncalves.com.pt.</p><p><a class="button" id="open-email">Abrir aplicação de email ${arrow}</a></p><pre class="message-preview"></pre><button class="button" id="copy-message">Copiar mensagem ${arrow}</button><p class="copy-status" role="status"></p>`,
     );
     dialogContent.querySelector(".message-preview").textContent = message;
+    const emailLink = dialogContent.querySelector("#open-email");
+    emailLink.href = mailto;
     dialogContent
       .querySelector("#copy-message")
       .addEventListener("click", async () => {
@@ -679,6 +699,7 @@ function openContact(solution = "") {
         }
       });
     dialog.querySelector(".dialog-close").focus();
+    emailLink.click();
   });
 }
 
@@ -719,9 +740,31 @@ document.addEventListener("click", (event) => {
     );
   }
   if (event.target.closest("[data-privacy]"))
-    openDialog(
-      '<span class="eyebrow">Privacidade</span><h2 id="dialog-title">A sua privacidade<br>importa.</h2><p>Esta pré-visualização não utiliza cookies de análise nem envia os dados preenchidos no formulário. As mensagens são preparadas apenas no seu navegador e desaparecem quando fecha ou atualiza a página.</p><p>Os tipos de letra, as fotografias e o código do mapa são servidos com o site. Ao visualizar o mapa, o navegador pede imagens ao OpenStreetMap; na vista de satélite, à Esri. Estes serviços recebem os dados técnicos necessários à ligação, incluindo o endereço IP. O botão «Como chegar» abre o Google Maps.</p>',
-    );
+    openDialog(`<div class="privacy-policy">
+<span class="eyebrow">Privacidade</span>
+<h2 id="dialog-title">Política de privacidade</h2>
+<p class="form-note">Atualizada em <time datetime="2026-10-24">24 de outubro de 2026</time></p>
+<p>Respeitamos a sua privacidade. Esta política explica que dados são tratados quando visita este site ou entra em contacto com a A. Gonçalves - Seguros.</p>
+<h3>Quem gere o site</h3>
+<p>A gestão do site e dos contactos apresentados é assegurada pela A. Gonçalves - Seguros. Para questões de privacidade, contacte <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> ou escreva para Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada.</p>
+<h3>O formulário «Vamos conversar»</h3>
+<p>O formulário utiliza o nome, email, tipo de seguro e mensagem que preencher para preparar um email no seu navegador. Ao escolher «Abrir aplicação de email», estes dados são incluídos numa ligação que abre a sua aplicação de email. Confirme o envio nessa aplicação. O site não envia o email por si nem guarda os dados numa base de dados. Se escolher «Copiar mensagem», o texto passa para a área de transferência do seu dispositivo, gerida pelo respetivo sistema.</p>
+<p>Se enviar a mensagem através da sua aplicação de email, os dados serão transmitidos ao serviço de email e à A. Gonçalves - Seguros. Nesta primeira mensagem, envie apenas a informação necessária ao seu pedido, evitando documentos de identificação e informações de saúde.</p>
+<h3>Para que usamos os seus contactos</h3>
+<p>Quando nos contacta, usamos os dados que fornecer para responder, esclarecer dúvidas e preparar as propostas que solicitar. Os pedidos de proposta são tratados para realizar diligências pré-contratuais a seu pedido; os restantes esclarecimentos, com base no interesse legítimo em responder às comunicações recebidas, nos termos do artigo 6.º, n.º 1, alíneas b) e f), do RGPD.</p>
+<p>Este site não disponibiliza subscrições de publicidade nem toma decisões automatizadas sobre a contratação de seguros.</p>
+<h3>Navegação, alojamento e mapas</h3>
+<p>O site está alojado no GitHub Pages. O alojamento regista endereços IP para fins de segurança. Ao carregar o mapa, o navegador liga-se ao OpenStreetMap; a vista de satélite liga-se à Esri. Estes fornecedores recebem o IP e os dados técnicos necessários para entregar as imagens. O mapa não solicita a localização do seu dispositivo.</p>
+<p>O código deste site não instala cookies de análise ou publicidade. As fotografias, os logótipos, os tipos de letra e o código do mapa são servidos com o próprio site.</p>
+<p>Consulte as políticas do <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a>, da <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OpenStreetMap Foundation</a> e da <a href="https://www.esri.com/en-us/privacy/privacy-statements/privacy-statement" target="_blank" rel="noopener noreferrer">Esri</a> para conhecer o tratamento, a conservação e as condições de transferências internacionais aplicáveis aos respetivos serviços. Estes serviços podem tratar dados fora do Espaço Económico Europeu.</p>
+<h3>Conservação e acesso aos dados</h3>
+<p>Os dados preparados pelo formulário não são conservados pelo site. As mensagens que nos enviar por email são conservadas pelo tempo necessário para tratar e concluir o pedido, ou durante os prazos exigidos por obrigações legais e pela defesa de direitos. O acesso deve limitar-se às pessoas que tratam do pedido e aos prestadores necessários ao funcionamento dos serviços.</p>
+<p>Se o contacto der origem a uma proposta ou contrato de seguro, será prestada a informação de privacidade específica aplicável, incluindo a da respetiva seguradora.</p>
+<h3>Os seus direitos</h3>
+<p>Pode pedir acesso, retificação ou apagamento dos seus dados e, quando aplicável, limitação, oposição ou portabilidade, através de <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. Pode também apresentar uma reclamação à <a href="https://www.cnpd.pt/cidadaos/participacoes/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>.</p>
+<h3>Ligações externas e alterações</h3>
+<p>«Como chegar» abre o Google Maps. As ligações às campanhas abrem o site da Zurich. Ao seguir essas ligações, aplicam-se as políticas dos respetivos serviços. Esta política será revista se alterarmos os serviços utilizados ou ativarmos o envio de mensagens pelo formulário.</p>
+</div>`);
 });
 
 if ("IntersectionObserver" in window) {

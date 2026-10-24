@@ -569,10 +569,6 @@ section[id],
 .insurers-strip.is-ready .insurers-group li {
   flex: 1;
 }
-.insurers-strip:hover .insurers-track,
-.insurers-strip:focus-within .insurers-track {
-  animation-play-state: paused;
-}
 @keyframes insurers-loop {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -2579,4 +2575,26 @@ dialog,
     order: 2;
     gap: 0;
   }
+}
+
+.privacy-policy p {
+  margin-top: 12px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.privacy-policy h3 {
+  margin-top: 28px;
+  font-size: 22px;
+  line-height: 1.3;
+}
+.privacy-policy a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+#contact-form button[type="submit"]:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
