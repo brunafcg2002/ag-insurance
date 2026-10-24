@@ -14,22 +14,25 @@ For a local HTTP preview, run any static server. If Python 3 is installed:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Then open http://localhost:8000. If the layout differs from opening the file directly, reset browser zoom to 100% (`Cmd+0` on macOS) and reload. Browsers can save different zoom levels for `localhost`, `127.0.0.1`, and local files. Deploy by uploading `index.html`, `styles.css`, `translations.js`, `i18n.js`, `script.js`, and `assets/` together to any static host. Relative asset paths also support hosting in a subdirectory.
+Then open http://localhost:8000. If the layout differs from opening the file directly, reset browser zoom to 100% (`Cmd+0` on macOS) and reload. Browsers can save different zoom levels for `localhost`, `127.0.0.1`, and local files. Deploy by uploading `index.html`, `en.html`, `sitemap.xml`, `styles.css`, `translations.js`, `i18n.js`, `contact-config.js`, `script.js`, and `assets/` together to any static host. Relative asset paths also support hosting in a subdirectory.
 
 ## Editing
 
-- `index.html`: homepage markup and translation markers. JavaScript renders the selected language; a bilingual contact fallback is available without JavaScript.
+- `index.html`: Portuguese homepage markup, translation markers and static text.
+- `en.html`: static English page, generated from the same structure and translation catalogue.
 - `styles.css`: design tokens, typography, component styles, responsive layouts, and reduced-motion support.
 - `script.js`: navigation, carousel, dialogs, contact validation and email handoff.
 - `translations.js`: all PT/EN homepage, dialog, form, map and legal copy.
 - `i18n.js`: language selection and catalogue rendering; see [translation editing](docs/translations.md).
+- `contact-config.js`: public endpoint URL only.
+- `worker.mjs`, `server/contact.mjs`, `wrangler.jsonc`: optional plain-JavaScript Cloudflare endpoint; see [delivery setup](docs/contact-delivery.md).
 - `assets/`: local photographs, fonts, favicon, and vendored Leaflet 1.9.4 with its license. Map tiles are fetched externally only when the location section approaches the viewport.
 - `AGENTS.md`: minimal instructions for future coding work.
 - [Design system](docs/design-system.md): reference measurements and component conventions.
 - [Asset sources](docs/assets.md): source URLs and font licensing.
 - [Brand variants](docs/brand-assets.html): original icon and blue/white SVG variants.
 
-The contact dialog requires a name, valid email, insurance option, and non-blank message. It opens a URL-encoded `mailto:` draft in the visitor’s email application; the visitor confirms sending there. A preview, retry link, and clipboard fallback remain available if no mail handler opens. The site does **not** send or persist form data and needs no backend or API credentials. Copy and insurance categories are draft content for company review; the experience claim, family history, insurer partnerships, and service information follow the client-supplied October 2026 PDF.
+The contact dialog requires a name, valid email, insurance option, and non-blank message. “Send message” is currently disabled through `contactConfig.enabled: false`. A Cloudflare Worker can send through Resend once delivery is explicitly enabled and its server-only credentials and security verification are configured. The former email-app/clipboard form flow has been removed. Direct telephone and email links remain available. See [delivery setup](docs/contact-delivery.md). Insurance descriptions remain draft content for company review.
 
 ## Verification
 
@@ -45,7 +48,7 @@ The address and contact details were verified against [the company website](http
 
 ## Client content update — October 2026
 
-The homepage follows the client-supplied `WEBSITE A. GONÇALVES.pdf`: six insurance options (Automóvel, Saúde, Habitação, Vida, Acidentes de Trabalho, Poupança e Investimento), three risk scenarios, and three FAQs with answer dialogs. Insurance and scenario dialogs lead to the existing message-preparation form. The form prepares a local email draft; sending happens in the visitor’s email application.
+The homepage follows the client-supplied `WEBSITE A. GONÇALVES.pdf`: six insurance options (Automóvel, Saúde, Habitação, Vida, Acidentes de Trabalho, Poupança e Investimento), three risk scenarios, and three FAQs with answer dialogs. Insurance and scenario dialogs lead to the existing message-preparation form. The form’s send button remains disabled until direct delivery is enabled and configured.
 
 The PDF is the owner-supplied source for the 40+ years claim, family history, four named insurers, and service information. Allianz contact details are corroborated by its [agency listing](https://www.allianz.pt/mediador/agoncalves.html). General statements about mandatory cover were checked against the ASF's [work accident insurance](https://www.asf.com.pt/web/site-pc/seguros/seguro-de-acidentes-de-trabalho) and [home insurance](https://www.asf.com.pt/pt/web/site-pc/seguros/seguro-de-habita%C3%A7%C3%A3o) information. Insurance descriptions remain draft copy for company review.
 
@@ -63,8 +66,10 @@ The insurer strip uses local vector SVGs and a transparent PNG, without SVG rast
 
 ## Asset cache versions
 
-`index.html` loads `styles.css`, `script.js`, `i18n.js` and `translations.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.
+The language pages load `styles.css`, `script.js`, `i18n.js`, `translations.js` and `contact-config.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.
 
 The privacy notice covers the current form, direct email contact, hosting, map providers, and visitor rights. See [privacy notes](docs/privacy.md) for verified data flows and the legal identity details still awaiting owner confirmation.
 
 The desktop/mobile footer also provides terms of use, a legal notice, cookie information, complaints/dispute information, and direct access to the official Electronic Complaints Book. See [legal document notes](docs/legal.md) for company fields to confirm and source references. Social links open the owner-supplied Instagram and Facebook pages without embedded widgets.
+
+PT and EN have static HTML content, titles and descriptions, with canonical/hreflang links and `sitemap.xml`. `node tools/render-pages.mjs` refreshes these outputs from the catalogue without an application build; pass the final `--site-url=` when hosting changes. The default remains the existing GitHub Pages URL.

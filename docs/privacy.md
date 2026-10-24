@@ -4,11 +4,11 @@ Updated 24 October 2026. The PT/EN visitor notices in `translations.js` describe
 
 ## Verified technical behaviour
 
-- The form prepares an encoded `mailto:` draft locally and hands it to the configured email application after validation; no API endpoint, POST request, analytics script, cookie-writing code, or browser-storage API is configured.
-- The copy action writes the message to the device clipboard, so the notice does not promise clipboard erasure when the page closes.
+- The default configuration disables form sending. The previous local email draft/clipboard form flow was removed. Cloudflare/Resend delivery is implemented but inactive until explicitly enabled and configured. When enabled, the form sends a POST request to the Worker, which verifies Turnstile and forwards one email through Resend. No analytics or client storage has been added.
+- The form does not use the clipboard or open the email application; direct contact links can still open an external email application.
 - Telephone and email links open external applications. A message sent by email is a separate communication received by the business, not an automatic form submission.
 - GitHub Pages hosts the site and logs visitor IP addresses for security. OpenStreetMap and Esri receive technical data when their map tiles load; no device geolocation is requested.
-- The language choice is included in the URL (`?lang=pt` or `?lang=en`), without cookies or browser storage.
+- The language choice uses distinct static page URLs (legacy `?lang=pt` and `?lang=en` are supported), without cookies or browser storage.
 - Site photographs, fonts, logos, and Leaflet code are local. Google Maps and Zurich are external links.
 
 ## Owner details still to confirm
@@ -41,3 +41,5 @@ If a sending service is configured later, update the form notice and privacy pol
 - [GitHub privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)
 - [OpenStreetMap Foundation privacy policy](https://osmfoundation.org/wiki/Privacy_Policy)
 - [Esri privacy statement](https://www.esri.com/en-us/privacy/privacy-statements/privacy-statement)
+
+The new optional delivery mode is described conditionally in both policies. Cloudflare hosts the endpoint and provides Turnstile verification; Resend processes the message for delivery. See [delivery notes](contact-delivery.md). Provider agreements, safeguards, retention and the existing company placeholders still require company confirmation before activation.

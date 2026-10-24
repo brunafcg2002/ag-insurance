@@ -73,4 +73,8 @@ Native section anchors position the heading 16px below the 70px sticky header. R
 
 ## Language selection
 
-A rectangular header disclosure offers PT and EN with decorative local flags and text labels. The current language remains visible on mobile, with the PT/EN abbreviation omitted below 380px to preserve header space. Selection uses a URL parameter, without cookies or storage. Text and attributes come from `translations.js`; see [editing instructions](translations.md).
+A rectangular header disclosure offers PT and EN with decorative local flags and text labels. The current language remains visible on mobile, with the PT/EN abbreviation omitted below 380px to preserve header space. Selection links to static PT/EN pages, without cookies or storage; legacy URL parameters remain supported. Text and attributes come from `translations.js`; see [editing instructions](translations.md).
+
+## Optional server delivery
+
+The configured contact endpoint enables a direct-send form with Cloudflare security verification, a disabled/loading submit action, a polite status message, retained input on failure and an acceptance dialog. On narrow modals the verification widget uses its compact layout. Sending remains disabled until explicitly enabled and an active endpoint is available; no email-app or clipboard form fallback is shown. Static PT/EN content and metadata are maintained by the dependency-free content sync helper; no framework or application build is required.

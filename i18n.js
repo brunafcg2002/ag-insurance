@@ -3,7 +3,8 @@
 (() => {
   const supported = ["pt", "en"];
   const requested = new URLSearchParams(location.search).get("lang");
-  const language = supported.includes(requested) ? requested : "pt";
+  const defaultLanguage = document.documentElement.lang.startsWith("en") ? "en" : "pt";
+  const language = supported.includes(requested) ? requested : defaultLanguage;
   const locale = window.siteTranslations[language];
   function interpolate(text, values = {}) {
     return text.replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
@@ -35,7 +36,9 @@
   picker.querySelectorAll("[data-language]").forEach((link) => {
     function updateURL() {
       const url = new URL(location.href);
-      url.searchParams.set("lang", link.dataset.language);
+      url.searchParams.delete("lang");
+      const directory = url.pathname.endsWith("/") ? url.pathname : url.pathname.slice(0, url.pathname.lastIndexOf("/") + 1);
+      url.pathname = `${directory}${link.dataset.language === "pt" ? "index.html" : "en.html"}`;
       link.href = url.href;
     }
     updateURL();

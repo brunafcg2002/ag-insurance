@@ -1,2 +1,8 @@
 .DS_Store
 .playwright-mcp/
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/

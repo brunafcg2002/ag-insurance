@@ -273,8 +273,11 @@ const dialogContent = dialog.querySelector(".dialog-content");
 let dialogCloseTimer = null;
 let dialogOpener = null;
 let disposeContactSelect = () => {};
+let disposeContactForm = () => {};
 function openDialog(content) {
   disposeContactSelect();
+  disposeContactForm();
+  disposeContactForm = () => {};
   if (!dialog.open) dialogOpener = document.activeElement;
   clearTimeout(dialogCloseTimer);
   dialogContent.innerHTML = content;
@@ -312,6 +315,8 @@ dialog.addEventListener("animationend", (event) => {
 });
 dialog.addEventListener("close", () => {
   disposeContactSelect();
+  disposeContactForm();
+  disposeContactForm = () => {};
   clearTimeout(dialogCloseTimer);
   dialog.classList.remove("is-entering", "is-closing");
   document.body.classList.remove("dialog-open");
@@ -452,52 +457,127 @@ function styleContactSelect(select) {
   sync();
 }
 
-function openContact(solution = "") {
-  openDialog(
-    renderText("contact", { contacts: contactDetails, options: solutions.map((s) => `<option value="${s.name}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join(""), arrow }),
-  );
+const contactSettingsPromise = (async () => {
+  const endpoint = window.contactConfig?.endpoint;
+  if (window.contactConfig?.enabled !== true || !endpoint) return null;
+  try {
+    const url = new URL(endpoint, location.href);
+    if (!["http:", "https:"].includes(url.protocol)) return null;
+    const response = await fetch(url, { credentials: "omit", signal: AbortSignal.timeout(3000) });
+    if (!response.ok) return null;
+    const settings = await response.json();
+    return settings.enabled === true && typeof settings.siteKey === "string" && settings.siteKey
+      ? { endpoint: url.href, siteKey: settings.siteKey } : null;
+  } catch { return null; }
+})();
+let turnstileLoading;
+function loadTurnstile() {
+  if (window.turnstile) return Promise.resolve(window.turnstile);
+  if (turnstileLoading) return turnstileLoading;
+  turnstileLoading = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.async = true;
+    const timeout = setTimeout(failed, 10000);
+    function failed() {
+      clearTimeout(timeout);
+      script.remove();
+      turnstileLoading = null;
+      reject(new Error("verification_unavailable"));
+    }
+    script.onerror = failed;
+    script.onload = () => {
+      clearTimeout(timeout);
+      if (window.turnstile) resolve(window.turnstile);
+      else failed();
+    };
+    document.head.append(script);
+  });
+  return turnstileLoading;
+}
+
+async function openContact(solution = "") {
+  const settings = await contactSettingsPromise;
+  openDialog(renderText("contactSend", {
+    contactIntro: settings ? t("contactIntro") : t("sendUnavailable"),
+    contacts: contactDetails,
+    options: solutions.map((s) => `<option value="${s.id}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join(""),
+    arrow,
+  }));
   styleContactSelect(document.querySelector('#contact-form select[name="solution"]'));
   const form = document.querySelector("#contact-form");
-  const fields = [...form.querySelectorAll("input, select, textarea")];
+  const fields = [...form.querySelectorAll("[required]")];
   const submit = form.querySelector('[type="submit"]');
+  const status = form.querySelector(".form-status");
+  let busy = false;
+  let sendError = "";
+  let token = "";
+  let widget;
+  let requestId = crypto.randomUUID();
+  let lastPayload = "";
   function updateValidity() {
-    fields.forEach((field) => {
-      field.setCustomValidity(field.value.trim() ? "" : t("required"));
-    });
-    submit.disabled = !fields.every((field) => field.validity.valid);
+    fields.forEach((field) => field.setCustomValidity(field.value.trim() ? "" : t("required")));
+    submit.disabled = !settings || busy || !fields.every((field) => field.validity.valid) || !token;
   }
   form.addEventListener("input", updateValidity);
   form.addEventListener("change", updateValidity);
   updateValidity();
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    updateValidity();
-    if (!form.reportValidity()) return;
-    const values = new FormData(form);
-    for (const [key, value] of values) values.set(key, value.trim());
-    const message = t("emailMessage", Object.fromEntries(values));
-    const subject = t("subject", { solution: values.get("solution") });
-    const mailto = `mailto:seguros@agoncalves.com.pt?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.replace(/\r?\n/g, "\r\n"))}`;
-    openDialog(
-      renderText("preview", { contacts: contactDetails, arrow }),
-    );
-    dialogContent.querySelector(".message-preview").textContent = message;
-    const emailLink = dialogContent.querySelector("#open-email");
-    emailLink.href = mailto;
-    dialogContent
-      .querySelector("#copy-message")
-      .addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(message);
-          dialogContent.querySelector(".copy-status").textContent =
-            t("copied");
-        } catch {
-          dialogContent.querySelector(".copy-status").textContent =
-            t("copyFallback");
-        }
+  if (settings) {
+    status.textContent = t("verificationLoading");
+    loadTurnstile().then((turnstile) => {
+      if (!form.isConnected || !dialog.open) return;
+      status.textContent = "";
+      widget = turnstile.render(form.querySelector(".contact-verification"), {
+        sitekey: settings.siteKey, action: "contact", language: window.siteI18n.language,
+        theme: "light", size: form.querySelector(".contact-verification").getBoundingClientRect().width < 300 ? "compact" : "flexible", "response-field": false,
+        callback: (value) => { token = value; status.textContent = sendError; updateValidity(); },
+        "expired-callback": () => { token = ""; status.textContent = t("verificationExpired"); updateValidity(); },
+        "error-callback": () => { token = ""; status.textContent = t("verificationFailed"); updateValidity(); },
       });
-    dialog.querySelector(".dialog-close").focus();
-    emailLink.click();
+    }).catch(() => { if (form.isConnected) status.textContent = t("verificationFailed"); });
+    disposeContactForm = () => { if (widget !== undefined && window.turnstile) window.turnstile.remove(widget); };
+  }
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (busy) return;
+    updateValidity();
+    if (!form.reportValidity() || submit.disabled) return;
+    const values = Object.fromEntries(new FormData(form));
+    for (const key of Object.keys(values)) values[key] = values[key].trim();
+    const payload = { ...values, language: window.siteI18n.language };
+    const fingerprint = JSON.stringify(payload);
+    if (lastPayload && fingerprint !== lastPayload) requestId = crypto.randomUUID();
+    lastPayload = fingerprint;
+    busy = true;
+    sendError = "";
+    status.textContent = "";
+    form.setAttribute("aria-busy", "true");
+    form.querySelectorAll("input, select, textarea, button").forEach((field) => field.disabled = true);
+    submit.textContent = t("sending");
+    try {
+      const response = await fetch(settings.endpoint, {
+        method: "POST", credentials: "omit", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, token, requestId }), signal: AbortSignal.timeout(18000),
+      });
+      const result = await response.json();
+      if (!response.ok || result.accepted !== true) throw new Error(result.error || "delivery_unavailable");
+      if (form.isConnected && dialog.open) openDialog(renderText("contactSuccess", { contacts: contactDetails }));
+    } catch (error) {
+      if (form.isConnected && dialog.open) {
+        sendError = error.message === "verification_failed" ? t("verificationFailed") : t("sendFailed");
+        status.textContent = sendError;
+      }
+    } finally {
+      busy = false;
+      token = "";
+      if (form.isConnected) {
+        form.removeAttribute("aria-busy");
+        form.querySelectorAll("input, select, textarea, button").forEach((field) => field.disabled = false);
+        submit.innerHTML = `${t("sendMessage")} ${arrow}`;
+        if (widget !== undefined && window.turnstile) window.turnstile.reset(widget);
+        updateValidity();
+      }
+    }
   });
 }
 
