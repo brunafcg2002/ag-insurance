@@ -1,5 +1,7 @@
 "use strict";
 
+const { locale, t, renderText } = window.siteI18n;
+
 // Content for the interactive insurance and FAQ dialogs. The homepage lives in index.html.
 const arrow =
   '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg>';
@@ -7,218 +9,14 @@ const arrow =
 const externalArrow =
   '<svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
 
-const solutions = [
-  {
-    "id": "auto",
-    "name": "Seguro Automóvel",
-    "category": "Auto & mobilidade",
-    "heading": "O seu carro protegido, dentro e fora da estrada.",
-    "detail": [
-      "Um seguro automóvel deve acompanhar a forma como utiliza o seu veículo. Desde a responsabilidade civil obrigatória até às coberturas de danos próprios, existem diferentes soluções para proteger o automóvel e responder a situações inesperadas.",
-      "Na A. Gonçalves, ajudamos a comparar opções e a perceber o que está realmente incluído."
-    ],
-    "questions": [
-      "Procura um seguro contra terceiros ou com danos próprios?",
-      "Qual é a marca, modelo e ano do veículo?",
-      "Tem atualmente um seguro automóvel?"
-    ],
-    "note": "As coberturas e condições dependem da modalidade e da apólice contratada.",
-    "cta": "Conversar sobre este seguro"
-  },
-  {
-    "id": "saude",
-    "name": "Seguro de Saúde",
-    "category": "Saúde",
-    "heading": "Mais opções para cuidar da sua saúde.",
-    "detail": [
-      "Um seguro de saúde pode facilitar o acesso a consultas, exames, tratamentos e outros cuidados médicos, conforme as coberturas contratadas.",
-      "Trabalhamos para encontrar uma solução adequada à sua idade, necessidades e orçamento, explicando as diferenças entre coberturas, redes médicas, limites e períodos de carência."
-    ],
-    "questions": [
-      "Procura um seguro individual ou familiar?",
-      "Que cuidados médicos utiliza com maior frequência?",
-      "Já tem seguro de saúde ou pretende contratar pela primeira vez?"
-    ],
-    "note": "Os serviços incluídos, limites, exclusões e períodos de carência variam consoante o produto contratado.",
-    "cta": "Conversar sobre este seguro"
-  },
-  {
-    "id": "casa",
-    "name": "Seguro Habitação",
-    "category": "Casa & património",
-    "heading": "A sua casa merece mais do que o seguro obrigatório.",
-    "detail": [
-      "Incêndios, danos por água, fenómenos naturais ou problemas que afetam terceiros são situações que podem representar despesas significativas.",
-      "O seguro multirriscos habitação pode incluir diferentes coberturas para o imóvel, o recheio e a responsabilidade civil. Ajudamos a perceber quais fazem sentido para a sua casa, evitando pagar por proteções desnecessárias ou deixar riscos importantes por cobrir."
-    ],
-    "questions": [
-      "A habitação é própria ou arrendada?",
-      "Pretende proteger o edifício, o recheio ou ambos?",
-      "Tem atualmente um seguro associado ao crédito habitação?"
-    ],
-    "note": "As coberturas dependem das condições e exclusões da apólice. A obrigação legal de seguro aplica-se, nomeadamente, ao risco de incêndio em edifícios em propriedade horizontal.",
-    "cta": "Conversar sobre este seguro"
-  },
-  {
-    "id": "vida",
-    "name": "Seguro de Vida",
-    "category": "Vida & família",
-    "heading": "Um seguro de vida também o pode proteger em vida.",
-    "detail": [
-      "O seguro de vida não serve apenas para proteger financeiramente os beneficiários em caso de morte.",
-      "Dependendo das coberturas contratadas, pode também assegurar um capital em situações de invalidez ou incapacidade, ajudando a enfrentar momentos em que a estabilidade financeira fica comprometida.",
-      "Na A. Gonçalves, explicamos as diferentes modalidades para que saiba exatamente o que está a proteger."
-    ],
-    "questions": [
-      "Pretende um seguro de vida pessoal ou associado ao crédito?",
-      "Procura proteção em caso de morte, invalidez ou ambas?",
-      "Já tem algum seguro de vida contratado?"
-    ],
-    "note": "A proteção em vida depende das coberturas de invalidez ou incapacidade incluídas e dos critérios definidos na apólice.",
-    "cta": "Conversar sobre este seguro"
-  },
-  {
-    "id": "trabalho",
-    "name": "Seguro de Acidentes de Trabalho",
-    "category": "Empresas & profissionais",
-    "heading": "Obrigatório por lei. Essencial para a sua empresa.",
-    "detail": [
-      "O seguro de Acidentes de Trabalho é uma obrigação legal e uma proteção fundamental para os trabalhadores e para a atividade empresarial.",
-      "Pode assegurar prestações relacionadas com acidentes de trabalho, incluindo assistência médica, tratamentos e indemnizações previstas na legislação e no contrato.",
-      "Ajudamos a encontrar uma solução ajustada à atividade, ao número de trabalhadores e à realidade da empresa."
-    ],
-    "questions": [
-      "Qual é a atividade da empresa?",
-      "Quantos trabalhadores pretende segurar?",
-      "Já tem um seguro de Acidentes de Trabalho em vigor?"
-    ],
-    "note": "A contratação e as coberturas devem respeitar o enquadramento legal aplicável à atividade e aos trabalhadores.",
-    "cta": "Conversar sobre este seguro"
-  },
-  {
-    "id": "poupanca",
-    "name": "Poupança e Investimento",
-    "category": "Poupança e investimento",
-    "heading": "Prepare hoje o futuro que deseja.",
-    "detail": [
-      "Poupar para a reforma, criar uma reserva financeira ou preparar novos projetos são decisões que merecem planeamento.",
-      "Na A. Gonçalves, ajudamos a conhecer as soluções de poupança, PPR e investimento disponíveis, tendo em conta os seus objetivos, o prazo e o nível de risco que está disposto a assumir."
-    ],
-    "questions": [
-      "Pretende poupar para a reforma ou para outro objetivo?",
-      "Procura uma solução de poupança ou de investimento?",
-      "Prefere privilegiar a segurança do capital ou admite algum risco?"
-    ],
-    "note": "As condições, os riscos e as garantias dependem do produto contratado. Algumas soluções de investimento podem implicar perda de capital.",
-    "cta": "Conversar sobre esta solução"
-  }
-];
+const solutions = locale.solutions;
 
-const faqs = [
-  {
-    "category": "Os nossos serviços",
-    "title": "Já tenho seguros noutra seguradora. Posso passar para a A. Gonçalves?",
-    "body": [
-      "Sim. Não precisa de começar do zero.",
-      "Podemos analisar os seus seguros atuais, verificar as coberturas e comparar as condições disponíveis, para perceber se existem alternativas mais adequadas às suas necessidades.",
-      "Caso pretenda mudar, ajudamos a compreender os procedimentos e os prazos a respeitar, de acordo com as condições dos contratos em vigor."
-    ],
-    "cta": "Fale connosco"
-  },
-  {
-    "category": "As nossas parcerias",
-    "title": "Conseguem apresentar propostas de diferentes seguradoras?",
-    "body": [
-      "Sim. Na A. Gonçalves trabalhamos com quatro seguradoras.",
-      "Allianz, Zurich, Lusitânia e Real Vida.",
-      "Esta diversidade permite-nos analisar diferentes soluções disponíveis, comparar coberturas e condições e aconselhar uma proteção ajustada à sua situação.",
-      "Porque o melhor seguro não é necessariamente o mais barato, mas aquele que responde às suas necessidades."
-    ],
-    "cta": "Pedir uma proposta"
-  },
-  {
-    "category": "Atendimento",
-    "title": "Tenho de me deslocar à loja para contratar um seguro?",
-    "body": [
-      "Não necessariamente.",
-      "Pode entrar em contacto connosco por telefone ou e-mail para esclarecer dúvidas, pedir propostas e tratar de grande parte do processo à distância.",
-      "Se preferir um atendimento presencial, estamos à sua espera no nosso espaço, na Praça das Pocinhas, em Lousada.",
-      "O importante é encontrar a forma mais prática de tratar da sua proteção."
-    ],
-    "cta": "Vamos conversar"
-  }
-];
+const faqs = locale.faqs;
 
-const scenarios = [
-  {
-    "category": "01 — Automóvel",
-    "title": "O carro desapareceu. As prestações ficaram.",
-    "body": "Imagine continuar a pagar por um carro que já não tem."
-  },
-  {
-    "category": "02 — Habitação",
-    "title": "O problema começou em sua casa. A conta chegou ao vizinho.",
-    "body": "Uma simples fuga de água pode transformar-se numa despesa de milhares de euros."
-  },
-  {
-    "category": "03 — Empresas",
-    "title": "A empresa parou. As despesas não.",
-    "body": "Um incêndio, uma avaria ou outro imprevisto pode comprometer a continuidade do seu negócio."
-  }
-];
+const scenarios = locale.scenarios;
 
 // Official Zurich Portugal offers, checked on 23 October 2026.
-const campaigns = [
-  {
-    "id": "lar-flex",
-    "product": "Zurich Lar Flex",
-    "title": "Até 15% de desconto",
-    "summary": "Z4U + débito direto + seguro Zurich Auto.",
-    "solution": "casa",
-    "image": "zurich-campanha-casa.jpg",
-    "alt": "Família em casa durante uma mudança, na campanha Zurich Lar Flex",
-    "start": "2026-01-01",
-    "end": "2026-12-31",
-    "source": "https://www.zurich.com.pt/pt-pt/particulares/habitacao/lar-flex",
-    "conditions": [
-      "Para novos contratos subscritos entre 01/01/2026 e 31/12/2026.",
-      "5% de desconto pelo registo no portal Z4U, mais 5% pelo pagamento por débito direto e mais 5% se também for cliente Zurich Auto."
-    ]
-  },
-  {
-    "id": "auto",
-    "product": "Zurich Auto",
-    "title": "Até 10% de desconto",
-    "summary": "Adesão ao Z4U e pagamento por débito direto.",
-    "solution": "auto",
-    "image": "zurich-campanha-auto.jpg",
-    "alt": "Casal a trocar as chaves junto ao automóvel, na campanha Zurich Auto",
-    "start": "2026-02-18",
-    "end": "2026-12-31",
-    "source": "https://www.zurich.com.pt/pt-pt/particulares/automovel/automovel",
-    "conditions": [
-      "Campanha Zurich Auto Ligeiros e Comerciais, de 18/02/2026 a 31/12/2026.",
-      "5% de desconto pela adesão ao portal de cliente Z4U e mais 5% pelo pagamento por débito em conta bancária."
-    ]
-  },
-  {
-    "id": "saude",
-    "product": "Zurich Saúde · Opção 3",
-    "title": "Oferta de 2 mensalidades",
-    "summary": "As duas primeiras, com pagamento mensal.",
-    "solution": "saude",
-    "image": "zurich-campanha-saude.jpg",
-    "alt": "Pulseira WHOOP e aplicação, na campanha Zurich Saúde",
-    "start": "2026-10-01",
-    "end": "2026-12-31",
-    "source": "https://www.zurich.com.pt/pt-pt/particulares/saude/zurich-saude",
-    "conditions": [
-      "Campanha de 01/10/2026 a 31/12/2026, na subscrição da Opção 3 do Zurich Saúde.",
-      "Oferta das duas primeiras mensalidades da primeira anuidade, exclusivamente com fracionamento mensal.",
-      "Oferta adicional de pulseira WHOOP e 12 meses de subscrição WHOOP para clientes com idades entre os 30 e os 55 anos."
-    ]
-  }
-];
+const campaigns = locale.campaigns;
 
 document.querySelector(".insurers-strip").classList.add("is-ready");
 
@@ -226,13 +24,13 @@ const navigation = document.querySelector("#navigation");
 const menuToggle = document.querySelector(".menu-toggle");
 const closeMenu = () => {
   menuToggle.setAttribute("aria-expanded", "false");
-  menuToggle.setAttribute("aria-label", "Abrir menu");
+  menuToggle.setAttribute("aria-label", t("openMenu"));
   document.body.classList.remove("menu-open");
 };
 menuToggle.addEventListener("click", () => {
   const open = menuToggle.getAttribute("aria-expanded") !== "true";
   menuToggle.setAttribute("aria-expanded", String(open));
-  menuToggle.setAttribute("aria-label", open ?"Fechar menu" : "Abrir menu");
+  menuToggle.setAttribute("aria-label", open ?t("closeMenu") : t("openMenu"));
   document.body.classList.toggle("menu-open", open);
 });
 navigation.addEventListener("click", (event) => {
@@ -272,7 +70,7 @@ function updateCarousel(announce = false) {
           );
         button.setAttribute(
           "aria-label",
-          `Ir para página ${index + 1} de ${pageCount}: ${categories.join(", ")}`,
+          t("pageLabel", { page: index + 1, count: pageCount, label: categories.join(", ") }),
         );
         return button;
       }),
@@ -295,7 +93,7 @@ function updateCarousel(announce = false) {
   });
   if (announce)
     document.querySelector(".carousel-status").textContent =
-      `Página ${page + 1} de ${pageCount}. Campanhas ${currentSlide + 1} a ${Math.min(currentSlide + count, slides.length)} de ${slides.length}.`;
+      t("campaignStatus", { page: page + 1, count: pageCount, first: currentSlide + 1, last: Math.min(currentSlide + count, slides.length), total: slides.length });
 }
 function moveCarousel(direction) {
   currentSlide += direction * visibleSlides();
@@ -355,7 +153,7 @@ function setupMobileCardCarousel(track, label) {
   const controls = document.createElement("div");
   controls.className = "mobile-card-pagination";
   controls.setAttribute("role", "group");
-  controls.setAttribute("aria-label", `Páginas: ${label}`);
+  controls.setAttribute("aria-label", t("pages", { label }));
   const status = document.createElement("span");
   status.className = "sr-only";
   status.setAttribute("role", "status");
@@ -367,7 +165,7 @@ function setupMobileCardCarousel(track, label) {
     dot.type = "button";
     dot.className = "carousel-dot";
     dot.setAttribute("aria-controls", track.id);
-    dot.setAttribute("aria-label", `Ir para página ${index + 1} de ${items.length}: ${item.querySelector("h3").textContent}`);
+    dot.setAttribute("aria-label", t("pageLabel", { page: index + 1, count: items.length, label: item.querySelector("h3").textContent }));
     dot.addEventListener("click", () => goTo(index));
     controls.append(dot);
     return dot;
@@ -379,7 +177,7 @@ function setupMobileCardCarousel(track, label) {
     controls.hidden = !mobile.matches;
     if (mobile.matches) {
       track.setAttribute("role", "region");
-      track.setAttribute("aria-roledescription", "carrossel");
+      track.setAttribute("aria-roledescription", t("carousel"));
       track.setAttribute("aria-label", label);
       track.tabIndex = 0;
       page = Math.max(0, Math.min(items.length - 1, Math.round(track.scrollLeft / step())));
@@ -393,7 +191,7 @@ function setupMobileCardCarousel(track, label) {
       dots[index].classList.toggle("is-active", index === page);
       dots[index].setAttribute("aria-current", String(index === page));
     });
-    if (announce && mobile.matches) status.textContent = `Página ${page + 1} de ${items.length}.`;
+    if (announce && mobile.matches) status.textContent = t("pageStatus", { page: page + 1, count: items.length });
   }
   function goTo(index) {
     if (!mobile.matches) return;
@@ -422,8 +220,8 @@ function setupMobileCardCarousel(track, label) {
   });
   update();
 }
-setupMobileCardCarousel(document.querySelector(".showcase-grid"), "Imprevistos e proteção");
-setupMobileCardCarousel(document.querySelector(".blog-grid"), "Perguntas frequentes");
+setupMobileCardCarousel(document.querySelector(".showcase-grid"), t("riskPages"));
+setupMobileCardCarousel(document.querySelector(".blog-grid"), t("faqPages"));
 
 function setupFooterDisclosure(footerInsuranceToggle, footerInsuranceLinks) {
   const footerMobile = window.matchMedia("(max-width: 767px)");
@@ -531,7 +329,7 @@ dialog.addEventListener("click", (event) => {
   }
 });
 
-const contactDetails = `<div class="dialog-phones" role="group" aria-label="Contactos"><p>Fale connosco</p>${[...document.querySelectorAll(".footer-contacts .phone-link, .footer-contacts .email-link")].map((link) => link.outerHTML).join("")}</div>`;
+const contactDetails = `<div class="dialog-phones" role="group" aria-label="${t("contacts")}"><p>${t("talk")}</p>${[...document.querySelectorAll(".footer-contacts .phone-link, .footer-contacts .email-link")].map((link) => link.outerHTML).join("")}</div>`;
 
 function styleContactSelect(select) {
   const controller = new AbortController();
@@ -543,7 +341,7 @@ function styleContactSelect(select) {
   trigger.type = "button";
   trigger.className = "insurance-select-trigger";
   trigger.setAttribute("role", "combobox");
-  trigger.setAttribute("aria-label", "Estou interessado em");
+  trigger.setAttribute("aria-label", t("interest"));
   trigger.setAttribute("aria-required", "true");
   trigger.setAttribute("aria-haspopup", "listbox");
   trigger.setAttribute("aria-expanded", "false");
@@ -555,7 +353,7 @@ function styleContactSelect(select) {
   list.id = "insurance-options";
   list.className = "insurance-options";
   list.setAttribute("role", "listbox");
-  list.setAttribute("aria-label", "Tipo de seguro");
+  list.setAttribute("aria-label", t("insuranceType"));
   list.hidden = true;
   let active = select.selectedIndex;
   let search = "";
@@ -656,7 +454,7 @@ function styleContactSelect(select) {
 
 function openContact(solution = "") {
   openDialog(
-    `<span class="eyebrow">Vamos conversar</span><h2 id="dialog-title">O que gostaria<br>de proteger?</h2>${contactDetails}<p>Preencha os campos para preparar o seu email. Todos os campos são obrigatórios.</p><form id="contact-form"><label>O seu nome<input name="name" autocomplete="name" required placeholder="Como se chama?" maxlength="100"></label><label>O seu email<input type="email" name="email" autocomplete="email" required placeholder="nome@exemplo.pt" maxlength="200"></label><label>Estou interessado em<select name="solution" required><option value="">Escolha uma opção</option>${solutions.map((s) => `<option value="${s.name}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join("")}<option>Outra questão</option></select></label><label>A sua mensagem<textarea name="message" required rows="3" placeholder="Conte-nos um pouco do que precisa." maxlength="2500"></textarea></label><p class="form-note">Ao continuar, abrimos a sua aplicação de email com a mensagem preenchida. Confirme o envio nessa aplicação. O site não guarda os dados do formulário.</p><button class="button" type="submit" disabled>Abrir aplicação de email ${arrow}</button></form>`,
+    renderText("contact", { contacts: contactDetails, options: solutions.map((s) => `<option value="${s.name}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join(""), arrow }),
   );
   styleContactSelect(document.querySelector('#contact-form select[name="solution"]'));
   const form = document.querySelector("#contact-form");
@@ -664,7 +462,7 @@ function openContact(solution = "") {
   const submit = form.querySelector('[type="submit"]');
   function updateValidity() {
     fields.forEach((field) => {
-      field.setCustomValidity(field.value.trim() ? "" : "Preencha este campo.");
+      field.setCustomValidity(field.value.trim() ? "" : t("required"));
     });
     submit.disabled = !fields.every((field) => field.validity.valid);
   }
@@ -677,11 +475,11 @@ function openContact(solution = "") {
     if (!form.reportValidity()) return;
     const values = new FormData(form);
     for (const [key, value] of values) values.set(key, value.trim());
-    const message = `Olá, A. Gonçalves - Seguros!\n\nO meu nome é ${values.get("name")}.\nEmail: ${values.get("email")}\nInteresse: ${values.get("solution") || "Informações gerais"}\n\n${values.get("message") || "Gostaria de saber mais sobre as vossas soluções de proteção."}`;
-    const subject = `Pedido de contacto — ${values.get("solution")}`;
+    const message = t("emailMessage", Object.fromEntries(values));
+    const subject = t("subject", { solution: values.get("solution") });
     const mailto = `mailto:seguros@agoncalves.com.pt?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.replace(/\r?\n/g, "\r\n"))}`;
     openDialog(
-      `<span class="eyebrow">A sua mensagem</span><h2 id="dialog-title">O primeiro passo<br>está preparado.</h2>${contactDetails}<p>Confirme o envio na sua aplicação de email. Se não abrir, use a ligação abaixo ou copie a mensagem e envie-a para seguros@agoncalves.com.pt.</p><p><a class="button" id="open-email">Abrir aplicação de email ${arrow}</a></p><pre class="message-preview"></pre><button class="button" id="copy-message">Copiar mensagem ${arrow}</button><p class="copy-status" role="status"></p>`,
+      renderText("preview", { contacts: contactDetails, arrow }),
     );
     dialogContent.querySelector(".message-preview").textContent = message;
     const emailLink = dialogContent.querySelector("#open-email");
@@ -692,10 +490,10 @@ function openContact(solution = "") {
         try {
           await navigator.clipboard.writeText(message);
           dialogContent.querySelector(".copy-status").textContent =
-            "Mensagem copiada.";
+            t("copied");
         } catch {
           dialogContent.querySelector(".copy-status").textContent =
-            "Selecione e copie o texto da mensagem acima.";
+            t("copyFallback");
         }
       });
     dialog.querySelector(".dialog-close").focus();
@@ -704,85 +502,12 @@ function openContact(solution = "") {
 }
 
 // Business-specific fields remain explicit until confirmed by the owner.
-const legalDocuments = {
-  terms: {
-    title: "Termos de utilização",
-    body: `<h3>1. Entidade e âmbito</h3>
-<p>Este site apresenta a atividade da A. Gonçalves - Seguros e permite consultar informação geral e preparar pedidos de contacto. Entidade titular: <strong>[PlaceHolder]</strong> — denominação legal completa; NIF: <strong>[PlaceHolder]</strong>; sede: <strong>[PlaceHolder]</strong>.</p>
-<p>Contactos: <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>, <a href="tel:+351255820960">255 820 960</a> e <a href="tel:+351963667526">963 667 526</a>. Morada de contacto: Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada.</p>
-<h3>2. Consulta e pedidos de informação</h3>
-<p>O site não permite contratar seguros ou efetuar pagamentos. A consulta dos conteúdos e o preenchimento do formulário não celebram um contrato nem ativam coberturas. A contratação exige a informação pré-contratual e contratual aplicável e a confirmação das condições acordadas com as entidades intervenientes.</p>
-<p>As descrições resumem opções de proteção. As coberturas, exclusões, franquias, capitais, prémios e condições de aceitação dependem do produto e da proposta concreta. As campanhas têm condições de elegibilidade e prazos próprios, indicados nos respetivos cartões e nas fontes oficiais.</p>
-<h3>3. Formulário e comunicações</h3>
-<p>«Vamos conversar» prepara um email no dispositivo e abre a aplicação de email configurada. O visitante confirma o envio nessa aplicação. O site não envia mensagens automaticamente nem confirma a sua entrega à empresa. Se a aplicação não abrir, pode copiar a mensagem ou utilizar os contactos diretos.</p>
-<p>Forneça informação correta e apenas os dados necessários ao pedido. Não inclua documentos de identificação nem informações de saúde neste primeiro contacto. O tratamento dos dados é descrito na Política de privacidade, disponível no rodapé.</p>
-<h3>4. Utilização e conteúdos</h3>
-<p>Utilize o site de forma lícita, respeitando os direitos de terceiros. Não introduza código malicioso, tente obter acessos não autorizados ou perturbe o funcionamento dos serviços.</p>
-<p>Os textos, fotografias, símbolos e marcas estão sujeitos aos direitos dos respetivos titulares. As marcas das seguradoras e as imagens das campanhas pertencem aos seus titulares. A consulta não concede direitos de exploração comercial; mantêm-se as utilizações permitidas por lei.</p>
-<h3>5. Disponibilidade e ligações externas</h3>
-<p>Podem ocorrer interrupções de acesso ou alterações para manutenção e atualização. Os mapas, as aplicações de email e os sites externos têm funcionamento e condições próprios. Uma ligação externa não transfere para esse serviço a responsabilidade pelas obrigações legais da entidade titular deste site.</p>
-<h3>6. Direitos e resolução de conflitos</h3>
-<p>Aplica-se a legislação portuguesa, sem prejuízo das normas imperativas de proteção do consumidor e das regras de competência legalmente aplicáveis. Estes termos não afastam direitos dos consumidores nem excluem responsabilidades que a lei não permita excluir.</p>
-<p>Os canais para reclamações e informação sobre resolução alternativa de litígios encontram-se em «Reclamações e litígios» e no acesso ao Livro de Reclamações Eletrónico, no rodapé. A empresa deve confirmar os dados e procedimentos assinalados nesse documento.</p>
-<h3>7. Atualizações</h3>
-<p>As alterações às funcionalidades ou às condições de utilização serão refletidas neste documento. As condições específicas de um contrato de seguro constam da documentação desse contrato.</p>`
-  },
-  disclaimer: {
-    title: "Aviso legal",
-    body: `<h3>1. Identificação da entidade</h3>
-<p>Designação comercial: A. Gonçalves - Seguros. Entidade titular: <strong>[PlaceHolder]</strong> — denominação legal; NIF: <strong>[PlaceHolder]</strong>; sede: <strong>[PlaceHolder]</strong>; registo comercial, se aplicável: <strong>[PlaceHolder]</strong> — conservatória e número de registo.</p>
-<p>Contactos: <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> e <a href="tel:+351255820960">255 820 960</a>. Morada de contacto: Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada.</p>
-<h3>2. Informação sobre a mediação</h3>
-<p>Identificação legal do mediador responsável pela atividade apresentada: <strong>[PlaceHolder]</strong>. Categoria: agente de seguros; número de registo: 317451977/3; ramos Vida e Não Vida, conforme a informação fornecida pela empresa. Data de inscrição: <strong>[PlaceHolder]</strong> — confirmar no registo oficial.</p>
-<p>A ASF — Autoridade de Supervisão de Seguros e Fundos de Pensões disponibiliza informação sobre o registo e a supervisão da atividade em <a href="https://www.asf.com.pt/" target="_blank" rel="noopener noreferrer">www.asf.com.pt</a>. Os campos acima devem ser preenchidos com os dados efetivamente registados.</p>
-<p>Relações com seguradoras, poderes de representação, natureza do aconselhamento, remuneração e demais informação pré-contratual aplicável: <strong>[PlaceHolder]</strong> — completar com a informação legal da empresa. A presença de várias marcas no site não significa que seja efetuada uma análise de todos os seguros disponíveis no mercado.</p>
-<h3>3. Informação sobre seguros e campanhas</h3>
-<p>Os conteúdos têm caráter geral e não substituem a avaliação das suas necessidades nem os documentos de informação do produto, as condições da apólice e a proposta concreta. Não garantem a aceitação de um risco, um prémio ou uma indemnização. Um pedido de contacto não coloca um seguro em vigor.</p>
-<p>As promoções estão sujeitas ao respetivo prazo, elegibilidade e condições da seguradora. Consulte a fonte oficial indicada e confirme as condições aplicáveis antes de decidir. As fotografias ilustrativas não constituem uma descrição das coberturas contratadas.</p>
-<h3>4. Responsabilidade e correções</h3>
-<p>Se identificar informação incorreta ou desatualizada, contacte-nos para que seja verificada. Este aviso não afasta os deveres de informação e diligência aplicáveis à atividade nem exclui ou limita responsabilidades ou direitos que a lei não permita afastar.</p>
-<p>Os logótipos e imagens de terceiros mantêm os direitos dos respetivos titulares. As ligações a mapas, campanhas e redes sociais conduzem a serviços externos com condições próprias.</p>`
-  },
-  cookies: {
-    title: "Política de cookies",
-    body: `<h3>1. O que são cookies</h3>
-<p>Cookies são pequenos ficheiros que um serviço pode guardar no navegador. Tecnologias como o armazenamento local podem igualmente guardar informação no dispositivo. A necessidade de consentimento depende da finalidade e do funcionamento concreto da tecnologia.</p>
-<h3>2. Funcionamento atual deste site</h3>
-<p>O código do site não cria cookies próprios nem utiliza armazenamento local ou de sessão para guardar preferências, dados do formulário ou identificadores de visitantes. Não foram configuradas ferramentas de análise de audiência, publicidade ou píxeis de redes sociais.</p>
-<p>O formulário prepara um email localmente. A opção de copiar utiliza a área de transferência do dispositivo; não cria um cookie. Os tipos de letra, fotografias, logótipos e ficheiros Leaflet são servidos com o site.</p>
-<h3>3. Alojamento, mapas e serviços externos</h3>
-<p>O site é alojado no GitHub Pages. As imagens do mapa são pedidas ao OpenStreetMap e, ao selecionar satélite, à Esri. Estas ligações transmitem dados técnicos, incluindo o endereço IP, mesmo sem um cookie criado pelo código do site. Os respetivos tratamentos estão descritos na Política de privacidade.</p>
-<p>As ligações ao Google Maps, à Zurich, ao Instagram, ao Facebook e ao Livro de Reclamações abrem serviços externos. Não incorporamos conteúdos de redes sociais no site. Ao abrir esses serviços, aplicam-se as respetivas políticas e opções de privacidade.</p>
-<p>Verificação dos mecanismos de armazenamento eventualmente utilizados pelos serviços externos na configuração de produção: <strong>[PlaceHolder]</strong> — confirmar categorias, fornecedores, finalidades e duração, caso existam. Não se atribuem nomes ou durações de cookies sem verificação.</p>
-<h3>4. Consentimento e opções do navegador</h3>
-<p>Na configuração atual, o site não apresenta escolhas de cookies de análise ou publicidade, porque essas ferramentas não foram implementadas. Se forem introduzidas tecnologias que exijam consentimento, terão de permanecer desativadas até à escolha do visitante, com possibilidade de recusar e retirar o consentimento.</p>
-<p>Pode consultar, bloquear ou apagar cookies nas definições do seu navegador. Essas definições não impedem necessariamente a transmissão dos dados técnicos indispensáveis a uma ligação e podem afetar o funcionamento de serviços externos.</p>
-<h3>5. Contacto e alterações</h3>
-<p>Para questões, contacte <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. Esta política deve ser revista sempre que mudem os fornecedores ou sejam acrescentadas funcionalidades que guardem ou acedam a informação no dispositivo.</p>`
-  },
-  complaints: {
-    title: "Reclamações e litígios",
-    body: `<h3>1. Apresentar uma reclamação à empresa</h3>
-<p>Para contactar a A. Gonçalves - Seguros, utilize <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> ou escreva para Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada. Identifique o assunto como reclamação para facilitar o seu encaminhamento.</p>
-<p>Ponto de receção e resposta às reclamações: <strong>[PlaceHolder]</strong> — identificação da pessoa ou função responsável, contacto específico, se distinto, e canal de acompanhamento.</p>
-<p>Procedimento aprovado de gestão de reclamações: <strong>[PlaceHolder]</strong> — completar com a forma de apresentação, elementos necessários, confirmação de receção, prazos legais aplicáveis, acompanhamento e acesso à informação do processo. Este campo deve refletir os procedimentos efetivamente adotados pela empresa.</p>
-<p>Descreva os factos, as datas relevantes e o motivo da reclamação, indicando como pode ser contactado. Os elementos adicionais necessários à apreciação devem ser solicitados através de um canal adequado; o formulário geral do site não se destina à entrega de documentação sensível.</p>
-<h3>2. Livro de Reclamações Eletrónico</h3>
-<p>Pode aceder à plataforma oficial através de <a href="https://www.livroreclamacoes.pt/INICIO/" target="_blank" rel="noopener noreferrer">Livro de Reclamações Eletrónico</a> e selecionar o operador económico a que respeita a reclamação.</p>
-<p>Identificação da empresa na plataforma: <strong>[PlaceHolder]</strong> — confirmar denominação legal, NIF e registo ativo. A ligação à plataforma não comprova nem substitui o registo da empresa. A informação sobre o livro físico e a sua disponibilização no estabelecimento deve ser confirmada pela empresa.</p>
-<h3>3. Autoridade de supervisão</h3>
-<p>Pode consultar o serviço público de <a href="https://www.gov.pt/servicos/reclamar-contra-seguradora-mediador-ou-entidade-gestora-de-fundos-de-pensoes" target="_blank" rel="noopener noreferrer">reclamação contra uma seguradora ou mediador junto da ASF</a>. A atuação de supervisão da ASF não substitui a decisão de um tribunal ou de uma entidade competente de resolução alternativa de litígios sobre um conflito contratual.</p>
-<h3>4. Resolução alternativa de litígios</h3>
-<p>Entidade ou entidades de resolução alternativa de litígios competentes e eventuais adesões da empresa: <strong>[PlaceHolder]</strong> — indicar a designação, morada, contacto, site e âmbito de competência, bem como as condições de acesso aplicáveis. Confirmar este campo com a empresa antes de considerar o documento definitivo.</p>
-<p>Pode consultar informação sobre o <a href="https://www.cimpas.pt/" target="_blank" rel="noopener noreferrer">CIMPAS — Centro de Informação, Mediação e Arbitragem de Seguros</a>. A referência ao centro não constitui uma declaração de adesão da empresa nem garante a competência para qualquer conflito; a intervenção depende do âmbito e das regras aplicáveis ao caso.</p>
-<p>A apresentação de reclamações não prejudica os meios judiciais nem os direitos legalmente reconhecidos ao consumidor.</p>`
-  }
-};
+const legalDocuments = locale.legal;
 
 function openLegalDocument(key) {
   const document = legalDocuments[key];
   if (!document) return;
-  openDialog(`<div class="privacy-policy"><span class="eyebrow">Informação legal</span><h2 id="dialog-title">${document.title}</h2><p class="form-note">Atualizado em <time datetime="2026-10-24">24 de outubro de 2026</time></p><p class="form-note">Versão em revisão: os campos [PlaceHolder] aguardam confirmação pela entidade responsável.</p>${document.body}</div>`);
+  openDialog(renderText("legal", { title: document.title, body: document.body }));
 }
 
 document.addEventListener("click", (event) => {
@@ -792,7 +517,7 @@ document.addEventListener("click", (event) => {
   if (campaignButton) {
     const campaign = campaigns.find((item) => item.id === campaignButton.dataset.campaign);
     openDialog(
-      `<span class="eyebrow">Campanha ${campaign.product}</span><h2 id="dialog-title">${campaign.title}</h2><h3>Condições da campanha</h3><ul>${campaign.conditions.map((condition) => `<li>${condition}</li>`).join("")}</ul><p><a class="text-link" href="${campaign.source}" target="_blank" rel="noopener noreferrer">Consultar campanha na Zurich ${externalArrow}</a></p><p class="form-note">Sujeito às condições da campanha e à aceitação do risco pela seguradora. Consulte a informação pré-contratual e contratual aplicável.</p><button class="button" id="campaign-contact">Saber mais sobre esta campanha ${arrow}</button>`,
+      renderText("campaign", { ...campaign, conditions: campaign.conditions.map((condition) => `<li>${condition}</li>`).join(""), arrow, externalArrow }),
     );
     document.querySelector("#campaign-contact").addEventListener("click", () => openContact(campaign.solution));
   }
@@ -802,7 +527,7 @@ document.addEventListener("click", (event) => {
       (s) => s.id === solutionButton.dataset.solution,
     );
     openDialog(
-      `<span class="eyebrow">${solution.category}</span><h2 id="dialog-title">${solution.heading}</h2>${solution.detail.map((paragraph) => `<p>${paragraph}</p>`).join("")}<h3>Vamos começar por aqui</h3><ul>${solution.questions.map((q) => `<li>${q}</li>`).join("")}</ul><p class="form-note">${solution.note}</p><button class="button" id="solution-contact">${solution.cta} ${arrow}</button>`,
+      renderText("solution", { ...solution, paragraphs: solution.detail.map((paragraph) => `<p>${paragraph}</p>`).join(""), questions: solution.questions.map((q) => `<li>${q}</li>`).join(""), arrow }),
     );
     document
       .querySelector("#solution-contact")
@@ -813,58 +538,18 @@ document.addEventListener("click", (event) => {
   if (faqButton) {
     const faq = faqs[Number(faqButton.dataset.faq)];
     openDialog(
-      `<span class="eyebrow">${faq.category} · Perguntas frequentes</span><h2 id="dialog-title">${faq.title}</h2>${faq.body.map((paragraph) => `<p>${paragraph}</p>`).join("")}<button class="button" data-contact>${faq.cta} ${arrow}</button>`,
+      renderText("faq", { ...faq, paragraphs: faq.body.map((paragraph) => `<p>${paragraph}</p>`).join(""), arrow }),
     );
   }
   const scenarioButton = event.target.closest("[data-scenario]");
   if (scenarioButton) {
     const scenario = scenarios[Number(scenarioButton.dataset.scenario)];
     openDialog(
-      `<span class="eyebrow">${scenario.category}</span><h2 id="dialog-title">${scenario.title}</h2><p>${scenario.body}</p><button class="button" data-contact>Vamos conversar ${arrow}</button>`,
+      renderText("scenario", { ...scenario, arrow }),
     );
   }
   if (event.target.closest("[data-privacy]"))
-    openDialog(`<div class="privacy-policy">
-<span class="eyebrow">Privacidade</span>
-<h2 id="dialog-title">Política de privacidade</h2>
-<p class="form-note">Atualizada em <time datetime="2026-10-24">24 de outubro de 2026</time></p>
-<p class="form-note">Versão em revisão: os campos identificados com [PlaceHolder] aguardam confirmação pela entidade responsável.</p>
-<p>Esta política explica como são tratados os dados pessoais de quem visita este site ou entra em contacto com a A. Gonçalves - Seguros, nos termos do Regulamento Geral sobre a Proteção de Dados (RGPD) e da legislação nacional aplicável.</p>
-<h3>1. Responsável pelo tratamento</h3>
-<p>A atividade apresentada sob a designação comercial A. Gonçalves - Seguros é exercida por <strong>[PlaceHolder]</strong> — denominação legal completa da entidade responsável pelo tratamento.</p>
-<p>Sede da entidade: <strong>[PlaceHolder]</strong> — morada da sede, a confirmar pela empresa.</p>
-<p>Para questões de privacidade e exercício de direitos, contacte <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. Pode também escrever para Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada, morada de contacto apresentada no site.</p>
-<p>Encarregado de proteção de dados: <strong>[PlaceHolder]</strong> — confirmar se foi designado; se existir, indicar os contactos. A designação não é obrigatória para todas as entidades.</p>
-<h3>2. Dados tratados e funcionamento do formulário</h3>
-<p>O formulário «Vamos conversar» utiliza o nome, email, opção de interesse e mensagem que preencher para preparar um email no seu navegador. Todos os campos são necessários para continuar através do formulário; pode, em alternativa, utilizar os contactos diretos apresentados no site.</p>
-<p>Ao escolher «Abrir aplicação de email», esses dados são incluídos numa ligação <em>mailto:</em> que abre a aplicação de email configurada no seu dispositivo. O envio depende da sua confirmação nessa aplicação. O site não envia o email automaticamente nem guarda o conteúdo do formulário numa base de dados.</p>
-<p>Se escolher «Copiar mensagem», o texto passa para a área de transferência do dispositivo, gerida pelo respetivo sistema. Se enviar o email, a mensagem será tratada pelos serviços de email envolvidos e recebida pela empresa. Envie apenas os dados necessários ao seu pedido; evite incluir documentos de identificação, informações de saúde ou outros dados sensíveis neste primeiro contacto.</p>
-<h3>3. Finalidades e fundamentos legais</h3>
-<p>Os dados enviados para pedir uma proposta ou informações necessárias à contratação de um seguro são utilizados para realizar diligências pré-contratuais a seu pedido, nos termos do artigo 6.º, n.º 1, alínea b), do RGPD.</p>
-<p>Os restantes pedidos de esclarecimento são tratados com base no interesse legítimo em responder às comunicações recebidas e prestar apoio, nos termos do artigo 6.º, n.º 1, alínea f), sujeito à ponderação dos seus direitos e interesses. Quando exista uma obrigação legal de conservação ou comunicação, o tratamento necessário ao seu cumprimento tem fundamento na alínea c) do mesmo artigo.</p>
-<p>Este site não disponibiliza subscrições de publicidade nem toma decisões automatizadas sobre a contratação de seguros. O envio de um pedido de contacto não corresponde à subscrição de comunicações promocionais.</p>
-<h3>4. Alojamento, mapas e cookies</h3>
-<p>O site é alojado no GitHub Pages, que regista endereços IP para fins de segurança. Ao carregar o mapa, o navegador pede imagens ao OpenStreetMap; na vista de satélite, à Esri. Esses serviços recebem o IP e os dados técnicos necessários à ligação. O mapa não solicita a localização do seu dispositivo.</p>
-<p>As fotografias, os logótipos, os tipos de letra e o código Leaflet são servidos com o site. O código do site não instala cookies de análise ou publicidade nem utiliza ferramentas de acompanhamento para esses fins.</p>
-<p>«Como chegar» abre o Google Maps e as ligações às campanhas abrem o site da Zurich. O Instagram, o Facebook e o Livro de Reclamações são disponibilizados como ligações externas, sem conteúdos incorporados. Ao seguir essas ligações, aplicam-se as políticas dos respetivos serviços.</p>
-<h3>5. Destinatários e transferências internacionais</h3>
-<p>O tratamento dos pedidos pode envolver as pessoas autorizadas a responder e os prestadores necessários ao funcionamento do email. Prestador do serviço de email da empresa: <strong>[PlaceHolder]</strong> — identificar o fornecedor e a respetiva política de privacidade.</p>
-<p>Outros destinatários ou categorias de destinatários dos pedidos, se aplicável: <strong>[PlaceHolder]</strong> — confirmar os acessos internos, prestadores e eventuais comunicações a seguradoras. A informação específica sobre o tratamento associado a uma proposta ou contrato deve identificar a respetiva seguradora e os destinatários aplicáveis.</p>
-<p>O GitHub e os fornecedores de mapas podem tratar dados fora do Espaço Económico Europeu. Consulte as políticas do <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a>, da <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OpenStreetMap Foundation</a> e da <a href="https://www.esri.com/en-us/privacy/privacy-statements/privacy-statement" target="_blank" rel="noopener noreferrer">Esri</a>.</p>
-<p>Transferências internacionais e garantias aplicáveis aos serviços contratados pela empresa: <strong>[PlaceHolder]</strong> — confirmar países ou situações de transferência e o mecanismo aplicável, quando necessário, incluindo como obter informação sobre essas garantias.</p>
-<h3>6. Conservação dos dados</h3>
-<p>O site não conserva os dados preenchidos no formulário. Os dados enviados por email podem ser conservados para tratar o pedido, cumprir obrigações legais ou exercer e defender direitos, pelo período adequado a cada finalidade.</p>
-<p>Pedidos de contacto sem contratação: <strong>[PlaceHolder]</strong> — indicar o prazo ou os critérios concretos de conservação e o momento a partir do qual são contados.</p>
-<p>Pedidos que dão origem a propostas ou contratos: <strong>[PlaceHolder]</strong> — indicar os prazos ou critérios aplicáveis, incluindo as obrigações legais relevantes e a informação específica a fornecer ao cliente.</p>
-<h3>7. Proteção e acesso aos dados</h3>
-<p>Medidas de segurança e regras de acesso aplicadas pela empresa aos emails e pedidos recebidos: <strong>[PlaceHolder]</strong> — descrever as medidas efetivamente implementadas, de forma adequada e sem divulgar pormenores que comprometam a segurança.</p>
-<h3>8. Os seus direitos</h3>
-<p>Nos termos e limites previstos no RGPD, pode solicitar acesso, retificação, apagamento, limitação do tratamento ou portabilidade dos seus dados, bem como opor-se a tratamentos baseados no interesse legítimo. Se algum tratamento depender do seu consentimento, pode retirá-lo a qualquer momento, sem afetar a licitude do tratamento anterior.</p>
-<p>Envie o pedido para <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. A resposta deve ser prestada sem demora injustificada e, em regra, no prazo de um mês. Quando a complexidade ou o número de pedidos justificar uma prorrogação, será informado dentro desse prazo, nos termos do RGPD. Para confirmar a sua identidade, apenas deve ser solicitada a informação necessária.</p>
-<p>Pode apresentar uma reclamação à <a href="https://www.cnpd.pt/cidadaos/participacoes/" target="_blank" rel="noopener noreferrer">Comissão Nacional de Proteção de Dados (CNPD)</a>, sem prejuízo de outros meios de recurso.</p>
-<h3>9. Alterações a esta política</h3>
-<p>Esta política será atualizada quando se alterarem os tratamentos, os fornecedores ou as funcionalidades do site. A data da versão encontra-se no início do documento. A eventual ativação de envio direto pelo formulário, ferramentas de análise ou publicidade exige uma avaliação prévia e a atualização da informação aplicável.</p>
-</div>`);
+    openDialog(locale.privacy);
 });
 
 if ("IntersectionObserver" in window) {
@@ -911,7 +596,7 @@ const mapStatus = document.querySelector(".map-status");
 function initializeOfficeMap() {
   if (!window.L || location.protocol === "file:") {
     mapStatus.textContent =
-      "O mapa não está disponível. Utilize o botão Como chegar.";
+      t("mapUnavailable");
     mapStatus.classList.remove("sr-only");
     return;
   }
@@ -955,8 +640,8 @@ function initializeOfficeMap() {
     layer.on("load", () => {
       if (!map.hasLayer(layer)) return;
       mapStatus.textContent = loadedTiles
-        ?"Mapa disponível."
-        : "Não foi possível carregar o mapa. Utilize o botão Como chegar.";
+        ?t("mapReady")
+        : t("mapFailed");
       mapStatus.classList.toggle("sr-only", loadedTiles > 0);
     });
   }
@@ -971,19 +656,19 @@ function initializeOfficeMap() {
   });
   L.marker(officeLocation, {
     icon: pin,
-    title: "A. Gonçalves - Seguros, Praça das Pocinhas",
-    alt: "Localização da A. Gonçalves - Seguros na Praça das Pocinhas",
+    title: t("pinTitle"),
+    alt: t("pinAlt"),
     keyboard: true,
   })
     .addTo(map)
-    .bindTooltip("A. Gonçalves · Seguros", {
+    .bindTooltip(t("pinTooltip"), {
       permanent: true,
       direction: "top",
       className: "office-map-label",
       offset: [0, -4],
     })
     .bindPopup(
-      "<strong>A. Gonçalves - Seguros</strong><br>Praça das Pocinhas, 163, Loja H<br>4620-674 Lousada",
+      t("pinPopup"),
     );
 
   function recenter() {
@@ -1010,8 +695,8 @@ function initializeOfficeMap() {
       });
       mapStatus.textContent =
         mode === "satellite"
-          ?"Vista de satélite selecionada."
-          : "Vista de mapa selecionada.";
+          ?t("satelliteSelected")
+          : t("streetSelected");
     });
   });
   document.querySelectorAll("[data-map-action]").forEach((button) => {

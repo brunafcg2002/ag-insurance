@@ -2,7 +2,7 @@
 
 A responsive insurance homepage with PT Sans, a blue and neutral palette, photographic hero, overlapping campaign carousel, service grid, and inset image captions.
 
-The company name and icon come from [the existing company website](http://agoncalves.com.pt/index.html). Visitor-facing copy is in **European Portuguese**. It implements the homepage only; navigation stays within the page and cards open detail dialogs.
+The company name and icon come from [the existing company website](http://agoncalves.com.pt/index.html). Visitor-facing copy is available in **European Portuguese and British English**, with Portuguese as the default. It implements the homepage only; navigation stays within the page and cards open detail dialogs.
 
 ## Preview
 
@@ -14,13 +14,15 @@ For a local HTTP preview, run any static server. If Python 3 is installed:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-Then open http://localhost:8000. If the layout differs from opening the file directly, reset browser zoom to 100% (`Cmd+0` on macOS) and reload. Browsers can save different zoom levels for `localhost`, `127.0.0.1`, and local files. Deploy by uploading `index.html`, `styles.css`, `script.js`, and `assets/` together to any static host. Relative asset paths also support hosting in a subdirectory.
+Then open http://localhost:8000. If the layout differs from opening the file directly, reset browser zoom to 100% (`Cmd+0` on macOS) and reload. Browsers can save different zoom levels for `localhost`, `127.0.0.1`, and local files. Deploy by uploading `index.html`, `styles.css`, `translations.js`, `i18n.js`, `script.js`, and `assets/` together to any static host. Relative asset paths also support hosting in a subdirectory.
 
 ## Editing
 
-- `index.html`: homepage markup, insurance cards, and FAQ cards. Page content is available without JavaScript.
+- `index.html`: homepage markup and translation markers. JavaScript renders the selected language; a bilingual contact fallback is available without JavaScript.
 - `styles.css`: design tokens, typography, component styles, responsive layouts, and reduced-motion support.
-- `script.js`: navigation, carousel, dialogs, and their supporting content.
+- `script.js`: navigation, carousel, dialogs, contact validation and email handoff.
+- `translations.js`: all PT/EN homepage, dialog, form, map and legal copy.
+- `i18n.js`: language selection and catalogue rendering; see [translation editing](docs/translations.md).
 - `assets/`: local photographs, fonts, favicon, and vendored Leaflet 1.9.4 with its license. Map tiles are fetched externally only when the location section approaches the viewport.
 - `AGENTS.md`: minimal instructions for future coding work.
 - [Design system](docs/design-system.md): reference measurements and component conventions.
@@ -55,13 +57,13 @@ Footer call links distinguish the landline (`255 820 960`) from the owner-suppli
 
 The opening carousel now presents Zurich campaigns. The previous three company highlights are the numbered points in “Quem somos”. Cards show their expiry date and open a conditions dialog with the official source and a contact action that selects the matching insurance category.
 
-The three offers were checked on 23 October 2026 and expire on 31 December 2026. Review or replace the static campaign copy before expiry; there is no automatic feed or date-based removal. Update `index.html` for card copy and images, and the `campaigns` array in `script.js` for conditions, dates, source links, and contact categories. Keep both consistent. See [campaign research](docs/campaigns.md) for verified terms and source notes.
+The three offers were checked on 23 October 2026 and expire on 31 December 2026. Review or replace the static campaign copy before expiry; there is no automatic feed or date-based removal. Update images in `index.html`, card copy in each language’s `home` catalogue, and the `campaigns` arrays in `translations.js` for conditions, dates, source links, and contact categories. Keep both consistent. See [campaign research](docs/campaigns.md) for verified terms and source notes.
 
 The insurer strip uses local vector SVGs and a transparent PNG, without SVG raster filters or external CSS mask requests. It works through both `file://` and HTTP and keeps moving after touch/click. Reduced-motion preferences show a static row.
 
 ## Asset cache versions
 
-`index.html` loads `styles.css` and `script.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.
+`index.html` loads `styles.css`, `script.js`, `i18n.js` and `translations.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.
 
 The privacy notice covers the current form, direct email contact, hosting, map providers, and visitor rights. See [privacy notes](docs/privacy.md) for verified data flows and the legal identity details still awaiting owner confirmation.
 

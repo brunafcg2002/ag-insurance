@@ -6,7 +6,7 @@ All page images and fonts are served locally. The company website was inspected 
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `assets/images/bruno.jpg`         | Office and team photograph supplied by the owner; used in the homepage hero.                                                                               |
 | `assets/images/quem_somos.jpg`    | Family photograph supplied by the owner; used in the Quem somos section.                                                                                   |
-| `assets/images/home.jpg`          | [Unsplash cabin photograph](https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8)                                                                  |
+| `assets/images/home-modern.jpg`          | [Unsplash contemporary white house](https://images.unsplash.com/photo-1523217582562-09d0def993a6), downloaded at 1600px, JPEG quality 85; illustrative image for the home risk card.                                                                  |
 | `assets/images/car.jpg`           | [Unsplash automobile photograph](https://images.unsplash.com/photo-1503376780353-7e6692767b70)                                                             |
 | `assets/images/business.jpg`      | [Unsplash office photograph](https://images.unsplash.com/photo-1497366811353-6870744d04b2)                                                                 |
 | `assets/fonts/pt-sans-*.woff2`    | Self-hosted PT Sans Latin subsets. [PT Sans family](https://fonts.google.com/specimen/PT+Sans), SIL Open Font License; included in `assets/fonts/OFL.txt`. |
@@ -61,3 +61,5 @@ Downloaded from official insurer sites on 23 October 2026 and served locally in 
 | `assets/brand/insurers/real-vida-blue.svg` | Inline SVG from the header of [Real Vida Seguros](https://www.realvidaseguros.pt/), recoloured in the local vector. |
 
 Logos remain trademarks of their respective owners. No external logo requests are made by the homepage.
+
+Language flags (`assets/flags/pt.svg`, `assets/flags/en.svg`) are locally authored SVG illustrations used decoratively alongside explicit PT/EN language labels. The English option uses the UK flag; accessible labels identify the language.

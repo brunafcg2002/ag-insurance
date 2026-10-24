@@ -33,7 +33,7 @@ No blanket waiver of statutory responsibility, forced acceptance by browsing, or
 
 ## Maintenance
 
-Edit `legalDocuments` in `script.js` for terms, legal notice, cookies and complaints. The privacy dialog remains in the `[data-privacy]` handler. Footer actions are in `index.html`. Refresh the matching asset hashes after editing script or styles. Replace all placeholders and remove the review notes only after verifying the company-specific content. Recheck policies when vendors or functionality change.
+Edit the matching `pt` and `en` entries in `translations.js`: `legal` for terms, legal notice, cookies and complaints, and `privacy` for the privacy dialog. Footer actions are in `index.html`. Refresh the matching asset hashes after editing script or styles. Replace all placeholders and remove the review notes only after verifying the company-specific content. Recheck policies when vendors or functionality change.
 
 ## Owner-supplied registration statement
 

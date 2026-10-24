@@ -1,6 +1,6 @@
 # Website privacy notice
 
-Updated 24 October 2026. The visitor notice in `script.js` describes the deployed static site rather than an assumed future email backend.
+Updated 24 October 2026. The PT/EN visitor notices in `translations.js` describes the deployed static site rather than an assumed future email backend.
 
 ## Verified technical behaviour
 
@@ -8,6 +8,7 @@ Updated 24 October 2026. The visitor notice in `script.js` describes the deploye
 - The copy action writes the message to the device clipboard, so the notice does not promise clipboard erasure when the page closes.
 - Telephone and email links open external applications. A message sent by email is a separate communication received by the business, not an automatic form submission.
 - GitHub Pages hosts the site and logs visitor IP addresses for security. OpenStreetMap and Esri receive technical data when their map tiles load; no device geolocation is requested.
+- The language choice is included in the URL (`?lang=pt` or `?lang=en`), without cookies or browser storage.
 - Site photographs, fonts, logos, and Leaflet code are local. Google Maps and Zurich are external links.
 
 ## Owner details still to confirm

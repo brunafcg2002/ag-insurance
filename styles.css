@@ -2681,3 +2681,81 @@ dialog,
     align-items: center;
   }
 }
+
+/* A native disclosure keeps the two-language selector keyboard accessible. */
+.nav-container > .brand { order: 0; }
+.nav-container > nav { order: 1; margin-left: auto; }
+.nav-container > .language-picker { order: 2; }
+.nav-container > .menu-toggle { order: 3; }
+.language-picker {
+  position: relative;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.language-picker summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 8px 4px;
+  cursor: pointer;
+  list-style: none;
+}
+.language-picker summary::-webkit-details-marker { display: none; }
+.language-picker summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+.language-picker[open] summary > svg { transform: rotate(180deg); }
+.language-picker img { flex-shrink: 0; object-fit: cover; }
+.language-options {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  min-width: 160px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px #011a3d14;
+}
+.language-options a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px;
+}
+.language-options a:hover,
+.language-options a[aria-current="true"] { background: var(--surface); color: var(--primary); }
+.noscript-notice { padding: 18px; background: var(--surface); }
+@media (max-width: 1100px) {
+  .nav-container > .language-picker { margin-left: auto; }
+  .nav-container { gap: 12px; }
+}
+@media (max-width: 380px) {
+  .nav-container { gap: 8px; }
+  .language-current-code { display: none; }
+}
+
+.footer-contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+.footer-contact-links[hidden] { display: none; }
+@media (max-width: 767px) {
+  .footer-contacts {
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .footer-contacts h2 { width: 100%; }
+  .footer-contact-links { padding-bottom: 16px; }
+}
+
+.language-picker { z-index: 2; }
+@media (max-width: 767px) {
+  .footer-grid { row-gap: 0; }
+  .footer-brand { margin-bottom: 28px; }
+}

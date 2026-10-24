@@ -39,7 +39,7 @@ The page includes a skip link, semantic landmarks, one H1, visible focus indicat
 
 ## Content configuration
 
-Homepage content and cards are edited directly in `index.html`. Navigation labels begin with a capital letter. The `campaigns`, `solutions`, `faqs`, and `scenarios` arrays near the top of `script.js` contain the corresponding dialog content. Text follows the client-supplied October 2026 PDF in European Portuguese; insurance descriptions remain draft copy. Review offering descriptions and configure the contact destination before enabling message submission.
+Homepage text and accessible labels are edited in `translations.js`; `index.html` retains structure, translation markers and image paths. Navigation labels begin with a capital letter. The `campaigns`, `solutions`, `faqs`, and `scenarios` arrays for each language in `translations.js` contain the corresponding dialog content. Text follows the client-supplied October 2026 PDF in European Portuguese; insurance descriptions remain draft copy. Review offering descriptions and configure the contact destination before enabling message submission.
 
 Main navigation follows the page order: Campanhas, Os nossos seguros, A sua proteção, Quem somos, Perguntas frequentes, followed by the contact action. The campaign carousel has its own `#campanhas` anchor.
 
@@ -47,7 +47,7 @@ Main navigation follows the page order: Campanhas, Os nossos seguros, A sua prot
 
 Below 768px, risk scenarios and FAQ cards use native horizontal scrolling with snap alignment and one card per view. Pagination supports clicks, arrow keys, Home/End, and scroll position changes; offscreen cards are inert and hidden from assistive technology. Desktop and tablet retain three-column grids. Risk-card captions are inset equally on both sides on every screen size.
 
-The mobile footer presents the main contact action at full width, then a single unboxed column for landline, mobile, and email under “Contacte-nos”, Explore and insurance lists that can each be expanded with a labelled button. Each list expands and collapses with a 220ms height/opacity animation, supports interrupted toggles, and skips motion for reduced-motion preferences. Desktop keeps both sets of links visible. The logo and low-emphasis legal links sit at the bottom. Without JavaScript both lists stay expanded.
+The mobile footer presents the main contact action at full width, then a single unboxed column for landline, mobile, and email under “Contacte-nos”, Explore and insurance lists that can each be expanded with a labelled button. Each list expands and collapses with a 220ms height/opacity animation, supports interrupted toggles, and skips motion for reduced-motion preferences. Desktop keeps all three sets of links visible. The logo and low-emphasis legal links sit at the bottom. Contact details also use the same animated mobile disclosure; all three groups remain visible on desktop.
 
 ## Mobile refinements
 
@@ -70,3 +70,7 @@ Mobile service cards and the location panel have square corners, consistent with
 The bottom legal area keeps a compact wrapping list on desktop and a two-column list on mobile, with 44px minimum targets. All six legal actions share plain text styling; the Electronic Complaints Book has no surrounding panel or icon. Local policies use the existing animated native dialog; the official complaints platform opens directly. Social contacts use local inline SVG icons and ordinary external links.
 
 Native section anchors position the heading 16px below the 70px sticky header. Root scroll padding accounts for the header once; section scroll margins compensate for desktop/mobile container padding. The same positioning applies to header navigation, footer Explore links, and direct hash URLs, retaining native smooth scrolling and reduced-motion behaviour.
+
+## Language selection
+
+A rectangular header disclosure offers PT and EN with decorative local flags and text labels. The current language remains visible on mobile, with the PT/EN abbreviation omitted below 380px to preserve header space. Selection uses a URL parameter, without cookies or storage. Text and attributes come from `translations.js`; see [editing instructions](translations.md).

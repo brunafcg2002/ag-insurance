@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#013781" />
     <meta
       name="description"
-      content="A. Gonçalves - Seguros. O nosso legado é proteger o seu. Conheça as nossas soluções de proteção para pessoas, famílias e empresas."
-    />
+      content=""
+     data-i18n-content="a_goncalves_seguros_o_nosso_legado_e_proteger_o_seu_conheca_as_no" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link
       rel="preload"
@@ -17,45 +17,50 @@
       crossorigin
     />
     <link rel="preload" href="assets/images/bruno.jpg" as="image" />
-    <link rel="stylesheet" href="styles.css?v=4bcde76eeef0" />
+    <link rel="stylesheet" href="styles.css?v=e2d24eee2d99" />
     <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
-    <title>A. Gonçalves - Seguros — O nosso legado é proteger o seu.</title>
+    <title data-i18n="page_title"></title>
   </head>
   <body>
-    <a class="skip-link" href="#main">Saltar para o conteúdo</a>
+    <noscript><p class="noscript-notice">Ative o JavaScript / Enable JavaScript. <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> · <a href="tel:+351255820960">255 820 960</a></p></noscript>
+    <a class="skip-link" href="#main"><span data-i18n="saltar_para_o_conteudo"></span></a>
     <header class="navbar">
       <div class="container nav-container">
         <a
           href="#inicio"
           class="brand"
-          aria-label="A. Gonçalves - Seguros — início"
-          ><img
+          aria-label=""
+           data-i18n-aria-label="a_goncalves_seguros_inicio"><img
             class="brand-symbol"
             src="assets/brand/logo-blue.svg"
             alt=""
             width="35"
             height="36"
           /><span class="brand-wordmark"
-            ><span class="brand-name">A. Gonçalves</span
-            ><span class="brand-descriptor">Seguros</span></span
-          ></a
-        >
+            ><span class="brand-name"><span data-i18n="a_goncalves"></span></span><span class="brand-descriptor"><span data-i18n="seguros"></span></span></span></a>
+        <details class="language-picker">
+          <summary><img class="language-current-flag" src="assets/flags/pt.svg" width="24" height="16" alt="" /><span class="language-current-code"></span><svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg></summary>
+          <div class="language-options">
+            <a href="?lang=pt" data-language="pt" lang="pt-PT" hreflang="pt-PT"><img src="assets/flags/pt.svg" width="24" height="16" alt="" /><span data-i18n-ui="portuguese"></span></a>
+            <a href="?lang=en" data-language="en" lang="en-GB" hreflang="en-GB"><img src="assets/flags/en.svg" width="24" height="16" alt="" /><span data-i18n-ui="english"></span></a>
+          </div>
+        </details>
         <button
           class="menu-toggle"
           aria-controls="navigation"
           aria-expanded="false"
-          aria-label="Abrir menu"
-        >
+          aria-label=""
+         data-i18n-aria-label="abrir_menu">
           <span></span><span></span>
         </button>
-        <nav id="navigation" aria-label="Navegação principal">
-          <a class="nav-link active" href="#campanhas">Campanhas</a>
-          <a class="nav-link" href="#seguros">Os nossos seguros</a>
-          <a class="nav-link" href="#protecao">A sua proteção</a>
-          <a class="nav-link" href="#sobre">Quem somos</a>
-          <a class="nav-link" href="#perguntas-frequentes">Perguntas frequentes</a>
+        <nav id="navigation" aria-label="" data-i18n-aria-label="navegacao_principal">
+          <a class="nav-link active" href="#campanhas"><span data-i18n="campanhas"></span></a>
+          <a class="nav-link" href="#seguros"><span data-i18n="os_nossos_seguros"></span></a>
+          <a class="nav-link" href="#protecao"><span data-i18n="a_sua_protecao"></span></a>
+          <a class="nav-link" href="#sobre"><span data-i18n="quem_somos"></span></a>
+          <a class="nav-link" href="#perguntas-frequentes"><span data-i18n="perguntas_frequentes"></span></a>
           <button class="button nav-button" data-contact>
-            Vamos conversar
+            <span data-i18n="vamos_conversar"></span>
           </button>
         </nav>
       </div>
@@ -65,66 +70,66 @@
         <div class="hero-background">
           <img
             src="assets/images/bruno.jpg"
-            alt="Equipa da A. Gonçalves - Seguros no escritório em Lousada"
+            alt=""
             width="2048"
             height="1536"
             fetchpriority="high"
-          />
+           data-i18n-alt="equipa_da_a_goncalves_seguros_no_escritorio_em_lousada" />
           <div class="hero-overlay"></div>
         </div>
         <div class="container hero-container">
           <div class="hero-content">
             <h1 id="hero-title">
-              O nosso legado<br />é proteger <span>o seu.</span>
+              <span data-i18n="o_nosso_legado"></span><br /><span data-i18n="e_proteger"></span> <span><span data-i18n="o_seu"></span></span>
             </h1>
           </div>
         </div>
       </section>
 
-      <section class="carousel-section" id="campanhas" aria-label="Campanhas Zurich">
+      <section class="carousel-section" id="campanhas" aria-label="" data-i18n-aria-label="campanhas_zurich">
         <div class="container carousel-container">
           <div
             class="carousel"
             id="insurance-carousel"
             tabindex="0"
             aria-roledescription="carrossel"
-            aria-label="Explore as campanhas Zurich; deslize ou utilize os pontos de paginação"
-          >
+            aria-label=""
+           data-i18n-aria-label="explore_as_campanhas_zurich_deslize_ou_utilize_os_pontos_de_pagin">
             <div class="carousel-track">
-              <article class="carousel-slide" aria-roledescription="diapositivo" aria-label="1 de 3">
-                <button class="campaign-card" data-campaign="lar-flex" aria-label="Zurich Lar Flex: Até 15% de desconto. Ver condições">
+              <article class="carousel-slide" aria-roledescription="diapositivo" aria-label="" data-i18n-aria-label="1_de_3">
+                <button class="campaign-card" data-campaign="lar-flex" aria-label="" data-i18n-aria-label="zurich_lar_flex_ate_15_de_desconto_ver_condicoes">
                   <div class="slide-content">
-                    <span class="slide-category">Zurich Lar Flex</span>
-                    <h2 class="slide-title">Até 15% de desconto</h2>
-                    <p class="campaign-summary">Z4U + débito direto + seguro Zurich Auto.</p>
-                    <p class="campaign-validity">Válida até <time datetime="2026-12-31">31/12/2026</time></p>
-                    <span class="campaign-more">Ver condições <svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span>
+                    <span class="slide-category"><span data-i18n="zurich_lar_flex"></span></span>
+                    <h2 class="slide-title"><span data-i18n="ate_15_de_desconto"></span></h2>
+                    <p class="campaign-summary"><span data-i18n="z4u_debito_direto_seguro_zurich_auto"></span></p>
+                    <p class="campaign-validity"><span data-i18n="valida_ate"></span> <time datetime="2026-12-31"><span data-i18n="31_12_2026"></span></time></p>
+                    <span class="campaign-more"><span data-i18n="ver_condicoes"></span> <svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span>
                   </div>
-                  <div class="slide-image-holder"><img class="slide-image" src="assets/images/zurich-campanha-casa.jpg" alt="Família em casa durante uma mudança, na campanha Zurich Lar Flex" width="1000" height="1000" /></div>
+                  <div class="slide-image-holder"><img class="slide-image" src="assets/images/zurich-campanha-casa.jpg" alt="" width="1000" height="1000"  data-i18n-alt="familia_em_casa_durante_uma_mudanca_na_campanha_zurich_lar_flex" /></div>
                 </button>
               </article>
-              <article class="carousel-slide" aria-roledescription="diapositivo" aria-label="2 de 3">
-                <button class="campaign-card" data-campaign="auto" aria-label="Zurich Auto: Até 10% de desconto. Ver condições">
+              <article class="carousel-slide" aria-roledescription="diapositivo" aria-label="" data-i18n-aria-label="2_de_3">
+                <button class="campaign-card" data-campaign="auto" aria-label="" data-i18n-aria-label="zurich_auto_ate_10_de_desconto_ver_condicoes">
                   <div class="slide-content">
-                    <span class="slide-category">Zurich Auto</span>
-                    <h2 class="slide-title">Até 10% de desconto</h2>
-                    <p class="campaign-summary">Adesão ao Z4U e pagamento por débito direto.</p>
-                    <p class="campaign-validity">Válida até <time datetime="2026-12-31">31/12/2026</time></p>
-                    <span class="campaign-more">Ver condições <svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span>
+                    <span class="slide-category"><span data-i18n="zurich_auto"></span></span>
+                    <h2 class="slide-title"><span data-i18n="ate_10_de_desconto"></span></h2>
+                    <p class="campaign-summary"><span data-i18n="adesao_ao_z4u_e_pagamento_por_debito_direto"></span></p>
+                    <p class="campaign-validity"><span data-i18n="valida_ate"></span> <time datetime="2026-12-31"><span data-i18n="31_12_2026"></span></time></p>
+                    <span class="campaign-more"><span data-i18n="ver_condicoes"></span> <svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span>
                   </div>
-                  <div class="slide-image-holder"><img class="slide-image" src="assets/images/zurich-campanha-auto.jpg" alt="Casal a trocar as chaves junto ao automóvel, na campanha Zurich Auto" width="1000" height="1000" /></div>
+                  <div class="slide-image-holder"><img class="slide-image" src="assets/images/zurich-campanha-auto.jpg" alt="" width="1000" height="1000"  data-i18n-alt="casal_a_trocar_as_chaves_junto_ao_automovel_na_campanha_zurich_au" /></div>
                 </button>
               </article>
-              <article class="carousel-slide" aria-roledescription="diapositivo" aria-label="3 de 3">
-                <button class="campaign-card" data-campaign="saude" aria-label="Zurich Saúde · Opção 3: Oferta de 2 mensalidades. Ver condições">
+              <article class="carousel-slide" aria-roledescription="diapositivo" aria-label="" data-i18n-aria-label="3_de_3">
+                <button class="campaign-card" data-campaign="saude" aria-label="" data-i18n-aria-label="zurich_saude_opcao_3_oferta_de_2_mensalidades_ver_condicoes">
                   <div class="slide-content">
-                    <span class="slide-category">Zurich Saúde · Opção 3</span>
-                    <h2 class="slide-title">Oferta de 2 mensalidades</h2>
-                    <p class="campaign-summary">As duas primeiras, com pagamento mensal.</p>
-                    <p class="campaign-validity">Válida até <time datetime="2026-12-31">31/12/2026</time></p>
-                    <span class="campaign-more">Ver condições <svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span>
+                    <span class="slide-category"><span data-i18n="zurich_saude_opcao_3"></span></span>
+                    <h2 class="slide-title"><span data-i18n="oferta_de_2_mensalidades"></span></h2>
+                    <p class="campaign-summary"><span data-i18n="as_duas_primeiras_com_pagamento_mensal"></span></p>
+                    <p class="campaign-validity"><span data-i18n="valida_ate"></span> <time datetime="2026-12-31"><span data-i18n="31_12_2026"></span></time></p>
+                    <span class="campaign-more"><span data-i18n="ver_condicoes"></span> <svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span>
                   </div>
-                  <div class="slide-image-holder"><img class="slide-image" src="assets/images/zurich-campanha-saude.jpg" alt="Pulseira WHOOP e aplicação, na campanha Zurich Saúde" width="1000" height="1000" /></div>
+                  <div class="slide-image-holder"><img class="slide-image" src="assets/images/zurich-campanha-saude.jpg" alt="" width="1000" height="1000"  data-i18n-alt="pulseira_whoop_e_aplicacao_na_campanha_zurich_saude" /></div>
                 </button>
               </article>
             </div>
@@ -133,8 +138,8 @@
             <div
               class="carousel-pagination"
               role="group"
-              aria-label="Páginas das campanhas"
-            ></div>
+              aria-label=""
+             data-i18n-aria-label="paginas_das_campanhas"></div>
             <span class="carousel-status sr-only" aria-live="polite"></span>
           </div>
         </div>
@@ -144,20 +149,20 @@
         <div class="container">
           <div class="section-heading reveal">
             <h2 id="solutions-title">
-              Há um seguro para cada necessidade.
+              <span data-i18n="ha_um_seguro_para_cada_necessidade"></span>
             </h2>
             <div class="section-description">
               <p>
-                Trabalhamos com várias seguradoras para apresentar soluções de proteção para pessoas, famílias e empresas. Ajudamos a avaliar as opções disponíveis e a escolher o seguro mais adequado a cada necessidade.
+                <span data-i18n="trabalhamos_com_varias_seguradoras_para_apresentar_solucoes_de_pr"></span>
               </p>
             </div>
           </div>
           <aside class="insurers-strip" aria-labelledby="insurers-title">
             <div class="insurers-strip-heading">
-              <h3 id="insurers-title">Seguradoras com que trabalhamos</h3>
+              <h3 id="insurers-title"><span data-i18n="seguradoras_com_que_trabalhamos"></span></h3>
             </div>
             <div class="insurers-window"><div class="insurers-track">
-              <ul class="insurers-group" role="list" aria-label="Seguradoras com que trabalhamos"><li><span class="insurer-mark"><img src="assets/brand/insurers/allianz-blue.svg?v=ce214bdbbae6" alt="Allianz" width="160" height="48" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/zurich-blue.svg?v=8ab1b11a5ada" alt="Zurich" width="160" height="48" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/lusitania-blue.png?v=a4533e538d8e" alt="Lusitânia" width="160" height="48" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/real-vida-blue.svg?v=9d4323c709e0" alt="Real Vida Seguros" width="160" height="48" /></span></li></ul>
+              <ul class="insurers-group" role="list" aria-label="" data-i18n-aria-label="seguradoras_com_que_trabalhamos"><li><span class="insurer-mark"><img src="assets/brand/insurers/allianz-blue.svg?v=ce214bdbbae6" alt="" width="160" height="48"  data-i18n-alt="allianz" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/zurich-blue.svg?v=8ab1b11a5ada" alt="" width="160" height="48"  data-i18n-alt="zurich" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/lusitania-blue.png?v=a4533e538d8e" alt="" width="160" height="48"  data-i18n-alt="lusitania" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/real-vida-blue.svg?v=9d4323c709e0" alt="" width="160" height="48"  data-i18n-alt="real_vida_seguros" /></span></li></ul>
               <ul class="insurers-group" aria-hidden="true" inert><li><span class="insurer-mark"><img src="assets/brand/insurers/allianz-blue.svg?v=ce214bdbbae6" alt="" width="160" height="48" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/zurich-blue.svg?v=8ab1b11a5ada" alt="" width="160" height="48" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/lusitania-blue.png?v=a4533e538d8e" alt="" width="160" height="48" /></span></li><li><span class="insurer-mark"><img src="assets/brand/insurers/real-vida-blue.svg?v=9d4323c709e0" alt="" width="160" height="48" /></span></li></ul>
             </div></div>
           </aside>
@@ -178,8 +183,8 @@
                 />
                 <path class="accent" d="M20 29h8M15 8l-3 12h24L33 8" />
               </svg>
-              <h3><span class="service-title-full">Seguro Automóvel</span><span class="service-title-short">Automóvel</span></h3>
-              <div class="service-details"><p>Proteção para cada viagem.</p><span class="service-more">Saber mais <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <h3><span class="service-title-full"><span data-i18n="seguro_automovel"></span></span><span class="service-title-short"><span data-i18n="automovel"></span></span></h3>
+              <div class="service-details"><p><span data-i18n="protecao_para_cada_viagem"></span></p><span class="service-more"><span data-i18n="saber_mais"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button>
             <button class="service-card" data-solution="saude">
               <svg
@@ -195,8 +200,8 @@
                 <path d="M17 6h14v12h12v14H31v12H17V32H5V18h12Z" />
                 <path class="accent" d="M20 12h8M12 24h8m8 0h8M24 20v16" />
               </svg>
-              <h3><span class="service-title-full">Seguro de Saúde</span><span class="service-title-short">Saúde</span></h3>
-              <div class="service-details"><p>A sua saúde merece atenção.</p><span class="service-more">Saber mais <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <h3><span class="service-title-full"><span data-i18n="seguro_de_saude"></span></span><span class="service-title-short"><span data-i18n="saude"></span></span></h3>
+              <div class="service-details"><p><span data-i18n="a_sua_saude_merece_atencao"></span></p><span class="service-more"><span data-i18n="saber_mais"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button>
             <button class="service-card" data-solution="casa">
               <svg
@@ -212,8 +217,8 @@
                 <path d="m5 23 19-17 19 17M11 20v22h26V20M20 42V28h9v14" />
                 <path class="accent" d="M32 8v8M18 20h12" />
               </svg>
-              <h3><span class="service-title-full">Seguro Habitação</span><span class="service-title-short">Habitação</span></h3>
-              <div class="service-details"><p>A sua casa, devidamente protegida.</p><span class="service-more">Saber mais <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <h3><span class="service-title-full"><span data-i18n="seguro_habitacao"></span></span><span class="service-title-short"><span data-i18n="habitacao"></span></span></h3>
+              <div class="service-details"><p><span data-i18n="a_sua_casa_devidamente_protegida"></span></p><span class="service-more"><span data-i18n="saber_mais"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button>
             <button class="service-card" data-solution="vida">
               <svg
@@ -231,8 +236,8 @@
                 />
                 <path class="accent" d="M13 25h7l4-8 4 16 4-8h5" />
               </svg>
-              <h3><span class="service-title-full">Seguro de Vida</span><span class="service-title-short">Vida</span></h3>
-              <div class="service-details"><p>Segurança para si e para os seus.</p><span class="service-more">Saber mais <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <h3><span class="service-title-full"><span data-i18n="seguro_de_vida"></span></span><span class="service-title-short"><span data-i18n="vida"></span></span></h3>
+              <div class="service-details"><p><span data-i18n="seguranca_para_si_e_para_os_seus"></span></p><span class="service-more"><span data-i18n="saber_mais"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button>
             <button class="service-card" data-solution="trabalho">
               <svg
@@ -250,13 +255,13 @@
                 />
                 <path class="accent" d="M28 43v-6h7v6M26 6V2h11v4" />
               </svg>
-              <h3><span class="service-title-full">Seguro de Acidentes de Trabalho</span><span class="service-title-short">Acidentes de trabalho</span></h3>
-              <div class="service-details"><p>Proteja a sua equipa e o seu negócio.</p><span class="service-more">Saber mais <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <h3><span class="service-title-full"><span data-i18n="seguro_de_acidentes_de_trabalho"></span></span><span class="service-title-short"><span data-i18n="acidentes_de_trabalho"></span></span></h3>
+              <div class="service-details"><p><span data-i18n="proteja_a_sua_equipa_e_o_seu_negocio"></span></p><span class="service-more"><span data-i18n="saber_mais"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button>
             <button class="service-card" data-solution="poupanca">
               <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 42h36M10 35V25h7v10M21 35V18h7v17M32 35V10h7v25"/><path class="accent" d="m8 18 12-8 8 3L40 3M32 3h8v8"/></svg>
-              <h3><span class="service-title-full">Poupança e Investimento</span><span class="service-title-short">Poupança e investimento</span></h3>
-              <div class="service-details"><p>O seu futuro começa a construir-se hoje.</p><span class="service-more">Saber mais <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <h3><span class="service-title-full"><span data-i18n="poupanca_e_investimento"></span></span><span class="service-title-short"><span data-i18n="poupanca_e_investimento_2"></span></span></h3>
+              <div class="service-details"><p><span data-i18n="o_seu_futuro_comeca_a_construir_se_hoje"></span></p><span class="service-more"><span data-i18n="saber_mais"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button>
           </div>
         </div>
@@ -270,24 +275,24 @@
         <div class="container">
           <div class="center-heading reveal">
             <h2 id="protection-title">
-              Há imprevistos que custam mais do que imagina.
+              <span data-i18n="ha_imprevistos_que_custam_mais_do_que_imagina"></span>
             </h2>
             <p>
-              E se amanhã fosse consigo? Já pensou no impacto que teria na sua vida, na sua família ou no seu negócio?
+              <span data-i18n="e_se_amanha_fosse_consigo_ja_pensou_no_impacto_que_teria_na_sua_v"></span>
             </p>
           </div>
           <div class="showcase-grid mobile-card-carousel" id="scenario-carousel">
             <button class="showcase-card reveal" data-scenario="0">
-              <div class="showcase-image"><img src="assets/images/car.jpg" alt="Automóvel numa estrada" loading="lazy" width="800" height="720" /></div>
-              <div class="showcase-caption"><span>01 — Automóvel</span><h3>O carro desapareceu. As prestações ficaram.</h3><p>Imagine continuar a pagar por um carro que já não tem.</p><span class="showcase-arrow"><svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div>
+              <div class="showcase-image"><img src="assets/images/car.jpg" alt="" loading="lazy" width="800" height="720"  data-i18n-alt="automovel_numa_estrada" /></div>
+              <div class="showcase-caption"><span><span data-i18n="01_automovel"></span></span><h3><span data-i18n="o_carro_desapareceu_as_prestacoes_ficaram"></span></h3><p><span data-i18n="imagine_continuar_a_pagar_por_um_carro_que_ja_nao_tem"></span></p><span class="showcase-arrow"><svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div>
             </button>
             <button class="showcase-card reveal" data-scenario="1">
-              <div class="showcase-image"><img src="assets/images/home.jpg" alt="Casa entre árvores" loading="lazy" width="800" height="720" /></div>
-              <div class="showcase-caption"><span>02 — Habitação</span><h3>O problema começou em sua casa. A conta chegou ao vizinho.</h3><p>Uma simples fuga de água pode transformar-se numa despesa de milhares de euros.</p><span class="showcase-arrow"><svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div>
+              <div class="showcase-image"><img src="assets/images/home-modern.jpg" alt="" loading="lazy" width="800" height="720"  data-i18n-alt="moradia_contemporanea_branca" /></div>
+              <div class="showcase-caption"><span><span data-i18n="02_habitacao"></span></span><h3><span data-i18n="o_problema_comecou_em_sua_casa_a_conta_chegou_ao_vizinho"></span></h3><p><span data-i18n="uma_simples_fuga_de_agua_pode_transformar_se_numa_despesa_de_milh"></span></p><span class="showcase-arrow"><svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div>
             </button>
             <button class="showcase-card reveal" data-scenario="2">
-              <div class="showcase-image"><img src="assets/images/business.jpg" alt="Espaço de trabalho" loading="lazy" width="800" height="720" /></div>
-              <div class="showcase-caption"><span>03 — Empresas</span><h3>A empresa parou. As despesas não.</h3><p>Um incêndio, uma avaria ou outro imprevisto pode comprometer a continuidade do seu negócio.</p><span class="showcase-arrow"><svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div>
+              <div class="showcase-image"><img src="assets/images/business.jpg" alt="" loading="lazy" width="800" height="720"  data-i18n-alt="espaco_de_trabalho" /></div>
+              <div class="showcase-caption"><span><span data-i18n="03_empresas"></span></span><h3><span data-i18n="a_empresa_parou_as_despesas_nao"></span></h3><p><span data-i18n="um_incendio_uma_avaria_ou_outro_imprevisto_pode_comprometer_a_con"></span></p><span class="showcase-arrow"><svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></div>
             </button>
           </div>
         </div>
@@ -301,11 +306,11 @@
         <div class="container">
           <div class="section-heading reveal">
             <h2 id="about-title">
-              Conhecemos os seguros. Mas, acima de tudo, conhecemos as pessoas.
+              <span data-i18n="conhecemos_os_seguros_mas_acima_de_tudo_conhecemos_as_pessoas"></span>
             </h2>
             <div class="section-description">
               <p>
-                Na A. Gonçalves, cada cliente tem necessidades diferentes. Por isso, privilegiamos o contacto direto, o aconselhamento claro e soluções que fazem sentido para cada realidade.
+                <span data-i18n="na_a_goncalves_cada_cliente_tem_necessidades_diferentes_por_isso_"></span>
               </p>
             </div>
           </div>
@@ -313,43 +318,40 @@
             <div class="about-photo">
               <img
                 src="assets/images/quem_somos.jpg"
-                alt="Família Gonçalves reunida"
+                alt=""
                 loading="lazy"
                 width="4000"
                 height="6000"
-              />
+               data-i18n-alt="familia_goncalves_reunida" />
               <div class="photo-label">
-                <span>A. Gonçalves - Seguros</span><span>Pessoas reais. Acompanhamento real.</span>
+                <span><span data-i18n="a_goncalves_seguros"></span></span><span><span data-i18n="pessoas_reais_acompanhamento_real"></span></span>
               </div>
             </div>
             <div class="approach">
               <div class="approach-item">
-                <span class="step-number">01</span>
+                <span class="step-number"><span data-i18n="01"></span></span>
                 <div>
-                  <h3>Mais de 40 anos de experiência</h3>
+                  <h3><span data-i18n="mais_de_40_anos_de_experiencia"></span></h3>
                   <p>
-                    Uma história construída com confiança e responsabilidade.
-                    Conhecimento que colocamos ao seu serviço. Ajudamos a escolher com clareza e segurança.
+                    <span data-i18n="uma_historia_construida_com_confianca_e_responsabilidade_conhecim"></span>
                   </p>
                 </div>
               </div>
               <div class="approach-item">
-                <span class="step-number">02</span>
+                <span class="step-number"><span data-i18n="02"></span></span>
                 <div>
-                  <h3>Uma história familiar</h3>
+                  <h3><span data-i18n="uma_historia_familiar"></span></h3>
                   <p>
-                    Diferentes gerações, o mesmo compromisso.
-                    A proximidade faz parte de quem somos. Ouvimos cada cliente para compreender o que precisa de proteger.
+                    <span data-i18n="diferentes_geracoes_o_mesmo_compromisso_a_proximidade_faz_parte_d"></span>
                   </p>
                 </div>
               </div>
               <div class="approach-item">
-                <span class="step-number">03</span>
+                <span class="step-number"><span data-i18n="03"></span></span>
                 <div>
-                  <h3>Acompanhamento próximo</h3>
+                  <h3><span data-i18n="acompanhamento_proximo"></span></h3>
                   <p>
-                    Antes, durante e depois de cada contratação.
-                    Esclarecemos dúvidas e ajudamos a rever as coberturas. Estamos presentes quando precisa de apoio.
+                    <span data-i18n="antes_durante_e_depois_de_cada_contratacao_esclarecemos_duvidas_e"></span>
                   </p>
                 </div>
               </div>
@@ -366,26 +368,26 @@
         <div class="container">
           <div class="section-heading reveal">
             <h2 id="advice-title">
-              Tem dúvidas? Começamos por esclarecer.
+              <span data-i18n="tem_duvidas_comecamos_por_esclarecer"></span>
             </h2>
             <div class="section-description">
               <p>
-                Reunimos algumas das perguntas mais frequentes sobre os nossos serviços, as seguradoras com que trabalhamos e a forma como pode contar connosco.
+                <span data-i18n="reunimos_algumas_das_perguntas_mais_frequentes_sobre_os_nossos_se"></span>
               </p>
             </div>
           </div>
           <div class="blog-grid mobile-card-carousel" id="guias">
             <article class="blog-card reveal"><button class="blog-link" data-faq="0">
-              <div class="blog-image"><img src="assets/images/analise-seguros.jpg" alt="Análise de documentos de seguros no escritório" loading="lazy" width="1067" height="1600" /></div>
-              <div class="blog-content"><div class="blog-meta"><span>Os nossos serviços</span><span>Perguntas frequentes</span></div><h3>Já tenho seguros noutra seguradora. Posso passar para a A. Gonçalves?</h3><span class="blog-more">Ver resposta <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <div class="blog-image"><img src="assets/images/analise-seguros.jpg" alt="" loading="lazy" width="1067" height="1600"  data-i18n-alt="analise_de_documentos_de_seguros_no_escritorio" /></div>
+              <div class="blog-content"><div class="blog-meta"><span><span data-i18n="os_nossos_servicos"></span></span><span><span data-i18n="perguntas_frequentes"></span></span></div><h3><span data-i18n="ja_tenho_seguros_noutra_seguradora_posso_passar_para_a_a_goncalve"></span></h3><span class="blog-more"><span data-i18n="ver_resposta"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button></article>
             <article class="blog-card reveal"><button class="blog-link" data-faq="1">
-              <div class="blog-image"><img src="assets/images/bruno_photo.jpg" alt="Bruno Gonçalves ao telefone no escritório" loading="lazy" width="1067" height="1600" /></div>
-              <div class="blog-content"><div class="blog-meta"><span>As nossas parcerias</span><span>Perguntas frequentes</span></div><h3>Conseguem apresentar propostas de diferentes seguradoras?</h3><span class="blog-more">Ver resposta <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <div class="blog-image"><img src="assets/images/bruno_photo.jpg" alt="" loading="lazy" width="1067" height="1600"  data-i18n-alt="bruno_goncalves_ao_telefone_no_escritorio" /></div>
+              <div class="blog-content"><div class="blog-meta"><span><span data-i18n="as_nossas_parcerias"></span></span><span><span data-i18n="perguntas_frequentes"></span></span></div><h3><span data-i18n="conseguem_apresentar_propostas_de_diferentes_seguradoras"></span></h3><span class="blog-more"><span data-i18n="ver_resposta"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button></article>
             <article class="blog-card reveal"><button class="blog-link" data-faq="2">
-              <div class="blog-image"><img src="assets/images/atendimento.jpg" alt="Colaboradora da A. Gonçalves a trabalhar ao computador" loading="lazy" width="1067" height="1600" /></div>
-              <div class="blog-content"><div class="blog-meta"><span>Atendimento</span><span>Perguntas frequentes</span></div><h3>Tenho de me deslocar à loja para contratar um seguro?</h3><span class="blog-more">Ver resposta <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
+              <div class="blog-image"><img src="assets/images/atendimento.jpg" alt="" loading="lazy" width="1067" height="1600"  data-i18n-alt="colaboradora_da_a_goncalves_a_trabalhar_ao_computador" /></div>
+              <div class="blog-content"><div class="blog-meta"><span><span data-i18n="atendimento"></span></span><span><span data-i18n="perguntas_frequentes"></span></span></div><h3><span data-i18n="tenho_de_me_deslocar_a_loja_para_contratar_um_seguro"></span></h3><span class="blog-more"><span data-i18n="ver_resposta"></span> <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg></span></div>
             </button></article>
           </div>
         </div>
@@ -398,10 +400,10 @@
       >
         <div class="container">
           <div class="section-heading reveal">
-            <h2 id="location-title">Estamos em Lousada.<br />E à distância de uma conversa.</h2>
+            <h2 id="location-title"><span data-i18n="estamos_em_lousada"></span><br /><span data-i18n="e_a_distancia_de_uma_conversa"></span></h2>
             <div class="section-description">
               <p>
-                Visite-nos na Praça das Pocinhas, em Lousada. Estamos disponíveis para esclarecer dúvidas, analisar os seus seguros ou ajudá-lo a encontrar a proteção adequada.
+                <span data-i18n="visite_nos_na_praca_das_pocinhas_em_lousada_estamos_disponiveis_p"></span>
               </p>
             </div>
           </div>
@@ -410,10 +412,10 @@
               class="map-canvas"
               id="office-map"
               role="region"
-              aria-label="Mapa da localização na Praça das Pocinhas, Lousada"
-            ></div>
-            <aside class="location-card" aria-label="Morada e direções">
-              <span class="location-eyebrow">O nosso espaço</span>
+              aria-label=""
+             data-i18n-aria-label="mapa_da_localizacao_na_praca_das_pocinhas_lousada"></div>
+            <aside class="location-card" aria-label="" data-i18n-aria-label="morada_e_direcoes">
+              <span class="location-eyebrow"><span data-i18n="o_nosso_espaco"></span></span>
               <img
                 class="location-logo"
                 src="assets/brand/logo-blue.svg"
@@ -421,48 +423,45 @@
                 width="44"
                 height="46"
               />
-              <h3>A. Gonçalves<span>Seguros</span></h3>
+              <h3><span data-i18n="a_goncalves"></span><span><span data-i18n="seguros"></span></span></h3>
               <address>
-                Praça das Pocinhas<br />Edifício Jardim, 163, Loja H<br />4620-674
-                Lousada
+                <span data-i18n="praca_das_pocinhas"></span><br /><span data-i18n="edificio_jardim_163_loja_h"></span><br /><span data-i18n="4620_674_lousada"></span>
               </address>
               <a
                 class="button location-directions"
                 href="https://www.google.com/maps/dir/?api=1&amp;destination=41.278481%2C-8.282931"
                 target="_blank"
                 rel="noopener noreferrer"
-                >Como chegar
+                ><span data-i18n="como_chegar"></span>
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <path
                     d="M5 19 19 5M5 5h14v14"
                     stroke="currentColor"
                     stroke-width="1.5"
-                  /></svg
-              ></a>
+                  /></svg></a>
             </aside>
-            <div class="map-toolbar" aria-label="Vista do mapa" hidden>
+            <div class="map-toolbar" aria-label="" hidden data-i18n-aria-label="vista_do_mapa">
               <button
                 type="button"
                 class="map-mode is-active"
                 data-map-mode="street"
                 aria-pressed="true"
               >
-                Mapa</button
-              ><button
+                <span data-i18n="mapa"></span></button><button
                 type="button"
                 class="map-mode"
                 data-map-mode="satellite"
                 aria-pressed="false"
               >
-                Satélite
+                <span data-i18n="satelite"></span>
               </button>
             </div>
-            <div class="map-navigation" aria-label="Controlos do mapa" hidden>
+            <div class="map-navigation" aria-label="" hidden data-i18n-aria-label="controlos_do_mapa">
               <button
                 type="button"
                 data-map-action="locate"
-                aria-label="Voltar à localização"
-              >
+                aria-label=""
+               data-i18n-aria-label="voltar_a_localizacao">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                   <circle
                     cx="12"
@@ -477,27 +476,24 @@
                     stroke="currentColor"
                     stroke-width="1.5"
                   />
-                </svg></button
-              ><button
+                </svg></button><button
                 type="button"
                 data-map-action="in"
-                aria-label="Aproximar mapa"
-              >
-                +</button
-              ><button
+                aria-label=""
+               data-i18n-aria-label="aproximar_mapa">
+                <span data-i18n="text"></span></button><button
                 type="button"
                 data-map-action="out"
-                aria-label="Afastar mapa"
-              >
-                −
+                aria-label=""
+               data-i18n-aria-label="afastar_mapa">
+                <span data-i18n="text_2"></span>
               </button>
             </div>
             <p class="map-status sr-only" role="status" aria-live="polite"></p>
             <noscript
               ><p class="map-fallback">
-                Consulte a localização através do botão «Como chegar».
-              </p></noscript
-            >
+                <span data-i18n="consulte_a_localizacao_atraves_do_botao_como_chegar"></span>
+              </p></noscript>
           </div>
         </div>
       </section>
@@ -508,7 +504,7 @@
         <div class="footer-grid">
           <div class="footer-brand">
             <p class="footer-title">
-              O nosso legado é proteger o seu.
+              <span data-i18n="o_nosso_legado_e_proteger_o_seu"></span>
             </p>
             <button class="footer-contact" data-contact>
               <span class="footer-contact-icon"
@@ -517,79 +513,79 @@
                     d="M4 12h15M13 5l7 7-7 7"
                     stroke="currentColor"
                     stroke-width="1.4"
-                  /></svg
-              ></span>
-              Fale connosco
+                  /></svg></span>
+              <span data-i18n="fale_connosco"></span>
             </button>
           </div>
           <div class="footer-navigation">
           <div class="footer-column footer-explore">
-            <h2><button class="footer-insurance-toggle" type="button" aria-expanded="true" aria-controls="footer-explore-links" disabled>Explore<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h2>
+            <h2><button class="footer-insurance-toggle" type="button" aria-expanded="true" aria-controls="footer-explore-links" disabled><span data-i18n="explore"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h2>
             <div class="footer-explore-links" id="footer-explore-links">
-            <a href="#campanhas">Campanhas</a>
-            <a href="#seguros">Os nossos seguros</a>
-            <a href="#protecao">A sua proteção</a>
-            <a href="#sobre">Quem somos</a>
-            <a href="#perguntas-frequentes">Perguntas frequentes</a>
+            <a href="#campanhas"><span data-i18n="campanhas"></span></a>
+            <a href="#seguros"><span data-i18n="os_nossos_seguros"></span></a>
+            <a href="#protecao"><span data-i18n="a_sua_protecao"></span></a>
+            <a href="#sobre"><span data-i18n="quem_somos"></span></a>
+            <a href="#perguntas-frequentes"><span data-i18n="perguntas_frequentes"></span></a>
             </div>
           </div>
           <div class="footer-column footer-insurances">
-            <h2><button class="footer-insurance-toggle" type="button" aria-expanded="true" aria-controls="footer-insurance-links" disabled>Os nossos seguros<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h2>
+            <h2><button class="footer-insurance-toggle" type="button" aria-expanded="true" aria-controls="footer-insurance-links" disabled><span data-i18n="os_nossos_seguros"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h2>
             <div class="footer-insurance-links" id="footer-insurance-links">
-            <button data-solution="auto">Seguro Automóvel</button>
-            <button data-solution="saude">Seguro de Saúde</button>
-            <button data-solution="casa">Seguro Habitação</button>
-            <button data-solution="vida">Seguro de Vida</button>
-            <button data-solution="trabalho">Seguro de Acidentes de Trabalho</button>
-            <button data-solution="poupanca">Poupança e Investimento</button>
+            <button data-solution="auto"><span data-i18n="seguro_automovel"></span></button>
+            <button data-solution="saude"><span data-i18n="seguro_de_saude"></span></button>
+            <button data-solution="casa"><span data-i18n="seguro_habitacao"></span></button>
+            <button data-solution="vida"><span data-i18n="seguro_de_vida"></span></button>
+            <button data-solution="trabalho"><span data-i18n="seguro_de_acidentes_de_trabalho"></span></button>
+            <button data-solution="poupanca"><span data-i18n="poupanca_e_investimento"></span></button>
             </div>
           </div>
           </div>
           <div class="footer-column footer-contacts">
-            <h2>Contacte-nos</h2>
-            <a class="phone-link" href="tel:+351255820960"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14l2 10H3l2-10Z"/><path d="M8 10V7h8v3M3 7V4c5-3 13-3 18 0v3h-5V5H8v2H3Z"/><circle cx="12" cy="15" r="2"/></svg><span><small>Telefone fixo</small>255 820 960</span></a>
-                <a class="phone-link" href="tel:+351963667526"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg><span><small>Telemóvel</small>963 667 526</span></a>
-            <a class="email-link" href="mailto:seguros@agoncalves.com.pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><small>Email</small>seguros@agoncalves.com.pt</span></a>
-            <a class="social-link" href="https://www.instagram.com/seguros_agoncalves/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da A. Gonçalves - Seguros (abre num novo separador)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
-            <a class="social-link" href="https://www.facebook.com/p/A-Gon%C3%A7alves-Seguros-Bruno-Gon%C3%A7alves-100057382392863/" target="_blank" rel="noopener noreferrer" aria-label="Facebook da A. Gonçalves - Seguros (abre num novo separador)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V2h-3c-3 0-5 2-5 5v2H7v4h3v8h4Z"/></svg><span>Facebook</span></a>
+            <h2><button class="footer-insurance-toggle" type="button" aria-expanded="true" aria-controls="footer-contact-links" disabled><span data-i18n="contacte_nos"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg></button></h2>
+            <div class="footer-contact-links" id="footer-contact-links">
+            <a class="phone-link" href="tel:+351255820960"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14l2 10H3l2-10Z"/><path d="M8 10V7h8v3M3 7V4c5-3 13-3 18 0v3h-5V5H8v2H3Z"/><circle cx="12" cy="15" r="2"/></svg><span><small><span data-i18n="telefone_fixo"></span></small><span data-i18n="255_820_960"></span></span></a>
+                <a class="phone-link" href="tel:+351963667526"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg><span><small><span data-i18n="telemovel"></span></small><span data-i18n="963_667_526"></span></span></a>
+            <a class="email-link" href="mailto:seguros@agoncalves.com.pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><small><span data-i18n="email"></span></small><span data-i18n="seguros_agoncalves_com_pt"></span></span></a>
+            <a class="social-link" href="https://www.instagram.com/seguros_agoncalves/" target="_blank" rel="noopener noreferrer" aria-label="" data-i18n-aria-label="instagram_da_a_goncalves_seguros_abre_num_novo_separador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg><span><span data-i18n="instagram"></span></span></a>
+            <a class="social-link" href="https://www.facebook.com/p/A-Gon%C3%A7alves-Seguros-Bruno-Gon%C3%A7alves-100057382392863/" target="_blank" rel="noopener noreferrer" aria-label="" data-i18n-aria-label="facebook_da_a_goncalves_seguros_abre_num_novo_separador"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V2h-3c-3 0-5 2-5 5v2H7v4h3v8h4Z"/></svg><span><span data-i18n="facebook"></span></span></a>
+            </div>
           </div>
         </div>
         <div class="footer-bottom">
           <a
             href="#inicio"
             class="brand"
-            aria-label="A. Gonçalves - Seguros — voltar ao início"
-            ><img
+            aria-label=""
+             data-i18n-aria-label="a_goncalves_seguros_voltar_ao_inicio"><img
               class="brand-symbol"
               src="assets/brand/logo-blue.svg"
               alt=""
               width="35"
               height="36"
             /><span class="brand-wordmark"
-              ><span class="brand-name">A. Gonçalves</span
-              ><span class="brand-descriptor">Seguros</span></span
-            ></a
-          >
+              ><span class="brand-name"><span data-i18n="a_goncalves"></span></span><span class="brand-descriptor"><span data-i18n="seguros"></span></span></span></a>
           <div class="footer-legal">
-            <nav class="footer-legal-links" aria-label="Informação legal">
-              <button type="button" data-privacy aria-haspopup="dialog">Política de privacidade</button>
-              <button type="button" data-legal="cookies" aria-haspopup="dialog">Política de cookies</button>
-              <button type="button" data-legal="terms" aria-haspopup="dialog">Termos de utilização</button>
-              <button type="button" data-legal="disclaimer" aria-haspopup="dialog">Aviso legal</button>
-              <button type="button" class="footer-complaints-info" data-legal="complaints" aria-haspopup="dialog">Reclamações e litígios</button>
-              <a class="footer-complaints-book" href="https://www.livroreclamacoes.pt/INICIO/" target="_blank" rel="noopener noreferrer" aria-label="Livro de Reclamações Eletrónico (abre num novo separador)">Livro de Reclamações</a>
+            <nav class="footer-legal-links" aria-label="" data-i18n-aria-label="informacao_legal">
+              <button type="button" data-privacy aria-haspopup="dialog"><span data-i18n="politica_de_privacidade"></span></button>
+              <button type="button" data-legal="cookies" aria-haspopup="dialog"><span data-i18n="politica_de_cookies"></span></button>
+              <button type="button" data-legal="terms" aria-haspopup="dialog"><span data-i18n="termos_de_utilizacao"></span></button>
+              <button type="button" data-legal="disclaimer" aria-haspopup="dialog"><span data-i18n="aviso_legal"></span></button>
+              <button type="button" class="footer-complaints-info" data-legal="complaints" aria-haspopup="dialog"><span data-i18n="reclamacoes_e_litigios"></span></button>
+              <a class="footer-complaints-book" href="https://www.livroreclamacoes.pt/INICIO/" target="_blank" rel="noopener noreferrer" aria-label="" data-i18n-aria-label="livro_de_reclamacoes_eletronico_abre_num_novo_separador"><span data-i18n="livro_de_reclamacoes"></span></a>
             </nav>
           </div>
         </div>
-        <p class="footer-registration">Agente de Seguros certificado pelo ISP — Instituto de Seguros de Portugal, sob o n.º 317451977/3, com autorização para os ramos Vida e Não Vida. A entidade de supervisão denomina-se atualmente <a href="https://www.asf.com.pt/" target="_blank" rel="noopener noreferrer">ASF — Autoridade de Supervisão de Seguros e Fundos de Pensões</a>.</p>
-        <p class="footer-copyright">© 2026 A. Gonçalves - Seguros</p>
+        <p class="footer-registration"><span data-i18n="agente_de_seguros_certificado_pelo_isp_instituto_de_seguros_de_po"></span> <a href="https://www.asf.com.pt/" target="_blank" rel="noopener noreferrer"><span data-i18n="asf_autoridade_de_supervisao_de_seguros_e_fundos_de_pensoes"></span></a><span data-i18n="text_3"></span></p>
+        <p class="footer-copyright"><span data-i18n="2026_a_goncalves_seguros"></span></p>
       </div>
     </footer>
     <dialog id="detail-dialog" aria-labelledby="dialog-title">
-      <button class="dialog-close" aria-label="Fechar janela">×</button>
+      <button class="dialog-close" aria-label="" data-i18n-aria-label="fechar_janela"><span data-i18n="text_4"></span></button>
       <div class="dialog-content"></div>
     </dialog>
+    <script src="translations.js?v=277e9ba690d6" defer></script>
+    <script src="i18n.js?v=89a40a6fb700" defer></script>
     <script src="assets/vendor/leaflet/leaflet.js" defer></script>
-    <script src="script.js?v=7e507840a722" defer></script>
+    <script src="script.js?v=2efd1f765cc7" defer></script>
   </body>
 </html>
