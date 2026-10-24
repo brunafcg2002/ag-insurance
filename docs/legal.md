@@ -1,6 +1,6 @@
 # Website legal documents
 
-Updated 24 October 2026. The footer provides Privacy, Cookies, Terms of use, Legal notice, Complaints/disputes, and a direct link to the official Electronic Complaints Book. The first five open accessible native dialogs; the book opens the official platform in a new tab. Both footer layouts retain 44px targets. Instagram and Facebook are ordinary external links; no social widgets or tracking scripts are embedded.
+Updated 24 October 2026. The footer provides Privacy, Cookies, Terms of use, Legal notice, Complaints/disputes, and a direct link to the official Electronic Complaints Book. The first five open accessible native dialogs; the book opens the official platform in a new tab. Both footer layouts retain 44px targets and use the same plain text styling for every legal action, including the direct book link. Instagram and Facebook are ordinary external links; no social widgets or tracking scripts are embedded.
 
 ## Scope and review
 

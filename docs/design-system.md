@@ -67,4 +67,6 @@ Mobile service cards and the location panel have square corners, consistent with
 
 ## Legal footer
 
-The bottom legal area keeps a compact wrapping list on desktop and a two-column list on mobile, with 44px minimum targets. Complaints information and the rectangular Electronic Complaints Book link each span the mobile row. Local policies use the existing animated native dialog; the official complaints platform opens directly. Social contacts use local inline SVG icons and ordinary external links.
+The bottom legal area keeps a compact wrapping list on desktop and a two-column list on mobile, with 44px minimum targets. All six legal actions share plain text styling; the Electronic Complaints Book has no surrounding panel or icon. Local policies use the existing animated native dialog; the official complaints platform opens directly. Social contacts use local inline SVG icons and ordinary external links.
+
+Native section anchors position the heading 16px below the 70px sticky header. Root scroll padding accounts for the header once; section scroll margins compensate for desktop/mobile container padding. The same positioning applies to header navigation, footer Explore links, and direct hash URLs, retaining native smooth scrolling and reduced-motion behaviour.
