@@ -54,3 +54,5 @@ The mobile footer presents the main contact action at full width, then two direc
 Below 768px, section headings use balanced wrapping and 28–34px sizing; introductory text uses 16px/1.55. Campaign text panels are 250px with 20px padding, and campaign/scenario images use a 4:3 viewport. Risk captions retain equal side insets. FAQ cards omit the repeated “Perguntas frequentes” metadata on mobile.
 
 About steps place each paragraph across the full available width, below the numbered heading. The mobile location layout shows the map first and a compact place card below, with the company name, address, and a full-width directions button. It hides the redundant “O nosso espaço” eyebrow. Telephone and email links are grouped in the footer and contact dialogs, with a 44px minimum touch area. The map is 300–360px high on mobile, with layer controls anchored inside its bounds. Mobile dialogs have a 44px close control and full-width primary actions of at least 48px height.
+
+Directional and link-out icons use inline SVG with `currentColor`, rather than Unicode arrow characters, to avoid emoji rendering on iOS.

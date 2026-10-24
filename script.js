@@ -4,6 +4,9 @@
 const arrow =
   '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg>';
 
+const externalArrow =
+  '<svg class="link-out-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>';
+
 const solutions = [
   {
     "id": "auto",
@@ -529,7 +532,7 @@ document.addEventListener("click", (event) => {
   if (campaignButton) {
     const campaign = campaigns.find((item) => item.id === campaignButton.dataset.campaign);
     openDialog(
-      `<span class="eyebrow">Campanha ${campaign.product}</span><h2 id="dialog-title">${campaign.title}</h2><h3>Condições da campanha</h3><ul>${campaign.conditions.map((condition) => `<li>${condition}</li>`).join("")}</ul><p><a class="text-link" href="${campaign.source}" target="_blank" rel="noopener noreferrer">Consultar campanha na Zurich ↗</a></p><p class="form-note">Sujeito às condições da campanha e à aceitação do risco pela seguradora. Consulte a informação pré-contratual e contratual aplicável.</p><button class="button" id="campaign-contact">Saber mais sobre esta campanha ${arrow}</button>`,
+      `<span class="eyebrow">Campanha ${campaign.product}</span><h2 id="dialog-title">${campaign.title}</h2><h3>Condições da campanha</h3><ul>${campaign.conditions.map((condition) => `<li>${condition}</li>`).join("")}</ul><p><a class="text-link" href="${campaign.source}" target="_blank" rel="noopener noreferrer">Consultar campanha na Zurich ${externalArrow}</a></p><p class="form-note">Sujeito às condições da campanha e à aceitação do risco pela seguradora. Consulte a informação pré-contratual e contratual aplicável.</p><button class="button" id="campaign-contact">Saber mais sobre esta campanha ${arrow}</button>`,
     );
     document.querySelector("#campaign-contact").addEventListener("click", () => openContact(campaign.solution));
   }

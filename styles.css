@@ -2344,3 +2344,11 @@ dialog.is-closing::backdrop {
     grid-column: 1 / -1;
   }
 }
+
+.link-out-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
