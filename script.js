@@ -703,7 +703,91 @@ function openContact(solution = "") {
   });
 }
 
+// Business-specific fields remain explicit until confirmed by the owner.
+const legalDocuments = {
+  terms: {
+    title: "Termos de utilização",
+    body: `<h3>1. Entidade e âmbito</h3>
+<p>Este site apresenta a atividade da A. Gonçalves - Seguros e permite consultar informação geral e preparar pedidos de contacto. Entidade titular: <strong>[PlaceHolder]</strong> — denominação legal completa; NIF: <strong>[PlaceHolder]</strong>; sede: <strong>[PlaceHolder]</strong>.</p>
+<p>Contactos: <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>, <a href="tel:+351255820960">255 820 960</a> e <a href="tel:+351963667526">963 667 526</a>. Morada de contacto: Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada.</p>
+<h3>2. Consulta e pedidos de informação</h3>
+<p>O site não permite contratar seguros ou efetuar pagamentos. A consulta dos conteúdos e o preenchimento do formulário não celebram um contrato nem ativam coberturas. A contratação exige a informação pré-contratual e contratual aplicável e a confirmação das condições acordadas com as entidades intervenientes.</p>
+<p>As descrições resumem opções de proteção. As coberturas, exclusões, franquias, capitais, prémios e condições de aceitação dependem do produto e da proposta concreta. As campanhas têm condições de elegibilidade e prazos próprios, indicados nos respetivos cartões e nas fontes oficiais.</p>
+<h3>3. Formulário e comunicações</h3>
+<p>«Vamos conversar» prepara um email no dispositivo e abre a aplicação de email configurada. O visitante confirma o envio nessa aplicação. O site não envia mensagens automaticamente nem confirma a sua entrega à empresa. Se a aplicação não abrir, pode copiar a mensagem ou utilizar os contactos diretos.</p>
+<p>Forneça informação correta e apenas os dados necessários ao pedido. Não inclua documentos de identificação nem informações de saúde neste primeiro contacto. O tratamento dos dados é descrito na Política de privacidade, disponível no rodapé.</p>
+<h3>4. Utilização e conteúdos</h3>
+<p>Utilize o site de forma lícita, respeitando os direitos de terceiros. Não introduza código malicioso, tente obter acessos não autorizados ou perturbe o funcionamento dos serviços.</p>
+<p>Os textos, fotografias, símbolos e marcas estão sujeitos aos direitos dos respetivos titulares. As marcas das seguradoras e as imagens das campanhas pertencem aos seus titulares. A consulta não concede direitos de exploração comercial; mantêm-se as utilizações permitidas por lei.</p>
+<h3>5. Disponibilidade e ligações externas</h3>
+<p>Podem ocorrer interrupções de acesso ou alterações para manutenção e atualização. Os mapas, as aplicações de email e os sites externos têm funcionamento e condições próprios. Uma ligação externa não transfere para esse serviço a responsabilidade pelas obrigações legais da entidade titular deste site.</p>
+<h3>6. Direitos e resolução de conflitos</h3>
+<p>Aplica-se a legislação portuguesa, sem prejuízo das normas imperativas de proteção do consumidor e das regras de competência legalmente aplicáveis. Estes termos não afastam direitos dos consumidores nem excluem responsabilidades que a lei não permita excluir.</p>
+<p>Os canais para reclamações e informação sobre resolução alternativa de litígios encontram-se em «Reclamações e litígios» e no acesso ao Livro de Reclamações Eletrónico, no rodapé. A empresa deve confirmar os dados e procedimentos assinalados nesse documento.</p>
+<h3>7. Atualizações</h3>
+<p>As alterações às funcionalidades ou às condições de utilização serão refletidas neste documento. As condições específicas de um contrato de seguro constam da documentação desse contrato.</p>`
+  },
+  disclaimer: {
+    title: "Aviso legal",
+    body: `<h3>1. Identificação da entidade</h3>
+<p>Designação comercial: A. Gonçalves - Seguros. Entidade titular: <strong>[PlaceHolder]</strong> — denominação legal; NIF: <strong>[PlaceHolder]</strong>; sede: <strong>[PlaceHolder]</strong>; registo comercial, se aplicável: <strong>[PlaceHolder]</strong> — conservatória e número de registo.</p>
+<p>Contactos: <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> e <a href="tel:+351255820960">255 820 960</a>. Morada de contacto: Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada.</p>
+<h3>2. Informação sobre a mediação</h3>
+<p>Identificação legal do mediador responsável pela atividade apresentada: <strong>[PlaceHolder]</strong>. Categoria: agente de seguros; número de registo: 317451977/3; ramos Vida e Não Vida, conforme a informação fornecida pela empresa. Data de inscrição: <strong>[PlaceHolder]</strong> — confirmar no registo oficial.</p>
+<p>A ASF — Autoridade de Supervisão de Seguros e Fundos de Pensões disponibiliza informação sobre o registo e a supervisão da atividade em <a href="https://www.asf.com.pt/" target="_blank" rel="noopener noreferrer">www.asf.com.pt</a>. Os campos acima devem ser preenchidos com os dados efetivamente registados.</p>
+<p>Relações com seguradoras, poderes de representação, natureza do aconselhamento, remuneração e demais informação pré-contratual aplicável: <strong>[PlaceHolder]</strong> — completar com a informação legal da empresa. A presença de várias marcas no site não significa que seja efetuada uma análise de todos os seguros disponíveis no mercado.</p>
+<h3>3. Informação sobre seguros e campanhas</h3>
+<p>Os conteúdos têm caráter geral e não substituem a avaliação das suas necessidades nem os documentos de informação do produto, as condições da apólice e a proposta concreta. Não garantem a aceitação de um risco, um prémio ou uma indemnização. Um pedido de contacto não coloca um seguro em vigor.</p>
+<p>As promoções estão sujeitas ao respetivo prazo, elegibilidade e condições da seguradora. Consulte a fonte oficial indicada e confirme as condições aplicáveis antes de decidir. As fotografias ilustrativas não constituem uma descrição das coberturas contratadas.</p>
+<h3>4. Responsabilidade e correções</h3>
+<p>Se identificar informação incorreta ou desatualizada, contacte-nos para que seja verificada. Este aviso não afasta os deveres de informação e diligência aplicáveis à atividade nem exclui ou limita responsabilidades ou direitos que a lei não permita afastar.</p>
+<p>Os logótipos e imagens de terceiros mantêm os direitos dos respetivos titulares. As ligações a mapas, campanhas e redes sociais conduzem a serviços externos com condições próprias.</p>`
+  },
+  cookies: {
+    title: "Política de cookies",
+    body: `<h3>1. O que são cookies</h3>
+<p>Cookies são pequenos ficheiros que um serviço pode guardar no navegador. Tecnologias como o armazenamento local podem igualmente guardar informação no dispositivo. A necessidade de consentimento depende da finalidade e do funcionamento concreto da tecnologia.</p>
+<h3>2. Funcionamento atual deste site</h3>
+<p>O código do site não cria cookies próprios nem utiliza armazenamento local ou de sessão para guardar preferências, dados do formulário ou identificadores de visitantes. Não foram configuradas ferramentas de análise de audiência, publicidade ou píxeis de redes sociais.</p>
+<p>O formulário prepara um email localmente. A opção de copiar utiliza a área de transferência do dispositivo; não cria um cookie. Os tipos de letra, fotografias, logótipos e ficheiros Leaflet são servidos com o site.</p>
+<h3>3. Alojamento, mapas e serviços externos</h3>
+<p>O site é alojado no GitHub Pages. As imagens do mapa são pedidas ao OpenStreetMap e, ao selecionar satélite, à Esri. Estas ligações transmitem dados técnicos, incluindo o endereço IP, mesmo sem um cookie criado pelo código do site. Os respetivos tratamentos estão descritos na Política de privacidade.</p>
+<p>As ligações ao Google Maps, à Zurich, ao Instagram, ao Facebook e ao Livro de Reclamações abrem serviços externos. Não incorporamos conteúdos de redes sociais no site. Ao abrir esses serviços, aplicam-se as respetivas políticas e opções de privacidade.</p>
+<p>Verificação dos mecanismos de armazenamento eventualmente utilizados pelos serviços externos na configuração de produção: <strong>[PlaceHolder]</strong> — confirmar categorias, fornecedores, finalidades e duração, caso existam. Não se atribuem nomes ou durações de cookies sem verificação.</p>
+<h3>4. Consentimento e opções do navegador</h3>
+<p>Na configuração atual, o site não apresenta escolhas de cookies de análise ou publicidade, porque essas ferramentas não foram implementadas. Se forem introduzidas tecnologias que exijam consentimento, terão de permanecer desativadas até à escolha do visitante, com possibilidade de recusar e retirar o consentimento.</p>
+<p>Pode consultar, bloquear ou apagar cookies nas definições do seu navegador. Essas definições não impedem necessariamente a transmissão dos dados técnicos indispensáveis a uma ligação e podem afetar o funcionamento de serviços externos.</p>
+<h3>5. Contacto e alterações</h3>
+<p>Para questões, contacte <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a>. Esta política deve ser revista sempre que mudem os fornecedores ou sejam acrescentadas funcionalidades que guardem ou acedam a informação no dispositivo.</p>`
+  },
+  complaints: {
+    title: "Reclamações e litígios",
+    body: `<h3>1. Apresentar uma reclamação à empresa</h3>
+<p>Para contactar a A. Gonçalves - Seguros, utilize <a href="mailto:seguros@agoncalves.com.pt">seguros@agoncalves.com.pt</a> ou escreva para Praça das Pocinhas, Edifício Jardim, 163, Loja H, 4620-674 Lousada. Identifique o assunto como reclamação para facilitar o seu encaminhamento.</p>
+<p>Ponto de receção e resposta às reclamações: <strong>[PlaceHolder]</strong> — identificação da pessoa ou função responsável, contacto específico, se distinto, e canal de acompanhamento.</p>
+<p>Procedimento aprovado de gestão de reclamações: <strong>[PlaceHolder]</strong> — completar com a forma de apresentação, elementos necessários, confirmação de receção, prazos legais aplicáveis, acompanhamento e acesso à informação do processo. Este campo deve refletir os procedimentos efetivamente adotados pela empresa.</p>
+<p>Descreva os factos, as datas relevantes e o motivo da reclamação, indicando como pode ser contactado. Os elementos adicionais necessários à apreciação devem ser solicitados através de um canal adequado; o formulário geral do site não se destina à entrega de documentação sensível.</p>
+<h3>2. Livro de Reclamações Eletrónico</h3>
+<p>Pode aceder à plataforma oficial através de <a href="https://www.livroreclamacoes.pt/INICIO/" target="_blank" rel="noopener noreferrer">Livro de Reclamações Eletrónico</a> e selecionar o operador económico a que respeita a reclamação.</p>
+<p>Identificação da empresa na plataforma: <strong>[PlaceHolder]</strong> — confirmar denominação legal, NIF e registo ativo. A ligação à plataforma não comprova nem substitui o registo da empresa. A informação sobre o livro físico e a sua disponibilização no estabelecimento deve ser confirmada pela empresa.</p>
+<h3>3. Autoridade de supervisão</h3>
+<p>Pode consultar o serviço público de <a href="https://www.gov.pt/servicos/reclamar-contra-seguradora-mediador-ou-entidade-gestora-de-fundos-de-pensoes" target="_blank" rel="noopener noreferrer">reclamação contra uma seguradora ou mediador junto da ASF</a>. A atuação de supervisão da ASF não substitui a decisão de um tribunal ou de uma entidade competente de resolução alternativa de litígios sobre um conflito contratual.</p>
+<h3>4. Resolução alternativa de litígios</h3>
+<p>Entidade ou entidades de resolução alternativa de litígios competentes e eventuais adesões da empresa: <strong>[PlaceHolder]</strong> — indicar a designação, morada, contacto, site e âmbito de competência, bem como as condições de acesso aplicáveis. Confirmar este campo com a empresa antes de considerar o documento definitivo.</p>
+<p>Pode consultar informação sobre o <a href="https://www.cimpas.pt/" target="_blank" rel="noopener noreferrer">CIMPAS — Centro de Informação, Mediação e Arbitragem de Seguros</a>. A referência ao centro não constitui uma declaração de adesão da empresa nem garante a competência para qualquer conflito; a intervenção depende do âmbito e das regras aplicáveis ao caso.</p>
+<p>A apresentação de reclamações não prejudica os meios judiciais nem os direitos legalmente reconhecidos ao consumidor.</p>`
+  }
+};
+
+function openLegalDocument(key) {
+  const document = legalDocuments[key];
+  if (!document) return;
+  openDialog(`<div class="privacy-policy"><span class="eyebrow">Informação legal</span><h2 id="dialog-title">${document.title}</h2><p class="form-note">Atualizado em <time datetime="2026-10-24">24 de outubro de 2026</time></p><p class="form-note">Versão em revisão: os campos [PlaceHolder] aguardam confirmação pela entidade responsável.</p>${document.body}</div>`);
+}
+
 document.addEventListener("click", (event) => {
+  const legalButton = event.target.closest("[data-legal]");
+  if (legalButton) openLegalDocument(legalButton.dataset.legal);
   const campaignButton = event.target.closest("[data-campaign]");
   if (campaignButton) {
     const campaign = campaigns.find((item) => item.id === campaignButton.dataset.campaign);
@@ -762,7 +846,7 @@ document.addEventListener("click", (event) => {
 <h3>4. Alojamento, mapas e cookies</h3>
 <p>O site é alojado no GitHub Pages, que regista endereços IP para fins de segurança. Ao carregar o mapa, o navegador pede imagens ao OpenStreetMap; na vista de satélite, à Esri. Esses serviços recebem o IP e os dados técnicos necessários à ligação. O mapa não solicita a localização do seu dispositivo.</p>
 <p>As fotografias, os logótipos, os tipos de letra e o código Leaflet são servidos com o site. O código do site não instala cookies de análise ou publicidade nem utiliza ferramentas de acompanhamento para esses fins.</p>
-<p>«Como chegar» abre o Google Maps e as ligações às campanhas abrem o site da Zurich. Ao seguir essas ligações, aplicam-se as políticas dos respetivos serviços.</p>
+<p>«Como chegar» abre o Google Maps e as ligações às campanhas abrem o site da Zurich. O Instagram, o Facebook e o Livro de Reclamações são disponibilizados como ligações externas, sem conteúdos incorporados. Ao seguir essas ligações, aplicam-se as políticas dos respetivos serviços.</p>
 <h3>5. Destinatários e transferências internacionais</h3>
 <p>O tratamento dos pedidos pode envolver as pessoas autorizadas a responder e os prestadores necessários ao funcionamento do email. Prestador do serviço de email da empresa: <strong>[PlaceHolder]</strong> — identificar o fornecedor e a respetiva política de privacidade.</p>
 <p>Outros destinatários ou categorias de destinatários dos pedidos, se aplicável: <strong>[PlaceHolder]</strong> — confirmar os acessos internos, prestadores e eventuais comunicações a seguradoras. A informação específica sobre o tratamento associado a uma proposta ou contrato deve identificar a respetiva seguradora e os destinatários aplicáveis.</p>

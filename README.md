@@ -64,3 +64,5 @@ The insurer strip uses local vector SVGs and a transparent PNG, without SVG rast
 `index.html` loads `styles.css` and `script.js` with a `?v=` content hash (first 12 characters of the file's SHA-256). Update the matching query parameter whenever either file changes. This keeps GitHub Pages/browser caches from mixing new markup with old CSS or JavaScript; it needs no runtime dependencies or build step.
 
 The privacy notice covers the current form, direct email contact, hosting, map providers, and visitor rights. See [privacy notes](docs/privacy.md) for verified data flows and the legal identity details still awaiting owner confirmation.
+
+The desktop/mobile footer also provides terms of use, a legal notice, cookie information, complaints/dispute information, and direct access to the official Electronic Complaints Book. See [legal document notes](docs/legal.md) for company fields to confirm and source references. Social links open the owner-supplied Instagram and Facebook pages without embedded widgets.

@@ -64,3 +64,7 @@ The contact form keeps its native select as the form-data source and enhances it
 Page, modal, and dropdown scrollbars use the primary blue and surface colour on desktop and mobile where browser styling is supported. WebKit scrollbar thumbs have square corners; standard scrollbar properties provide a fallback. OS-controlled overlay indicators, especially on iOS, can retain native styling. No custom scrolling behaviour replaces the browser's scrolling.
 
 Mobile service cards and the location panel have square corners, consistent with the site’s rectangular panels. Pagination dots, the circular map pin, and numbered badges retain their intentional shapes.
+
+## Legal footer
+
+The bottom legal area keeps a compact wrapping list on desktop and a two-column list on mobile, with 44px minimum targets. Complaints information and the rectangular Electronic Complaints Book link each span the mobile row. Local policies use the existing animated native dialog; the official complaints platform opens directly. Social contacts use local inline SVG icons and ordinary external links.

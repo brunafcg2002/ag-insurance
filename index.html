@@ -17,7 +17,7 @@
       crossorigin
     />
     <link rel="preload" href="assets/images/bruno.jpg" as="image" />
-    <link rel="stylesheet" href="styles.css?v=06404daf03ec" />
+    <link rel="stylesheet" href="styles.css?v=7393c222a327" />
     <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
     <title>A. Gonçalves - Seguros — O nosso legado é proteger o seu.</title>
   </head>
@@ -550,6 +550,8 @@
             <a class="phone-link" href="tel:+351255820960"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h14l2 10H3l2-10Z"/><path d="M8 10V7h8v3M3 7V4c5-3 13-3 18 0v3h-5V5H8v2H3Z"/><circle cx="12" cy="15" r="2"/></svg><span><small>Telefone fixo</small>255 820 960</span></a>
                 <a class="phone-link" href="tel:+351963667526"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></svg><span><small>Telemóvel</small>963 667 526</span></a>
             <a class="email-link" href="mailto:seguros@agoncalves.com.pt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span><small>Email</small>seguros@agoncalves.com.pt</span></a>
+            <a class="social-link" href="https://www.instagram.com/seguros_agoncalves/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da A. Gonçalves - Seguros (abre num novo separador)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg><span>Instagram</span></a>
+            <a class="social-link" href="https://www.facebook.com/p/A-Gon%C3%A7alves-Seguros-Bruno-Gon%C3%A7alves-100057382392863/" target="_blank" rel="noopener noreferrer" aria-label="Facebook da A. Gonçalves - Seguros (abre num novo separador)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M14 21v-8h3l.5-4H14V7c0-1 .3-2 2-2h2V2h-3c-3 0-5 2-5 5v2H7v4h3v8h4Z"/></svg><span>Facebook</span></a>
           </div>
         </div>
         <div class="footer-bottom">
@@ -570,9 +572,17 @@
           >
           <div class="footer-legal">
             <span>© 2026 A. Gonçalves - Seguros</span>
-            <button data-privacy>Política de privacidade</button>
+            <nav class="footer-legal-links" aria-label="Informação legal">
+              <button type="button" data-privacy aria-haspopup="dialog">Política de privacidade</button>
+              <button type="button" data-legal="cookies" aria-haspopup="dialog">Política de cookies</button>
+              <button type="button" data-legal="terms" aria-haspopup="dialog">Termos de utilização</button>
+              <button type="button" data-legal="disclaimer" aria-haspopup="dialog">Aviso legal</button>
+              <button type="button" class="footer-complaints-info" data-legal="complaints" aria-haspopup="dialog">Reclamações e litígios</button>
+              <a class="footer-complaints-book" href="https://www.livroreclamacoes.pt/INICIO/" target="_blank" rel="noopener noreferrer" aria-label="Livro de Reclamações Eletrónico (abre num novo separador)">Livro de Reclamações<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 4h6v6M20 4 9 15M10 4H4v16h16v-6"/></svg></a>
+            </nav>
           </div>
         </div>
+        <p class="footer-registration">Agente de Seguros certificado pelo ISP — Instituto de Seguros de Portugal, sob o n.º 317451977/3, com autorização para os ramos Vida e Não Vida. A entidade de supervisão denomina-se atualmente <a href="https://www.asf.com.pt/" target="_blank" rel="noopener noreferrer">ASF — Autoridade de Supervisão de Seguros e Fundos de Pensões</a>.</p>
       </div>
     </footer>
     <dialog id="detail-dialog" aria-labelledby="dialog-title">
@@ -580,6 +590,6 @@
       <div class="dialog-content"></div>
     </dialog>
     <script src="assets/vendor/leaflet/leaflet.js" defer></script>
-    <script src="script.js?v=fcdf5ce77792" defer></script>
+    <script src="script.js?v=7e507840a722" defer></script>
   </body>
 </html>
