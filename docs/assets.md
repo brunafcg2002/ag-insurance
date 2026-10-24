@@ -51,7 +51,7 @@ Campaign imagery belongs to Zurich and its respective rights holders. Local card
 
 ## Insurer logos
 
-Downloaded from official insurer sites on 23 October 2026 and served locally in compact tags below the insurance introduction. The tags use self-contained `*-blue.svg` files that embed the downloaded image and apply an SVG alpha filter in primary blue, preserving the original proportions. Separate unused original logo files were removed; their original image data remains embedded in each derivative. These regular image assets also work through `file://`, where external CSS masks are blocked. These marks identify the four insurers named by the owner.
+Downloaded from official insurer sites on 23 October 2026 and served locally in the moving logo strip below the insurance introduction. The strip uses self-contained `*-blue.svg` files that embed the downloaded image and apply an SVG alpha filter in primary blue, preserving the original proportions. Separate unused original logo files were removed; their original image data remains embedded in each derivative. These regular image assets also work through `file://`, where external CSS masks are blocked. These marks identify the four insurers named by the owner.
 
 | Local file | Official source |
 | --- | --- |

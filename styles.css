@@ -499,48 +499,120 @@ section[id],
 .text-link:hover {
   border-color: var(--primary);
 }
-.insurer-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
-  margin: 24px 0 0;
+.insurers-strip {
+  margin-top: 36px;
+  padding: 12px 0 24px;
+  border-block: 1px solid var(--border);
 }
-.insurer-tags li {
+.insurers-strip-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-inline: 8px;
+  margin-bottom: 12px;
+}
+.insurers-strip h3 {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.insurers-window {
+  overflow: hidden;
+}
+.insurers-track {
+  display: flex;
+  width: 100%;
+}
+.insurers-group {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  flex: 0 0 100%;
+  gap: 16px;
+  padding: 12px 0;
+  margin: 0;
+  list-style: none;
+}
+.insurers-group li {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  min-width: 0;
+}
+.insurers-group[aria-hidden="true"] {
+  display: none;
 }
 .insurer-mark {
   display: block;
-  width: 100px;
-  height: 28px;
+  width: 160px;
+  max-width: 100%;
+  height: 48px;
 }
 .insurer-mark img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+.insurers-strip.is-ready .insurers-window {
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.insurers-strip.is-ready .insurers-track {
+  width: max(200%, 1408px);
+  animation: insurers-loop 36s linear infinite;
+}
+.insurers-strip.is-ready .insurers-group {
+  display: flex;
+  flex-basis: 50%;
+  gap: 0;
+}
+.insurers-strip.is-ready .insurers-group li {
+  flex: 1;
+}
+.insurers-strip:hover .insurers-track,
+.insurers-strip:focus-within .insurers-track {
+  animation-play-state: paused;
+}
+@keyframes insurers-loop {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 @media (max-width: 767px) {
-  .insurer-tags {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 6px;
-    margin-top: 18px;
+  .insurers-strip {
+    margin-top: 28px;
+    padding-bottom: 16px;
   }
-  .insurer-tags li {
-    min-width: 0;
-    padding: 8px 6px;
-    border-radius: 6px;
+  .insurers-strip-heading {
+    padding-inline: 0;
+    gap: 8px;
   }
-  .insurer-tags .insurer-mark {
+  .insurers-strip h3 {
+    font-size: 12px;
+  }
+  .insurer-mark {
+    width: 120px;
+    height: 36px;
+  }
+  .insurers-group {
+    gap: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .insurers-strip.is-ready .insurers-track {
     width: 100%;
-    height: 20px;
+    animation: none;
+    transform: none;
+  }
+  .insurers-strip.is-ready .insurers-group {
+    display: grid;
+    flex-basis: 100%;
+    gap: 8px;
+  }
+  .insurers-strip.is-ready .insurers-group[aria-hidden="true"] {
+    display: none;
+  }
+  .insurers-strip.is-ready .insurers-window {
+    mask-image: none;
   }
 }
 .services-grid {
@@ -1449,7 +1521,7 @@ dialog.is-closing::backdrop {
     gap: 10px;
     padding: 16px 8px;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 0;
     text-align: center;
   }
   .service-card h3 {
@@ -2252,7 +2324,7 @@ dialog.is-closing::backdrop {
     grid-template-areas: "map" "details";
     overflow: hidden;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 0;
   }
   .location-card {
     display: grid;

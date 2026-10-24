@@ -220,6 +220,8 @@ const campaigns = [
   }
 ];
 
+document.querySelector(".insurers-strip").classList.add("is-ready");
+
 const navigation = document.querySelector("#navigation");
 const menuToggle = document.querySelector(".menu-toggle");
 const closeMenu = () => {
