@@ -47,7 +47,7 @@ Main navigation follows the page order: Campanhas, Os nossos seguros, A sua prot
 
 Below 768px, risk scenarios and FAQ cards use native horizontal scrolling with snap alignment and one card per view. Pagination supports clicks, arrow keys, Home/End, and scroll position changes; offscreen cards are inert and hidden from assistive technology. Desktop and tablet retain three-column grids. Risk-card captions are inset equally on both sides on every screen size.
 
-The mobile footer presents the main contact action at full width, then two direct-call tiles, visible Explore links in two columns, and a secondary insurance list that can be expanded with a labelled button. Desktop keeps all insurance links visible. The logo and low-emphasis legal links sit at the bottom. Without JavaScript the insurance list stays expanded.
+The mobile footer presents the main contact action at full width, then a single unboxed column for landline, mobile, and email under “Contacte-nos”, Explore and insurance lists that can each be expanded with a labelled button. Each list expands and collapses with a 220ms height/opacity animation, supports interrupted toggles, and skips motion for reduced-motion preferences. Desktop keeps both sets of links visible. The logo and low-emphasis legal links sit at the bottom. Without JavaScript both lists stay expanded.
 
 ## Mobile refinements
 
@@ -56,3 +56,9 @@ Below 768px, section headings use balanced wrapping and 28–34px sizing; introd
 About steps place each paragraph across the full available width, below the numbered heading. The mobile location layout shows the map first and a compact place card below, with the company name, address, and a full-width directions button. It hides the redundant “O nosso espaço” eyebrow. Telephone and email links are grouped in the footer and contact dialogs, with a 44px minimum touch area. The map is 300–360px high on mobile, with layer controls anchored inside its bounds. Mobile dialogs have a 44px close control and full-width primary actions of at least 48px height.
 
 Directional and link-out icons use inline SVG with `currentColor`, rather than Unicode arrow characters, to avoid emoji rendering on iOS.
+
+## Contact select and scrollbars
+
+The contact form keeps its native select as the form-data source and enhances it with a select-only combobox, using PT Sans, pale-blue option focus, and primary-blue selection. It supports pointer selection, Arrow keys, Home/End, typeahead, Enter/Space to confirm, Tab to confirm and move on, and Escape to discard navigation without dismissing the modal. The popup chooses above or below the field based on available room inside the modal. Form submission and initial insurance selection remain tied to the native select.
+
+Page, modal, and dropdown scrollbars use the primary blue and surface colour on desktop and mobile where browser styling is supported. WebKit scrollbar thumbs have square corners; standard scrollbar properties provide a fallback. OS-controlled overlay indicators, especially on iOS, can retain native styling. No custom scrolling behaviour replaces the browser's scrolling.

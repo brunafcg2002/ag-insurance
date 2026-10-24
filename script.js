@@ -423,27 +423,58 @@ function setupMobileCardCarousel(track, label) {
 setupMobileCardCarousel(document.querySelector(".showcase-grid"), "Imprevistos e proteção");
 setupMobileCardCarousel(document.querySelector(".blog-grid"), "Perguntas frequentes");
 
-const footerInsuranceToggle = document.querySelector(".footer-insurance-toggle");
-const footerInsuranceLinks = document.querySelector("#footer-insurance-links");
-const footerMobile = window.matchMedia("(max-width: 767px)");
-function updateFooterNavigation() {
-  footerInsuranceToggle.disabled = !footerMobile.matches;
-  footerInsuranceToggle.setAttribute("aria-expanded", String(!footerMobile.matches));
-  footerInsuranceLinks.hidden = footerMobile.matches;
+function setupFooterDisclosure(footerInsuranceToggle, footerInsuranceLinks) {
+  const footerMobile = window.matchMedia("(max-width: 767px)");
+  let footerInsuranceAnimation = null;
+  function setFooterInsuranceExpanded(expanded, animate = true) {
+    const height = footerInsuranceLinks.getBoundingClientRect().height;
+    const opacity = Number(getComputedStyle(footerInsuranceLinks).opacity);
+    const padding = getComputedStyle(footerInsuranceLinks).paddingBottom;
+    footerInsuranceAnimation?.cancel();
+    footerInsuranceToggle.setAttribute("aria-expanded", String(expanded));
+    footerInsuranceLinks.inert = !expanded;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!animate || reduceMotion || !footerInsuranceLinks.animate) {
+      footerInsuranceLinks.hidden = !expanded;
+      footerInsuranceLinks.style.overflow = "";
+      return;
+    }
+    footerInsuranceLinks.hidden = false;
+    footerInsuranceLinks.style.overflow = "hidden";
+    const targetHeight = expanded ? footerInsuranceLinks.getBoundingClientRect().height : 0;
+    const animation = footerInsuranceLinks.animate([
+      { height: `${height}px`, paddingBottom: height ? padding : "0px", opacity: height ? opacity : 0 },
+      { height: `${targetHeight}px`, paddingBottom: expanded ? "16px" : "0px", opacity: expanded ? 1 : 0 },
+    ], { duration: 220, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "both" });
+    footerInsuranceAnimation = animation;
+    animation.onfinish = () => {
+      footerInsuranceLinks.hidden = !expanded;
+      footerInsuranceLinks.style.overflow = "";
+      animation.cancel();
+      footerInsuranceAnimation = null;
+    };
+  }
+  function updateFooterNavigation() {
+    footerInsuranceToggle.disabled = !footerMobile.matches;
+    setFooterInsuranceExpanded(!footerMobile.matches, false);
+  }
+  footerInsuranceToggle.addEventListener("click", () => {
+    setFooterInsuranceExpanded(footerInsuranceToggle.getAttribute("aria-expanded") !== "true");
+  });
+  footerMobile.addEventListener("change", updateFooterNavigation);
+  updateFooterNavigation();
 }
-footerInsuranceToggle.addEventListener("click", () => {
-  const expanded = footerInsuranceToggle.getAttribute("aria-expanded") !== "true";
-  footerInsuranceToggle.setAttribute("aria-expanded", String(expanded));
-  footerInsuranceLinks.hidden = !expanded;
+document.querySelectorAll(".footer-insurance-toggle").forEach((toggle) => {
+  setupFooterDisclosure(toggle, document.getElementById(toggle.getAttribute("aria-controls")));
 });
-footerMobile.addEventListener("change", updateFooterNavigation);
-updateFooterNavigation();
 
 const dialog = document.querySelector("#detail-dialog");
 const dialogContent = dialog.querySelector(".dialog-content");
 let dialogCloseTimer = null;
 let dialogOpener = null;
+let disposeContactSelect = () => {};
 function openDialog(content) {
+  disposeContactSelect();
   if (!dialog.open) dialogOpener = document.activeElement;
   clearTimeout(dialogCloseTimer);
   dialogContent.innerHTML = content;
@@ -480,6 +511,7 @@ dialog.addEventListener("animationend", (event) => {
   if (event.target === dialog && event.animationName === "dialog-exit") finishDialogClose();
 });
 dialog.addEventListener("close", () => {
+  disposeContactSelect();
   clearTimeout(dialogCloseTimer);
   dialog.classList.remove("is-entering", "is-closing");
   document.body.classList.remove("dialog-open");
@@ -499,10 +531,131 @@ dialog.addEventListener("click", (event) => {
 
 const contactDetails = `<div class="dialog-phones" role="group" aria-label="Contactos"><p>Fale connosco</p>${[...document.querySelectorAll(".footer-contacts .phone-link, .footer-contacts .email-link")].map((link) => link.outerHTML).join("")}</div>`;
 
+function styleContactSelect(select) {
+  const controller = new AbortController();
+  const { signal } = controller;
+  disposeContactSelect = () => controller.abort();
+  const wrapper = document.createElement("div");
+  wrapper.className = "insurance-select";
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "insurance-select-trigger";
+  trigger.setAttribute("role", "combobox");
+  trigger.setAttribute("aria-label", "Estou interessado em");
+  trigger.setAttribute("aria-haspopup", "listbox");
+  trigger.setAttribute("aria-expanded", "false");
+  trigger.setAttribute("aria-controls", "insurance-options");
+  const value = document.createElement("span");
+  trigger.append(value);
+  trigger.insertAdjacentHTML("beforeend", '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>');
+  const list = document.createElement("ul");
+  list.id = "insurance-options";
+  list.className = "insurance-options";
+  list.setAttribute("role", "listbox");
+  list.setAttribute("aria-label", "Tipo de seguro");
+  list.hidden = true;
+  let active = select.selectedIndex;
+  let search = "";
+  let typedAt = 0;
+  const options = [...select.options].map((option, index) => {
+    const item = document.createElement("li");
+    item.id = `insurance-option-${index}`;
+    item.setAttribute("role", "option");
+    item.textContent = option.textContent;
+    item.addEventListener("pointerdown", (event) => event.preventDefault());
+    item.addEventListener("click", () => { active = index; close(true); });
+    list.append(item);
+    return item;
+  });
+  select.hidden = true;
+  select.after(wrapper);
+  wrapper.append(trigger, list);
+
+  function sync() {
+    value.textContent = select.options[select.selectedIndex].textContent;
+    options.forEach((item, index) => item.setAttribute("aria-selected", String(index === select.selectedIndex)));
+  }
+  function position() {
+    const field = trigger.getBoundingClientRect();
+    const modal = dialog.getBoundingClientRect();
+    const below = Math.min(modal.bottom, innerHeight - 12) - field.bottom - 8;
+    const above = field.top - Math.max(modal.top, 12) - 8;
+    const opensUp = below < 180 && above > below;
+    wrapper.classList.toggle("opens-up", opensUp);
+    list.style.maxHeight = `${Math.min(240, Math.max(80, opensUp ? above : below))}px`;
+  }
+  function highlight(index) {
+    active = Math.max(0, Math.min(options.length - 1, index));
+    options.forEach((item, i) => item.classList.toggle("is-active", i === active));
+    trigger.setAttribute("aria-activedescendant", options[active].id);
+    options[active].scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
+  }
+  function open() {
+    list.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+    position();
+    highlight(select.selectedIndex);
+  }
+  function close(commit = false) {
+    if (list.hidden) return;
+    if (commit) {
+      select.selectedIndex = active;
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      sync();
+    }
+    list.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.removeAttribute("aria-activedescendant");
+  }
+  trigger.addEventListener("click", () => list.hidden ? open() : close());
+  trigger.addEventListener("keydown", (event) => {
+    const wasOpen = !list.hidden;
+    if (event.key === "Escape" && wasOpen) {
+      event.preventDefault();
+      event.stopPropagation();
+      close();
+    } else if (["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
+      event.preventDefault();
+      if (!wasOpen) open();
+      if (event.key === "Home") highlight(0);
+      else if (event.key === "End") highlight(options.length - 1);
+      else if (wasOpen) highlight(active + (event.key === "ArrowDown" ? 1 : -1));
+    } else if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      if (wasOpen) close(true);
+      else open();
+    } else if (event.key === "Tab" && wasOpen) {
+      close(true);
+    } else if (event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      event.preventDefault();
+      if (!wasOpen) open();
+      const now = performance.now();
+      search = now - typedAt > 700 ? event.key : search + event.key;
+      typedAt = now;
+      const normalize = (text) => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      const query = normalize(search);
+      const repeated = [...query].every((letter) => letter === query[0]);
+      const prefix = repeated ? query[0] : query;
+      for (let offset = 1; offset <= options.length; offset++) {
+        const index = (active + offset) % options.length;
+        if (normalize(options[index].textContent).startsWith(prefix)) { highlight(index); break; }
+      }
+    }
+  });
+  trigger.addEventListener("blur", () => close(true));
+  dialog.addEventListener("pointerdown", (event) => {
+    if (!wrapper.contains(event.target)) close(true);
+  }, { signal });
+  dialog.addEventListener("scroll", () => { if (!list.hidden) position(); }, { signal, passive: true });
+  window.addEventListener("resize", () => { if (!list.hidden) position(); }, { signal });
+  sync();
+}
+
 function openContact(solution = "") {
   openDialog(
     `<span class="eyebrow">Vamos conversar</span><h2 id="dialog-title">O que gostaria<br>de proteger?</h2>${contactDetails}<p>Prepare os pontos que gostaria de conversar connosco.</p><form id="contact-form"><label>O seu nome<input name="name" autocomplete="name" required placeholder="Como se chama?" maxlength="100"></label><label>O seu email<input type="email" name="email" autocomplete="email" required placeholder="nome@exemplo.pt" maxlength="200"></label><label>Estou interessado em<select name="solution"><option value="">Escolha uma opção</option>${solutions.map((s) => `<option value="${s.name}" ${s.id === solution ? "selected" : ""}>${s.name}</option>`).join("")}<option>Outra questão</option></select></label><label>A sua mensagem<textarea name="message" rows="3" placeholder="Conte-nos um pouco do que precisa." maxlength="2500"></textarea></label><p class="form-note">Pré-visualização: este formulário prepara uma mensagem. Os dados não são enviados nem guardados.</p><button class="button" type="submit">Preparar mensagem ${arrow}</button></form>`,
   );
+  styleContactSelect(document.querySelector('#contact-form select[name="solution"]'));
   document.querySelector("#contact-form").addEventListener("submit", (e) => {
     e.preventDefault();
     const values = new FormData(e.currentTarget);

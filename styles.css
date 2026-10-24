@@ -938,9 +938,6 @@ section[id],
   font-size: 12px;
   color: var(--muted);
 }
-.footer-call-label {
-  font-size: 16px;
-}
 .footer-bottom {
   display: flex;
   align-items: center;
@@ -2025,35 +2022,33 @@ dialog.is-closing::backdrop {
   }
   .footer-contacts {
     order: 1;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
   }
   .footer-contacts h2 {
     grid-column: 1 / -1;
     margin: 0;
     font-size: 16px;
   }
-  .footer-contacts .footer-call-label {
-    display: none;
-  }
   .footer-contacts .phone-link {
     display: flex;
-    gap: 8px;
-    min-height: 76px;
-    padding: 12px 10px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 14px;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    font-size: 16px;
     white-space: nowrap;
   }
   .footer-contacts .phone-link svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
   .footer-contacts .phone-link small {
-    font-size: 11px;
+    font-size: 12px;
   }
   .footer-explore {
     order: 2;
@@ -2341,7 +2336,7 @@ dialog.is-closing::backdrop {
 }
 @media (max-width: 767px) {
   .footer-contacts .email-link {
-    grid-column: 1 / -1;
+    font-size: 16px;
   }
 }
 
@@ -2351,4 +2346,153 @@ dialog.is-closing::backdrop {
   width: 18px;
   height: 18px;
   vertical-align: middle;
+}
+
+.insurance-select {
+  position: relative;
+  width: 100%;
+}
+.insurance-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+  border: 1px solid #01378140;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+}
+.insurance-select-trigger span {
+  min-width: 0;
+}
+.insurance-select-trigger svg {
+  flex-shrink: 0;
+  transition: transform 160ms ease;
+}
+.insurance-select-trigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.insurance-options {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  padding: 6px !important;
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  list-style: none;
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: 0 8px 24px #011a3d24;
+}
+.insurance-options[hidden] {
+  display: none;
+}
+.insurance-select.opens-up .insurance-options {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+.insurance-options [role="option"] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 12px;
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.insurance-options [role="option"]:hover,
+.insurance-options .is-active {
+  background: var(--surface);
+  outline: 1px solid var(--border);
+  outline-offset: -1px;
+}
+.insurance-options [aria-selected="true"] {
+  color: #fff;
+  background: var(--primary);
+}
+.insurance-options [aria-selected="true"]::after {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+}
+:root,
+dialog,
+.insurance-options {
+  scrollbar-color: var(--primary) var(--surface);
+  scrollbar-width: thin;
+}
+@supports selector(::-webkit-scrollbar) {
+  :root,
+  dialog,
+  .insurance-options {
+    scrollbar-color: auto;
+    scrollbar-width: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-corner {
+    background: var(--surface);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border: 2px solid var(--surface);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--body);
+  }
+}
+@media (forced-colors: active) {
+  :root,
+  dialog,
+  .insurance-options {
+    scrollbar-color: auto;
+  }
+}
+
+.footer-explore-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.footer-explore-links[hidden] {
+  display: none;
+}
+@media (max-width: 767px) {
+  .footer-explore {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .footer-explore h2 {
+    width: 100%;
+    margin: 0;
+  }
+  .footer-explore-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 20px;
+    width: 100%;
+    padding-bottom: 16px;
+  }
 }
