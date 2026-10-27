@@ -18,4 +18,4 @@ Insurance coverage remains subject to the product's contractual and pre-contract
 
 ## Maintenance
 
-The offers and dates are static. Review before **31 December 2026** and replace or remove expired offers. Card markup lives in `index.html`; dialog conditions, source URLs, and contact categories live in `campaigns` in `script.js`. Only the photographs referenced by the final site are retained under `assets/images/`; unused originals and the source PDF were removed during pre-commit cleanup.
+The offers and dates are static. Review before **31 December 2026** and replace or remove expired offers. Card markup lives in `src/frontend/components/Homepage.jsx`; dialog conditions, source URLs, and contact categories live in `campaigns` in `src/frontend/interactions/site-interactions.js`. Only the photographs referenced by the final site are retained under `assets/images/`; unused originals and the source PDF were removed during pre-commit cleanup.

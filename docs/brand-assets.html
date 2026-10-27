@@ -4,8 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Identidade visual — A. Gonçalves - Seguros</title>
-    <link rel="stylesheet" href="../styles.css" />
     <style>
+      @font-face { font-family: "PT Sans"; src: url("../public/assets/fonts/pt-sans-400.woff2"); font-weight: 400; }
+      @font-face { font-family: "PT Sans"; src: url("../public/assets/fonts/pt-sans-700.woff2"); font-weight: 700; }
+      :root { --primary: #013781; --surface: #f5f9ff; --dark: #011a3d; --border: #01378124; }
+      * { box-sizing: border-box; }
+      body { margin: 0; color: var(--dark); font: 18px/1.5 "PT Sans", sans-serif; }
+      .container { max-width: 1170px; margin: auto; padding: 36px; }
+
       body {
         background: var(--surface);
       }
@@ -58,19 +64,19 @@
   </head>
   <body>
     <main class="container">
-      <a class="back" href="../index.html">← Voltar ao site</a>
+      <a class="back" href="/">← Voltar ao site</a>
       <h1>A. Gonçalves - Seguros</h1>
       <p>O símbolo original e as suas variantes em azul e branco.</p>
       <div class="variants">
         <figure>
           <div class="sample">
             <img
-              src="../assets/brand/logo-original.jpg"
+              src="../public/assets/brand/logo-original.jpg"
               alt="Símbolo original"
             />
           </div>
           <figcaption>
-            <a href="../assets/brand/logo-original.jpg" download
+            <a href="../public/assets/brand/logo-original.jpg" download
               >Original · JPG</a
             >
           </figcaption>
@@ -78,12 +84,12 @@
         <figure>
           <div class="sample">
             <img
-              src="../assets/brand/logo-blue-on-white.svg"
+              src="../public/assets/brand/logo-blue-on-white.svg"
               alt="Símbolo azul em fundo branco"
             />
           </div>
           <figcaption>
-            <a href="../assets/brand/logo-blue-on-white.svg" download
+            <a href="../public/assets/brand/logo-blue-on-white.svg" download
               >Azul sobre branco · SVG</a
             >
           </figcaption>
@@ -91,12 +97,12 @@
         <figure>
           <div class="sample light">
             <img
-              src="../assets/brand/logo-blue-on-light.svg"
+              src="../public/assets/brand/logo-blue-on-light.svg"
               alt="Símbolo azul em fundo azul claro"
             />
           </div>
           <figcaption>
-            <a href="../assets/brand/logo-blue-on-light.svg" download
+            <a href="../public/assets/brand/logo-blue-on-light.svg" download
               >Azul sobre fundo claro · SVG</a
             >
           </figcaption>
@@ -104,12 +110,12 @@
         <figure>
           <div class="sample blue">
             <img
-              src="../assets/brand/logo-white-on-blue.svg"
+              src="../public/assets/brand/logo-white-on-blue.svg"
               alt="Símbolo branco em fundo azul"
             />
           </div>
           <figcaption>
-            <a href="../assets/brand/logo-white-on-blue.svg" download
+            <a href="../public/assets/brand/logo-white-on-blue.svg" download
               >Branco sobre azul · SVG</a
             >
           </figcaption>
@@ -117,12 +123,12 @@
         <figure>
           <div class="sample">
             <img
-              src="../assets/brand/logo-blue.svg"
+              src="../public/assets/brand/logo-blue.svg"
               alt="Símbolo azul com fundo transparente"
             />
           </div>
           <figcaption>
-            <a href="../assets/brand/logo-blue.svg" download
+            <a href="../public/assets/brand/logo-blue.svg" download
               >Azul transparente · SVG</a
             >
           </figcaption>
@@ -130,12 +136,12 @@
         <figure>
           <div class="sample blue">
             <img
-              src="../assets/brand/logo-white.svg"
+              src="../public/assets/brand/logo-white.svg"
               alt="Símbolo branco com fundo transparente"
             />
           </div>
           <figcaption>
-            <a href="../assets/brand/logo-white.svg" download
+            <a href="../public/assets/brand/logo-white.svg" download
               >Branco transparente · SVG</a
             >
           </figcaption>

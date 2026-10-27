@@ -6,3 +6,7 @@
 .dev.vars
 .dev.vars.*
 .wrangler/
+node_modules/
+.next/
+out/
+coverage/
