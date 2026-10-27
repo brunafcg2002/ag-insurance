@@ -1,8 +1,6 @@
-"use strict";
+export function initializeSite({ language, locale, t, renderText, contactConfig }) {
 
-const { locale, t, renderText } = window.siteI18n;
-
-// Content for the interactive insurance and FAQ dialogs. The homepage lives in index.html.
+// Content for the interactive insurance and FAQ dialogs. The homepage is rendered by src/frontend/components/Homepage.jsx.
 const arrow =
   '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.4"/></svg>';
 
@@ -458,8 +456,8 @@ function styleContactSelect(select) {
 }
 
 const contactSettingsPromise = (async () => {
-  const endpoint = window.contactConfig?.endpoint;
-  if (window.contactConfig?.enabled !== true || !endpoint) return null;
+  const endpoint = contactConfig?.endpoint;
+  if (contactConfig?.enabled !== true || !endpoint) return null;
   try {
     const url = new URL(endpoint, location.href);
     if (!["http:", "https:"].includes(url.protocol)) return null;
@@ -528,7 +526,7 @@ async function openContact(solution = "") {
       if (!form.isConnected || !dialog.open) return;
       status.textContent = "";
       widget = turnstile.render(form.querySelector(".contact-verification"), {
-        sitekey: settings.siteKey, action: "contact", language: window.siteI18n.language,
+        sitekey: settings.siteKey, action: "contact", language: language,
         theme: "light", size: form.querySelector(".contact-verification").getBoundingClientRect().width < 300 ? "compact" : "flexible", "response-field": false,
         callback: (value) => { token = value; status.textContent = sendError; updateValidity(); },
         "expired-callback": () => { token = ""; status.textContent = t("verificationExpired"); updateValidity(); },
@@ -544,7 +542,7 @@ async function openContact(solution = "") {
     if (!form.reportValidity() || submit.disabled) return;
     const values = Object.fromEntries(new FormData(form));
     for (const key of Object.keys(values)) values[key] = values[key].trim();
-    const payload = { ...values, language: window.siteI18n.language };
+    const payload = { ...values, language: language };
     const fingerprint = JSON.stringify(payload);
     if (lastPayload && fingerprint !== lastPayload) requestId = crypto.randomUUID();
     lastPayload = fingerprint;
@@ -673,7 +671,18 @@ const officeLocation = [41.278481, -8.282931];
 const mapPanel = document.querySelector(".location-panel");
 const mapStatus = document.querySelector(".map-status");
 
-function initializeOfficeMap() {
+async function initializeOfficeMap() {
+  if (!window.L) {
+    try {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "/assets/vendor/leaflet/leaflet.js";
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.append(script);
+      });
+    } catch { /* The address and directions remain available if the map fails. */ }
+  }
   if (!window.L || location.protocol === "file:") {
     mapStatus.textContent =
       t("mapUnavailable");
@@ -729,7 +738,7 @@ function initializeOfficeMap() {
   layers.street.addTo(map);
   const pin = L.divIcon({
     className: "office-marker",
-    html: '<span class="office-pin"><img src="assets/brand/logo-white.svg" alt="" /></span>',
+    html: '<span class="office-pin"><img src="/assets/brand/logo-white.svg" alt="" /></span>',
     iconSize: [56, 68],
     iconAnchor: [28, 64],
     tooltipAnchor: [0, -68],
@@ -818,4 +827,30 @@ if ("IntersectionObserver" in window) {
   mapObserver.observe(mapPanel);
 } else {
   initializeOfficeMap();
+}
+
+
+const picker = document.querySelector(".language-picker");
+const summary = picker.querySelector("summary");
+picker.querySelectorAll("[data-language]").forEach((link) => {
+  function updateURL() {
+    const url = new URL(location.href);
+    url.searchParams.delete("lang");
+    url.pathname = link.dataset.language === "pt" ? "/" : "/en";
+    link.href = url.href;
+  }
+  updateURL();
+  link.addEventListener("pointerdown", updateURL);
+  window.addEventListener("hashchange", updateURL);
+});
+document.addEventListener("click", (event) => {
+  if (!picker.contains(event.target)) picker.open = false;
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && picker.open) {
+    picker.open = false;
+    summary.focus();
+  }
+});
+
 }

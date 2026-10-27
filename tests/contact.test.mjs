@@ -1,10 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { createContactHandler } from "../server/contact.mjs";
-import worker from "../worker.mjs";
+import { createContactHandler } from "../src/backend/contact/composition.js";
+import { GET, POST, OPTIONS, runtime, dynamic } from "../src/app/api/contact/route.js";
 
 const origin = "https://example.com";
 const env = {
+  CONTACT_ENABLED: "true",
   CONTACT_ALLOWED_ORIGINS: origin,
   RESEND_API_KEY: "test-key-not-a-real-credential",
   CONTACT_FROM: "A. Gonçalves <website@example.com>",
@@ -17,7 +18,7 @@ const valid = {
   solution: "casa", language: "en", token: "test-token", website: "",
   requestId: "12345678-1234-4234-8234-123456789012",
 };
-const request = (value = valid, extra = {}) => new Request("https://worker.example/api/contact", {
+const request = (value = valid, extra = {}) => new Request("https://example.com/api/contact", {
   method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify(value), ...extra,
 });
 function setup(options = {}) {
@@ -32,7 +33,7 @@ function setup(options = {}) {
 
 test("public settings contain no secrets or recipient details", async () => {
   const { handle } = setup();
-  const response = await handle(new Request("https://worker.example/api/contact"));
+  const response = await handle(new Request("https://example.com/api/contact"));
   assert.deepEqual(await response.json(), { enabled: true, siteKey: env.TURNSTILE_SITE_KEY });
   assert.equal(response.headers.get("cache-control"), "no-store");
 });
@@ -43,7 +44,7 @@ test("missing configuration disables delivery", async () => {
 });
 test("invalid configured origins do not activate delivery", async () => {
   const { handle } = setup({ env: { ...env, CONTACT_ALLOWED_ORIGINS: origin + "/path" } });
-  const response = await handle(new Request("https://worker.example/api/contact"));
+  const response = await handle(new Request("https://example.com/api/contact"));
   assert.equal((await response.json()).enabled, false);
 });
 test("unapproved and missing POST origins cannot send", async () => {
@@ -54,7 +55,7 @@ test("unapproved and missing POST origins cannot send", async () => {
 });
 test("CORS preflight permits only the configured origin", async () => {
   const { handle } = setup();
-  const response = await handle(new Request("https://worker.example/api/contact", { method: "OPTIONS", headers: { origin } }));
+  const response = await handle(new Request("https://example.com/api/contact", { method: "OPTIONS", headers: { origin } }));
   assert.equal(response.status, 204);
   assert.equal(response.headers.get("access-control-allow-origin"), origin);
   assert.equal(response.headers.get("access-control-allow-credentials"), null);
@@ -113,12 +114,20 @@ test("network failures return a recoverable response", async () => {
   const handle = createContactHandler({ env, fetchImpl: async () => { throw new Error("private failure"); } });
   assert.deepEqual(await (await handle(request())).json(), { error: "verification_unavailable" });
 });
-test("worker serves HTML assets separately from its API", async () => {
-  let assetURL;
-  const assets = { fetch: async (request) => { assetURL = request.url; return new Response("<h1>Static content</h1>"); } };
-  assert.equal((await worker.fetch(new Request("https://example.com/"), { ASSETS: assets })).status, 200);
-  assert.equal(assetURL, "https://example.com/index.html");
-  assert.equal((await worker.fetch(new Request("https://example.com/api/unknown"), { ASSETS: assets })).status, 404);
-  const response = await worker.fetch(new Request("https://example.com/api/contact"), {});
-  assert.deepEqual(await response.json(), { enabled: false, siteKey: null });
+test("Next route delegates supported methods to the contact handler", async () => {
+  assert.equal(GET, POST);
+  assert.equal(POST, OPTIONS);
+  assert.equal(runtime, "nodejs");
+  assert.equal(dynamic, "force-dynamic");
+  const response = await GET(new Request("https://example.com/api/contact"));
+  assert.equal(response.headers.get("cache-control"), "no-store");
+  assert.equal(typeof (await response.json()).enabled, "boolean");
+});
+test("explicit activation is required even when credentials are present", async () => {
+  for (const flag of [undefined, "false", "1"]) {
+    const { handle, calls } = setup({ env: { ...env, CONTACT_ENABLED: flag } });
+    assert.deepEqual(await (await handle(new Request("https://example.com/api/contact"))).json(), { enabled: false, siteKey: null });
+    assert.equal((await handle(request())).status, 503);
+    assert.equal(calls.length, 0);
+  }
 });

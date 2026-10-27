@@ -4,7 +4,7 @@ Updated 24 October 2026. The footer provides Privacy, Cookies, Terms of use, Leg
 
 ## Scope and review
 
-The [FSM legal area](https://www.fsm.pt/privacy-policy) inspired the grouping of documents. The owner also supplied [Vitorinos’s legal notice](https://vitorinos.pt/informacao-legal/) as a sector reference; no Vitorinos registration numbers or representation/payment powers have been transferred to this business. The copy is original European Portuguese, tailored to an informational insurance mediation site with a local `mailto:` form, GitHub Pages, OpenStreetMap/Esri tiles, and no configured analytics or advertising. It does not reproduce FSM's B2B garment business, automatic email service, retention periods, provider contracts, liability exclusions, or exclusive court clauses.
+The [FSM legal area](https://www.fsm.pt/privacy-policy) inspired the grouping of documents. The owner also supplied [Vitorinos’s legal notice](https://vitorinos.pt/informacao-legal/) as a sector reference; no Vitorinos registration numbers or representation/payment powers have been transferred to this business. The copy is original European Portuguese, tailored to an informational insurance mediation site with an optional Next.js/Resend form, an unconfirmed hosting provider, OpenStreetMap/Esri tiles, and no configured analytics or advertising. It does not reproduce FSM's B2B garment business, automatic email service, retention periods, provider contracts, liability exclusions, or exclusive court clauses.
 
 Do not treat the existence of separate Terms, Disclaimer and Cookies documents as proof that each document title is legally mandatory. The legal duties concern the applicable information and actual business practices. These texts are drafts for company/legal review and retain explicit `[PlaceHolder]` fields rather than unverified facts.
 
@@ -33,7 +33,7 @@ No blanket waiver of statutory responsibility, forced acceptance by browsing, or
 
 ## Maintenance
 
-Edit the matching `pt` and `en` entries in `translations.js`: `legal` for terms, legal notice, cookies and complaints, and `privacy` for the privacy dialog. Footer actions are in `index.html`. Refresh the matching asset hashes after editing script or styles. Replace all placeholders and remove the review notes only after verifying the company-specific content. Recheck policies when vendors or functionality change.
+Edit the matching `pt` and `en` entries in `src/frontend/i18n/translations.js`: `legal` for terms, legal notice, cookies and complaints, and `privacy` for the privacy dialog. Footer actions are in `src/frontend/components/Homepage.jsx`. Refresh the matching asset hashes after editing script or styles. Replace all placeholders and remove the review notes only after verifying the company-specific content. Recheck policies when vendors or functionality change.
 
 ## Owner-supplied registration statement
 
